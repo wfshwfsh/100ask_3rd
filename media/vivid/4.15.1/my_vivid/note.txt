@@ -1,0 +1,2 @@
+sudo modprobe videobuf-core  
+sudo modprobe videobuf-vmalloc
