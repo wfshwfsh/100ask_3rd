@@ -1,2 +1,17 @@
+sudo modprobe vivid
+sudo rmmod vivid
 sudo modprobe videobuf-core  
 sudo modprobe videobuf-vmalloc
+
+videobuf2_dma_contig    20480  0
+videobuf2_vmalloc      16384  0
+videobuf2_memops       16384  2 videobuf2_vmalloc,videobuf2_dma_contig
+videobuf2_v4l2         24576  0
+videobuf2_core         40960  1 videobuf2_v4l2
+videodev              188416  3 videobuf2_core,v4l2_common,videobuf2_v4l2
+media                  40960  1 videodev
+videobuf_vmalloc       16384  0
+videobuf_core          28672  1 videobuf_vmalloc
+
+
+
