@@ -50,6 +50,7 @@ static spinlock_t myVivid_queue_slock;
 static struct list_head  myVivid_vb_local_queue;
 static struct timer_list myVivid_timer;
 
+#include "fill_buf.c"
 
 /* 参考documentations/video4linux/v4l2-framework.txt:
  *     drivers\media\video\videobuf-core.c 
@@ -92,6 +93,7 @@ int myVivid_buffer_prepare(struct videobuf_queue *q, struct videobuf_buffer *vb,
 {
 	printk("%s \n", __func__);
 	/* 1. 做準備工作 */
+	/* 設置videobuf */
 	if (VIDEOBUF_NEEDS_INIT == vb->state) {
 		struct v4l2_pix_format *pix;
 
@@ -101,7 +103,9 @@ int myVivid_buffer_prepare(struct videobuf_queue *q, struct videobuf_buffer *vb,
 		vb->width			= pix->width;
 		vb->height			= pix->height;
 		vb->field  			= field;
-
+		
+		precalculate_bars(0);
+		//precalculate_line(vb);
 	/* 2. videobuf_iolock分配內存(userptr才會分配), 我們用mmap */
 #if 0
 		rc = videobuf_iolock(q, vb, NULL);
@@ -179,8 +183,8 @@ static void myVivid_timer_function(struct timer_list *t)
 	vbuf = videobuf_to_vmalloc(vb);
 	do_gettimeofday(&ts);
 	
-	memset(vbuf, 0, vb->size);
-	//vivi_fillbuff(dev, buf);
+	//memset(vbuf, 0, vb->size);
+	myVivid_fillbuff(vb);
 
 	vb->field_count++;
 	vb->ts = ts;
