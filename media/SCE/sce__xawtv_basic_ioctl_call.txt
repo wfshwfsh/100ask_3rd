@@ -1,0 +1,202 @@
+
+
+
+static int v4l2_flags(void *handle)
+{
+    struct v4l2_handle *h = handle;
+    int ret = 0;
+
+    if (h->cap.capabilities & V4L2_CAP_VIDEO_OVERLAY && !h->ov_error)
+	ret |= CAN_OVERLAY;
+    if (h->cap.capabilities & V4L2_CAP_VIDEO_CAPTURE)
+	ret |= CAN_CAPTURE;
+    if (h->cap.capabilities & V4L2_CAP_TUNER)
+	ret |= CAN_TUNE;
+    return ret;
+}
+
+v4l2_start_streaming
+    /* setup buffers */
+    h->reqbufs.count  = buffers;
+    h->reqbufs.type   = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+    h->reqbufs.memory = V4L2_MEMORY_MMAP;
+	xioctl(h->fd, VIDIOC_REQBUFS, &h->reqbufs, 0))
+	for (i = 0; i < h->reqbufs.count; i++) {
+		h->buf_v4l2[i].index  = i;
+		h->buf_v4l2[i].type   = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+		h->buf_v4l2[i].memory = V4L2_MEMORY_MMAP;
+		if (-1 == xioctl(h->fd, VIDIOC_QUERYBUF, &h->buf_v4l2[i], 0))
+		...
+		h->buf_me[i].data = v4l2_mmap(NULL, h->buf_v4l2[i].length,
+				PROT_READ | PROT_WRITE, MAP_SHARED,
+				h->fd, h->buf_v4l2[i].m.offset);
+	}
+	/* queue up all buffers */
+	v4l2_queue_all(h);
+		//xioctl(h->fd,VIDIOC_QBUF,&h->buf_v4l2[frame], 0);
+	
+    /* start capture */
+    if (-1 == xioctl(h->fd,VIDIOC_STREAMON,&h->fmt_v4l2.type,
+		     h->ov_on ? EBUSY : 0)) {
+
+
+
+
+v4l2_open_handle
+	xioctl(h->fd,VIDIOC_QUERYCAP,&h->cap,1))
+	caps = v4l2_flags(h);
+	get_device_capabilities(h);
+		xioctl(h->fd, VIDIOC_ENUMINPUT, &h->inp[h->ninputs], 1)
+		xioctl(h->fd, VIDIOC_ENUMSTD, &h->std[h->nstds], 1)
+		xioctl(h->fd, VIDIOC_ENUM_FMT, &h->fmt[h->nfmts], 1)
+		h->streamparm.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+		v4l2_ioctl(h->fd,VIDIOC_G_PARM,&h->streamparm);
+		xioctl(h->fd, VIDIOC_QUERYCTRL, &h->ctl[i], 1)
+	find_min_size(h);
+	
+	....
+	ng_init_video_buf(h->buf_me+i);
+	
+	
+	
+
+
+
+
+
+
+
+
+struct ng_vid_driver v4l2_driver = {
+    name:          PLUGIN_NAME,
+    open:          v4l2_open_handle,
+    close:         v4l2_close_handle,
+
+    get_devname:   v4l2_devname,
+    capabilities:  v4l2_flags,
+    list_attrs:    v4l2_attrs,
+    get_min_size:  v4l2_get_min_size,
+
+    setupfb:       v4l2_setupfb,
+    overlay:       v4l2_overlay,
+
+    setformat:     v4l2_setformat,
+    startvideo:    v4l2_startvideo,
+    stopvideo:     v4l2_stopvideo,
+    nextframe:     v4l2_nextframe,
+    getimage:      v4l2_getimage,
+
+    getfreq:       v4l2_getfreq,
+    setfreq:       v4l2_setfreq,
+    is_tuned:      v4l2_tuned,
+};
+
+
+grabber_init
+	drv = ng_vid_open(&ng_dev.video,ng_dev.driver,NULL,0,&h_drv);
+		*handle = ng_vid_open_auto(drv, devpath, !strcmp(*device, "auto_tv") ? 0 : 1);
+			/* Step 1: try TV cards first */
+			while (1) {
+			md = discover_media_devicess();
+			device = get_associated_device(md, device, MEDIA_V4L_VIDEO, NULL, NONE);
+			snprintf(devpath, PATH_MAX, "/dev/%s", device);
+			handle = (drv->open)(devpath, CAN_CAPTURE | CAN_TUNE);
+			}
+			
+			/* Step 2: try grabber devices and webcams */
+			while (1) {
+			device = get_associated_device(md, device, MEDIA_V4L_VIDEO, NULL, NONE);
+			snprintf(devpath, PATH_MAX, "/dev/%s", device);
+			handle = (drv->open)(devpath, CAN_CAPTURE);
+			}
+		
+			free_media_devices(md);
+			
+			
+	f_drv = drv->capabilities(h_drv);
+    add_attrs(drv->list_attrs(h_drv));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#define VIDIOC_QUERYCAP		 _IOR('V',  0, struct v4l2_capability)
+#define VIDIOC_RESERVED		  _IO('V',  1)
+#define VIDIOC_ENUM_FMT         _IOWR('V',  2, struct v4l2_fmtdesc)
+#define VIDIOC_G_FMT		_IOWR('V',  4, struct v4l2_format)
+#define VIDIOC_S_FMT		_IOWR('V',  5, struct v4l2_format)
+#define VIDIOC_REQBUFS		_IOWR('V',  8, struct v4l2_requestbuffers)
+#define VIDIOC_QUERYBUF		_IOWR('V',  9, struct v4l2_buffer)
+#define VIDIOC_G_FBUF		 _IOR('V', 10, struct v4l2_framebuffer)
+#define VIDIOC_S_FBUF		 _IOW('V', 11, struct v4l2_framebuffer)
+#define VIDIOC_OVERLAY		 _IOW('V', 14, int)
+#define VIDIOC_QBUF		_IOWR('V', 15, struct v4l2_buffer)
+#define VIDIOC_DQBUF		_IOWR('V', 17, struct v4l2_buffer)
+#define VIDIOC_STREAMON		 _IOW('V', 18, int)
+#define VIDIOC_STREAMOFF	 _IOW('V', 19, int)
+
+
+VIDIOC_QUERYCAP
+	v4l2_open_handle
+		if (-1 == xioctl(h->fd,VIDIOC_QUERYCAP,&h->cap,1))
+		goto err;
+		caps = v4l2_flags(h);
+		
+
+
+
+char *bits_capabilities[32] = {
+	"VIDEO_CAPTURE", "VIDEO_OUTPUT", "VIDEO_OVERLAY", "",
+	"VBI_CAPTURE", "VBI_OUTPUT",   "?","?",
+	"RDS_CAPTURE", "?", "?", "?",
+	"?", "?", "?", "?",
+	"TUNER", "AUDIO", "?", "?",
+	"?", "?", "?", "?",
+	"READWRITE", "ASYNCIO", "STREAMING", "?",
+};
+
+
+VIDIOC_DQBUF
+	v4l2_getimage
+	v4l2_nextframe
+		v4l2_queue_all(h);
+		h->buf_me[frame].refcount++;
+		buf = &h->buf_me[frame];
+		buf->info.ts = ng_tofday_to_timestamp(&h->buf_v4l2[frame].timestamp);
+		v4l2_waiton
+			switch (select(h->fd + 1, &rdset, NULL, NULL, &tv))
+			
+			memset(&buf,0,sizeof(buf));
+			buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+			buf.memory = V4L2_MEMORY_MMAP;
+			if (-1 == xioctl(h->fd,VIDIOC_DQBUF,&buf, 0))
+				h->waiton++;
+				h->buf_v4l2[buf.index] = buf;
+			return buf.index;
+		return buf;
+
+
+ng_grabber_get_image
+	return ng_grabber_grab_image(1/*single*/);
+		return single ? drv->getimage(h_drv) : drv->nextframe(h_drv);
+
+movie_grab_put_video
+	...
+	ng_grabber_grab_image(0);
+		return single ? drv->getimage(h_drv) : drv->nextframe(h_drv);
+	...
+		
