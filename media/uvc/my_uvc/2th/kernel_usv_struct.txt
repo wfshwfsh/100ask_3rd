@@ -1,0 +1,123 @@
+
+struct usb_interface_assoc_descriptor {
+	__u8  bLength;
+	__u8  bDescriptorType;
+
+	__u8  bFirstInterface;
+	__u8  bInterfaceCount;
+	__u8  bFunctionClass;
+	__u8  bFunctionSubClass;
+	__u8  bFunctionProtocol;
+	__u8  iFunction;
+} __attribute__ ((packed));
+
+struct usb_interface {
+	/* array of alternate settings for this interface,
+	 * stored in no particular order */
+	struct usb_host_interface *altsetting;//可能有多個設置
+    
+	struct usb_host_interface *cur_altsetting;	/* the currently 當前使用設置
+					 * active alternate setting */
+	unsigned num_altsetting;	/* number of alternate settings */
+
+	/* If there is an interface association descriptor then it will list
+	 * the associated interfaces */
+	struct usb_interface_assoc_descriptor *intf_assoc;
+
+	int minor;			/* minor number this interface is
+					 * bound to */
+	enum usb_interface_condition condition;		/* state of binding */
+	unsigned sysfs_files_created:1;	/* the sysfs attributes exist */
+	unsigned ep_devs_created:1;	/* endpoint "devices" exist */
+	unsigned unregistering:1;	/* unregistration is in progress */
+	unsigned needs_remote_wakeup:1;	/* driver requires remote wakeup */
+	unsigned needs_altsetting0:1;	/* switch to altsetting 0 is pending */
+	unsigned needs_binding:1;	/* needs delayed unbind/rebind */
+	unsigned resetting_device:1;	/* true: bandwidth alloc after reset */
+	unsigned authorized:1;		/* used for interface authorization */
+
+	struct device dev;		/* interface specific device info */
+	struct device *usb_dev;
+	atomic_t pm_usage_cnt;		/* usage counter for autosuspend */
+	struct work_struct reset_ws;	/* for resets in atomic context */
+};
+
+
+struct usb_host_config {
+	struct usb_config_descriptor	desc;
+
+	char *string;		/* iConfiguration string, if present */
+
+	/* List of any Interface Association Descriptors in this
+	 * configuration. */
+	struct usb_interface_assoc_descriptor *intf_assoc[USB_MAXIADS];
+
+	/* the interfaces associated with this configuration,
+	 * stored in no particular order */
+	struct usb_interface *interface[USB_MAXINTERFACES];
+
+	/* Interface information available even when this is not the
+	 * active configuration */
+	struct usb_interface_cache *intf_cache[USB_MAXINTERFACES];
+
+	unsigned char *extra;   /* Extra descriptors */
+	int extralen;
+};
+
+struct usb_device_descriptor {
+	__u8  bLength;
+	__u8  bDescriptorType;
+
+	__le16 bcdUSB;
+	__u8  bDeviceClass;
+	__u8  bDeviceSubClass;
+	__u8  bDeviceProtocol;
+	__u8  bMaxPacketSize0;
+	__le16 idVendor;
+	__le16 idProduct;
+	__le16 bcdDevice;
+	__u8  iManufacturer;
+	__u8  iProduct;
+	__u8  iSerialNumber;
+	__u8  bNumConfigurations;
+} __attribute__ ((packed));
+
+
+struct usb_device {
+	int		devnum;
+	char		devpath[16];
+	u32		route;
+	enum usb_device_state	state;
+	enum usb_device_speed	speed;
+
+	struct usb_tt	*tt;
+	int		ttport;
+
+	unsigned int toggle[2];
+
+	struct usb_device *parent;
+	struct usb_bus *bus;
+	struct usb_host_endpoint ep0;
+
+	struct device dev;
+
+	struct usb_device_descriptor descriptor;
+	struct usb_host_bos *bos;
+	struct usb_host_config *config;
+
+	struct usb_host_config *actconfig;
+	struct usb_host_endpoint *ep_in[16];
+	struct usb_host_endpoint *ep_out[16];
+
+	char **rawdescriptors;
+
+	unsigned short bus_mA;
+	u8 portnum;
+	u8 level;
+    
+    ...
+}
+
+
+
+

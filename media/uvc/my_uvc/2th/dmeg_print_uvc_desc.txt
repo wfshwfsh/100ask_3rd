@@ -1,0 +1,374 @@
+[ 3356.083016] usbcore: deregistering interface driver myUvc
+[ 3356.083027] myUvc_disconnect cnt=0
+[ 3356.083046] myUvc_disconnect cnt=1
+[ 3357.974232] myUvc_probe cnt=0
+[ 3357.974235] Device Descriptor:
+                 bLength                18
+                 bDescriptorType         1
+                 bcdUSB               2.00
+                 bDeviceClass          239 
+                 bDeviceSubClass         2 
+                 bDeviceProtocol         1 
+                 bMaxPacketSize0        64
+                 idVendor           0x1b3b 
+                 idProduct          0x2977 
+                 bcdDevice            1.0a
+                 iManufacturer           0
+                 iProduct                0
+                 iSerial                 0
+                 bNumConfigurations      1
+[ 3357.974235]   Configuration: 0
+[ 3357.974236]     bLength:              9
+[ 3357.974236]     bDescriptorType:      2
+[ 3357.974236]     wTotalLength:         492
+[ 3357.974237]     bNumInterfaces:       4
+[ 3357.974237]     bConfigurationValue:  1
+[ 3357.974237]     iConfiguration:       0
+[ 3357.974238]     bmAttributes:         80h
+[ 3357.974238]     bMaxPower:            250
+[ 3357.974238]     Interface Assoc:
+[ 3357.974239]       bLength:            8
+[ 3357.974239]       bDescriptorType:    11
+[ 3357.974239]       bFirstInterface:    0
+[ 3357.974240]       bInterfaceCount:    2
+[ 3357.974240]       bFunctionClass:     14
+[ 3357.974240]       bFunctionSubClass:  3
+[ 3357.974241]       bFunctionProtocol:  0
+[ 3357.974241]       iFunction:          0
+[ 3357.974241] num_altsetting 1
+[ 3357.974242]     Interface Descriptor altsetting: 0
+[ 3357.974242]       bLength:            9
+[ 3357.974242]       bDescriptorType:    4
+[ 3357.974242]       bInterfaceNumber:   0
+[ 3357.974243]       bAlternateSetting:  0
+[ 3357.974243]       bNumEndpoints:      1
+[ 3357.974243]       bInterfaceClass:    14
+[ 3357.974244]       bInterfaceSubClass: 1
+[ 3357.974244]       bInterfaceProtocol: 0
+[ 3357.974244]       iInterface:         0
+[ 3357.974245] extra buffer of interface 0:
+[ 3357.974245] extra desc 0: 
+[ 3357.974245] 0d 
+[ 3357.974245] 24 
+[ 3357.974246] 01 
+[ 3357.974246] 00 
+[ 3357.974246] 01 
+[ 3357.974247] 4d 
+[ 3357.974247] 00 
+[ 3357.974247] 80 
+[ 3357.974248] 8d 
+[ 3357.974248] 5b 
+[ 3357.974248] 00 
+[ 3357.974248] 01 
+[ 3357.974249] 01 
+
+[ 3357.974249] extra desc 1: 
+[ 3357.974250] 12 
+[ 3357.974250] 24 
+[ 3357.974250] 02 
+[ 3357.974250] 01 
+[ 3357.974251] 01 
+[ 3357.974251] 02 
+[ 3357.974251] 00 
+[ 3357.974252] 00 
+[ 3357.974252] 01 
+[ 3357.974252] 00 
+[ 3357.974252] 03 
+[ 3357.974253] 00 
+[ 3357.974253] 01 
+[ 3357.974253] 00 
+[ 3357.974254] 03 
+[ 3357.974254] 80 
+[ 3357.974254] 2a 
+[ 3357.974254] 00 
+
+[ 3357.974255] extra desc 2: 
+[ 3357.974255] 0b 
+[ 3357.974256] 24 
+[ 3357.974256] 05 
+[ 3357.974256] 03 
+[ 3357.974256] 01 
+[ 3357.974257] 00 
+[ 3357.974257] 00 
+[ 3357.974257] 02 
+[ 3357.974258] 3f 
+[ 3357.974258] 05 
+[ 3357.974258] 00 
+
+[ 3357.974259] extra desc 3: 
+[ 3357.974259] 1a 
+[ 3357.974259] 24 
+[ 3357.974259] 06 
+[ 3357.974260] 04 
+[ 3357.974260] 3a 
+[ 3357.974260] ab 
+[ 3357.974261] 91 
+[ 3357.974277] 99 
+[ 3357.974278] ef 
+[ 3357.974278] b2 
+[ 3357.974278] c9 
+[ 3357.974279] 48 
+[ 3357.974279] 8f 
+[ 3357.974279] e9 
+[ 3357.974279] 8f 
+[ 3357.974280] e3 
+[ 3357.974280] 63 
+[ 3357.974280] 47 
+[ 3357.974281] 71 
+[ 3357.974281] d0 
+[ 3357.974281] 08 
+[ 3357.974281] 01 
+[ 3357.974282] 03 
+[ 3357.974282] 01 
+[ 3357.974282] 0f 
+[ 3357.974283] 00 
+
+[ 3357.974283] extra desc 4: 
+[ 3357.974283] 09 
+[ 3357.974284] 24 
+[ 3357.974284] 03 
+[ 3357.974284] 02 
+[ 3357.974284] 01 
+[ 3357.974285] 01 
+[ 3357.974285] 00 
+[ 3357.974285] 04 
+[ 3357.974286] 00 
+
+[ 3357.974308] myUvc_probe cnt=1
+[ 3357.974326] Device Descriptor:
+                 bLength                18
+                 bDescriptorType         1
+                 bcdUSB               2.00
+                 bDeviceClass          239 
+                 bDeviceSubClass         2 
+                 bDeviceProtocol         1 
+                 bMaxPacketSize0        64
+                 idVendor           0x1b3b 
+                 idProduct          0x2977 
+                 bcdDevice            1.0a
+                 iManufacturer           0
+                 iProduct                0
+                 iSerial                 0
+                 bNumConfigurations      1
+[ 3357.974326]   Configuration: 1
+[ 3357.974327]     bLength:              9
+[ 3357.974327]     bDescriptorType:      2
+[ 3357.974327]     wTotalLength:         492
+[ 3357.974328]     bNumInterfaces:       4
+[ 3357.974328]     bConfigurationValue:  1
+[ 3357.974328]     iConfiguration:       0
+[ 3357.974329]     bmAttributes:         80h
+[ 3357.974329]     bMaxPower:            250
+[ 3357.974329]     Interface Assoc:
+[ 3357.974330]       bLength:            8
+[ 3357.974330]       bDescriptorType:    11
+[ 3357.974330]       bFirstInterface:    0
+[ 3357.974330]       bInterfaceCount:    2
+[ 3357.974331]       bFunctionClass:     14
+[ 3357.974331]       bFunctionSubClass:  3
+[ 3357.974331]       bFunctionProtocol:  0
+[ 3357.974332]       iFunction:          0
+[ 3357.974332] num_altsetting 7
+[ 3357.974332]     Interface Descriptor altsetting: 1
+[ 3357.974333]       bLength:            9
+[ 3357.974333]       bDescriptorType:    4
+[ 3357.974333]       bInterfaceNumber:   1
+[ 3357.974333]       bAlternateSetting:  0
+[ 3357.974334]       bNumEndpoints:      0
+[ 3357.974334]       bInterfaceClass:    14
+[ 3357.974334]       bInterfaceSubClass: 2
+[ 3357.974335]       bInterfaceProtocol: 0
+[ 3357.974335]       iInterface:         0
+[ 3357.974335]     Interface Descriptor altsetting: 2
+[ 3357.974335]       bLength:            9
+[ 3357.974336]       bDescriptorType:    4
+[ 3357.974336]       bInterfaceNumber:   1
+[ 3357.974336]       bAlternateSetting:  1
+[ 3357.974337]       bNumEndpoints:      1
+[ 3357.974337]       bInterfaceClass:    14
+[ 3357.974337]       bInterfaceSubClass: 2
+[ 3357.974338]       bInterfaceProtocol: 0
+[ 3357.974338]       iInterface:         0
+[ 3357.974338]     Interface Descriptor altsetting: 3
+[ 3357.974338]       bLength:            9
+[ 3357.974339]       bDescriptorType:    4
+[ 3357.974339]       bInterfaceNumber:   1
+[ 3357.974339]       bAlternateSetting:  2
+[ 3357.974340]       bNumEndpoints:      1
+[ 3357.974340]       bInterfaceClass:    14
+[ 3357.974340]       bInterfaceSubClass: 2
+[ 3357.974340]       bInterfaceProtocol: 0
+[ 3357.974341]       iInterface:         0
+[ 3357.974341]     Interface Descriptor altsetting: 4
+[ 3357.974341]       bLength:            9
+[ 3357.974348]       bDescriptorType:    4
+[ 3357.974362]       bInterfaceNumber:   1
+[ 3357.974363]       bAlternateSetting:  3
+[ 3357.974363]       bNumEndpoints:      1
+[ 3357.974363]       bInterfaceClass:    14
+[ 3357.974364]       bInterfaceSubClass: 2
+[ 3357.974364]       bInterfaceProtocol: 0
+[ 3357.974364]       iInterface:         0
+[ 3357.974364]     Interface Descriptor altsetting: 5
+[ 3357.974365]       bLength:            9
+[ 3357.974365]       bDescriptorType:    4
+[ 3357.974365]       bInterfaceNumber:   1
+[ 3357.974366]       bAlternateSetting:  4
+[ 3357.974366]       bNumEndpoints:      1
+[ 3357.974366]       bInterfaceClass:    14
+[ 3357.974367]       bInterfaceSubClass: 2
+[ 3357.974367]       bInterfaceProtocol: 0
+[ 3357.974367]       iInterface:         0
+[ 3357.974367]     Interface Descriptor altsetting: 6
+[ 3357.974368]       bLength:            9
+[ 3357.974368]       bDescriptorType:    4
+[ 3357.974368]       bInterfaceNumber:   1
+[ 3357.974369]       bAlternateSetting:  5
+[ 3357.974369]       bNumEndpoints:      1
+[ 3357.974369]       bInterfaceClass:    14
+[ 3357.974369]       bInterfaceSubClass: 2
+[ 3357.974370]       bInterfaceProtocol: 0
+[ 3357.974370]       iInterface:         0
+[ 3357.974370]     Interface Descriptor altsetting: 7
+[ 3357.974371]       bLength:            9
+[ 3357.974371]       bDescriptorType:    4
+[ 3357.974371]       bInterfaceNumber:   1
+[ 3357.974371]       bAlternateSetting:  6
+[ 3357.974372]       bNumEndpoints:      1
+[ 3357.974372]       bInterfaceClass:    14
+[ 3357.974372]       bInterfaceSubClass: 2
+[ 3357.974373]       bInterfaceProtocol: 0
+[ 3357.974373]       iInterface:         0
+[ 3357.974373] extra buffer of interface 1:
+[ 3357.974373] extra desc 0: 
+[ 3357.974374] 0e 
+[ 3357.974374] 24 
+[ 3357.974374] 01 
+[ 3357.974375] 01 
+[ 3357.974375] 79 
+[ 3357.974375] 00 
+[ 3357.974375] 82 
+[ 3357.974376] 00 
+[ 3357.974376] 02 
+[ 3357.974376] 00 
+[ 3357.974377] 00 
+[ 3357.974377] 01 
+[ 3357.974377] 01 
+[ 3357.974378] 00 
+
+[ 3357.974378] extra desc 1: 
+[ 3357.974378] 0b 
+[ 3357.974379] 24 
+[ 3357.974379] 06 
+[ 3357.974379] 01 
+[ 3357.974379] 03 
+[ 3357.974380] 00 
+[ 3357.974380] 01 
+[ 3357.974380] 00 
+[ 3357.974381] 00 
+[ 3357.974381] 00 
+[ 3357.974381] 00 
+
+[ 3357.974382] extra desc 2: 
+[ 3357.974382] 1e 
+[ 3357.974382] 24 
+[ 3357.974382] 07 
+[ 3357.974383] 01 
+[ 3357.974383] 01 
+[ 3357.974383] 80 
+[ 3357.974384] 02 
+[ 3357.974384] e0 
+[ 3357.974384] 01 
+[ 3357.974384] 00 
+[ 3357.974385] 28 
+[ 3357.974385] 23 
+[ 3357.974385] 00 
+[ 3357.974386] 00 
+[ 3357.974386] 28 
+[ 3357.974386] 23 
+[ 3357.974387] 00 
+[ 3357.974387] 00 
+[ 3357.974387] 2c 
+[ 3357.974387] 01 
+[ 3357.974388] 00 
+[ 3357.974388] 15 
+[ 3357.974388] 16 
+[ 3357.974389] 05 
+[ 3357.974389] 00 
+[ 3357.974389] 01 
+[ 3357.974389] 15 
+[ 3357.974390] 16 
+[ 3357.974390] 05 
+[ 3357.974390] 00 
+
+[ 3357.974391] extra desc 3: 
+[ 3357.974391] 1e 
+[ 3357.974391] 24 
+[ 3357.974392] 07 
+[ 3357.974392] 02 
+[ 3357.974392] 01 
+[ 3357.974393] 40 
+[ 3357.974393] 01 
+[ 3357.974393] f0 
+[ 3357.974393] 00 
+[ 3357.974394] 00 
+[ 3357.974394] ca 
+[ 3357.974394] 08 
+[ 3357.974395] 00 
+[ 3357.974395] 00 
+[ 3357.974395] ca 
+[ 3357.974395] 08 
+[ 3357.974396] 00 
+[ 3357.974396] 00 
+[ 3357.974396] 4b 
+[ 3357.974397] 00 
+[ 3357.974397] 00 
+[ 3357.974397] 15 
+[ 3357.974397] 16 
+[ 3357.974398] 05 
+[ 3357.974398] 00 
+[ 3357.974398] 01 
+[ 3357.974399] 15 
+[ 3357.974399] 16 
+[ 3357.974399] 05 
+[ 3357.974400] 00 
+
+[ 3357.974400] extra desc 4: 
+[ 3357.974400] 1e 
+[ 3357.974401] 24 
+[ 3357.974401] 07 
+[ 3357.974401] 03 
+[ 3357.974401] 01 
+[ 3357.974402] a0 
+[ 3357.974402] 00 
+[ 3357.974402] 78 
+[ 3357.974403] 00 
+[ 3357.974403] 80 
+[ 3357.974403] 32 
+[ 3357.974403] 02 
+[ 3357.974404] 00 
+[ 3357.974404] 80 
+[ 3357.974404] 32 
+[ 3357.974405] 02 
+[ 3357.974405] 00 
+[ 3357.974405] c0 
+[ 3357.974406] 12 
+[ 3357.974406] 00 
+[ 3357.974406] 00 
+[ 3357.974406] 15 
+[ 3357.974407] 16 
+[ 3357.974407] 05 
+[ 3357.974407] 00 
+[ 3357.974408] 01 
+[ 3357.974408] 15 
+[ 3357.974408] 16 
+[ 3357.974408] 05 
+[ 3357.974409] 00 
+
+[ 3357.974409] extra desc 5: 
+[ 3357.974409] 06 
+[ 3357.974410] 24 
+[ 3357.974410] 0d 
+[ 3357.974410] 01 
+[ 3357.974411] 01 
+[ 3357.974411] 04 

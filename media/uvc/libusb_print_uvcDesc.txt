@@ -1,0 +1,68 @@
+
+
+libusb_get_device_list(NULL, &devs);
+    libusb_get_device_descriptor(dev, &desc);
+    libusb_open(dev, &handle);
+        for (i = 0; i < desc.bNumConfigurations; i++) {
+            struct libusb_config_descriptor *config;
+            ret = libusb_get_config_descriptor(dev, i, &config);
+            print_configuration(config);
+                for (i = 0; i < config->bNumInterfaces; i++)
+                    print_interface(&config->interface[i]);
+                        for (i = 0; i < interface->num_altsetting; i++)
+                            print_altsetting(&interface->altsetting[i]);
+                                for (i = 0; i < interface->bNumEndpoints; i++)
+                                    print_endpoint(&interface->endpoint[i]);
+    
+    Dev (bus 1, device 3): 1B3B - 2977
+            Configuration:
+                wTotalLength:         492
+                bNumInterfaces:       4
+                bConfigurationValue:  1
+                iConfiguration:       0
+                bmAttributes:         80h
+                MaxPower:             250
+                
+                Interface:
+                    bInterfaceNumber:   0
+                    bAlternateSetting:  0
+                    bNumEndpoints:      1
+                    bInterfaceClass:    14
+                    bInterfaceSubClass: 1
+                    bInterfaceProtocol: 0
+                    iInterface:         0
+
+                    Endpoint:
+                        bEndpointAddress: 81h
+                        bmAttributes:     03h
+                        wMaxPacketSize:   64
+                        bInterval:        6
+                        bRefresh:         0
+                        bSynchAddress:    0
+
+                Interface:
+                    bInterfaceNumber:   1
+                    bAlternateSetting:  0
+                    bNumEndpoints:      0
+                    bInterfaceClass:    14
+                    bInterfaceSubClass: 2
+                    bInterfaceProtocol: 0
+                    iInterface:         0
+
+                Interface:
+                    bInterfaceNumber:   1
+                    bAlternateSetting:  1 2 3
+                    bNumEndpoints:      1
+                    bInterfaceClass:    14
+                    bInterfaceSubClass: 2
+                    bInterfaceProtocol: 0
+                    iInterface:         0
+
+                    Endpoint:
+                        bEndpointAddress: 82h
+                        bmAttributes:     05h
+                        wMaxPacketSize:   128 256 512 600 800 956
+                        bInterval:        1
+                        bRefresh:         0
+                        bSynchAddress:    0
+
