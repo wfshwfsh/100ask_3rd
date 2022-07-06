@@ -1,0 +1,437 @@
+[ 2393.892680] usbcore: deregistering interface driver myUvc
+[ 2393.892691] myUvc_disconnect cnt=0
+[ 2393.892780] myUvc_disconnect cnt=1
+[ 2405.585452] myUvc_probe cnt=0
+[ 2405.585455] Device Descriptor:
+                 bLength                18
+                 bDescriptorType         1
+                 bcdUSB               2.00
+                 bDeviceClass          239 
+                 bDeviceSubClass         2 
+                 bDeviceProtocol         1 
+                 bMaxPacketSize0        64
+                 idVendor           0x1b3b 
+                 idProduct          0x2977 
+                 bcdDevice            1.0a
+                 iManufacturer           0
+                 iProduct                0
+                 iSerial                 0
+                 bNumConfigurations      1
+[ 2405.585455]   Configuration: 0
+[ 2405.585456]     bLength:                  9
+[ 2405.585456]     bDescriptorType:          2
+[ 2405.585456]     wTotalLength:           492
+[ 2405.585457]     bNumInterfaces:           4
+[ 2405.585457]     bConfigurationValue:      1
+[ 2405.585457]     iConfiguration:           0
+[ 2405.585457]     bmAttributes:           128
+[ 2405.585458]     bMaxPower:              250
+[ 2405.585458]     Interface Assoc:
+[ 2405.585458]       bLength:                8
+[ 2405.585459]       bDescriptorType:       11
+[ 2405.585459]       bFirstInterface:        0
+[ 2405.585459]       bInterfaceCount:        2
+[ 2405.585460]       bFunctionClass:        14
+[ 2405.585460]       bFunctionSubClass:      3
+[ 2405.585460]       bFunctionProtocol:      0
+[ 2405.585461]       iFunction:              0
+[ 2405.585461] num_altsetting 1
+[ 2405.585461]     Interface Descriptor altsetting: 0
+[ 2405.585462]       bLength:                9
+[ 2405.585462]       bDescriptorType:        4
+[ 2405.585462]       bInterfaceNumber:       0
+[ 2405.585462]       bAlternateSetting:      0
+[ 2405.585463]       bNumEndpoints:          1
+[ 2405.585463]       bInterfaceClass:       14
+[ 2405.585463]       bInterfaceSubClass:     1
+[ 2405.585464]       bInterfaceProtocol:     0
+[ 2405.585464]       iInterface:             0
+[ 2405.585466]       Endpoint Descriptor:
+                       bLength                 7
+                       bDescriptorType         5
+                       bEndpointAddress     0x81  EP 1 IN
+                       bmAttributes            3
+                         Transfer Type            Interrupt
+                         Synch Type               None
+                         Usage Type               Data
+                       wMaxPacketSize     0x0040  1x 64 bytes
+                       bInterval               6
+
+[ 3357.974245] extra desc 0: 
+[ 3357.974245] 0d 24 01         00 01 4d 00 80 8d 5b 00 01 01 
+                     VC_HEADER
+[ 3357.974249] extra desc 1: 
+[ 3357.974250] 12 24 02                 01 01 02 00 00 01 00 03 00 01 00 03 80 2a 00 
+                     VC_INPUT_TERMINAL
+[ 3357.974255] extra desc 2: 
+[ 3357.974255] 0b 24 05                 03 01           00 00           02           3f 05      00 
+                     VC_PROCESSING_UNIT ID bSourceID    wMaxMultiplier  bControlSize bmControls
+[ 3357.974259] extra desc 3: 
+[ 3357.974259] 1a 24 06                 04 3a ab 91 99 ef b2 c9 48 8f e9 8f e3 63 47 71 d0 08 01 03 01 0f 00 
+                     VC_EXTENSION_UNIT
+[ 3357.974283] extra desc 4: 
+[ 3357.974283] 09 24 03                 02 01 01 00 04 00 
+                     VC_OUTPUT_TERMINAL
+
+
+
+[ 2405.585492]       VideoControl Interface Descriptor:
+                       bLength                13
+                       bDescriptorType        36
+                       bDescriptorSubtype      1 
+[ 2405.585492] (HEADER)
+[ 2405.585493]         bcdUVC               1.00
+                       wTotalLength           77
+                       dwClockFrequency        6.000000MHz
+                       bInCollection           1
+[ 2405.585494]         baInterfaceNr( 0)       1
+[ 2405.585494]       VideoControl Interface Descriptor:
+                       bLength                18
+                       bDescriptorType        36
+                       bDescriptorSubtype      2 
+[ 2405.585494] (INPUT_TERMINAL)
+[ 2405.585495]         bTerminalID             1
+                       wTerminalType      0x0201
+                       bAssocTerminal          0
+[ 2405.585495]         iTerminal               0
+[ 2405.585496]         wObjectiveFocalLengthMin      1
+                       wObjectiveFocalLengthMax      3
+                       wOcularFocalLength            1
+                       bControlSize                  3
+[ 2405.585496]         bmControls           0x00002a80
+[ 2405.585496]           Iris (Absolute)
+[ 2405.585497]           Zoom (Absolute)
+[ 2405.585497]           PanTilt (Absolute)
+[ 2405.585497]           Roll (Absolute)
+[ 2405.585498]       VideoControl Interface Descriptor:
+                       bLength                11
+                       bDescriptorType        36
+                       bDescriptorSubtype      5 
+[ 2405.585498] (PROCESSING_UNIT)
+[ 2405.585498]       Warning: Descriptor too short
+[ 2405.585499]         bUnitID                 3
+                       bSourceID               1
+                       wMaxMultiplier          0
+                       bControlSize            2
+[ 2405.585499]         bmControls     0x0000053f
+[ 2405.585499]           Brightness
+[ 2405.585500]           Contrast
+[ 2405.585500]           Hue
+[ 2405.585500]           Saturation
+[ 2405.585501]           Sharpness
+[ 2405.585501]           Gamma
+[ 2405.585501]           Backlight Compensation
+[ 2405.585502]           Power Line Frequency
+[ 2405.585502]         iProcessing             0 
+                       bmVideoStandards     0x1a
+[ 2405.585502]           NTSC - 525/60
+[ 2405.585503]           SECAM - 625/50
+[ 2405.585503]           NTSC - 625/50
+[ 2405.585503]       VideoControl Interface Descriptor:
+                       bLength                26
+                       bDescriptorType        36
+                       bDescriptorSubtype      6 
+[ 2405.585504] (EXTENSION_UNIT)
+[ 2405.585505]         bUnitID                 4
+                       guidExtensionCode         {3aab9199-efb2-c948-8fe9-8fe3634771d0}
+                       bNumControl             8
+                       bNrPins                 1
+[ 2405.585505]         baSourceID( 0)          3
+[ 2405.585506]         bControlSize            1
+[ 2405.585506]         bmControls( 0)       0x0f
+[ 2405.585506]         iExtension              0 
+[ 2405.585507]       VideoControl Interface Descriptor:
+                       bLength                 9
+                       bDescriptorType        36
+                       bDescriptorSubtype      3 
+[ 2405.585507] (OUTPUT_TERMINAL)
+[ 2405.585508]         bTerminalID             2
+                       wTerminalType      0x0101
+                       bAssocTerminal          0
+                       bSourceID               4
+                       iTerminal               0
+                       
+                       
+                       
+                       
+                       
+[ 2405.585536] myUvc_probe cnt=1
+[ 2405.585538] Device Descriptor:
+                 bLength                18
+                 bDescriptorType         1
+                 bcdUSB               2.00
+                 bDeviceClass          239 
+                 bDeviceSubClass         2 
+                 bDeviceProtocol         1 
+                 bMaxPacketSize0        64
+                 idVendor           0x1b3b 
+                 idProduct          0x2977 
+                 bcdDevice            1.0a
+                 iManufacturer           0
+                 iProduct                0
+                 iSerial                 0
+                 bNumConfigurations      1
+[ 2405.585538]   Configuration: 1
+[ 2405.585538]     bLength:                  9
+[ 2405.585539]     bDescriptorType:          2
+[ 2405.585539]     wTotalLength:           492
+[ 2405.585539]     bNumInterfaces:           4
+[ 2405.585540]     bConfigurationValue:      1
+[ 2405.585540]     iConfiguration:           0
+[ 2405.585540]     bmAttributes:           128
+[ 2405.585541]     bMaxPower:              250
+[ 2405.585541]     Interface Assoc:
+[ 2405.585541]       bLength:                8
+[ 2405.585541]       bDescriptorType:       11
+[ 2405.585542]       bFirstInterface:        0
+[ 2405.585542]       bInterfaceCount:        2
+[ 2405.585542]       bFunctionClass:        14
+[ 2405.585543]       bFunctionSubClass:      3
+[ 2405.585543]       bFunctionProtocol:      0
+[ 2405.585543]       iFunction:              0
+[ 2405.585544] num_altsetting 7
+[ 2405.585544]     Interface Descriptor altsetting: 1
+[ 2405.585544]       bLength:                9
+[ 2405.585544]       bDescriptorType:        4
+[ 2405.585545]       bInterfaceNumber:       1
+[ 2405.585545]       bAlternateSetting:      0
+[ 2405.585545]       bNumEndpoints:          0
+[ 2405.585546]       bInterfaceClass:       14
+[ 2405.585546]       bInterfaceSubClass:     2
+[ 2405.585546]       bInterfaceProtocol:     0
+[ 2405.585547]       iInterface:             0
+[ 2405.585547]     Interface Descriptor altsetting: 2
+[ 2405.585547]       bLength:                9
+[ 2405.585547]       bDescriptorType:        4
+[ 2405.585548]       bInterfaceNumber:       1
+[ 2405.585548]       bAlternateSetting:      1
+[ 2405.585548]       bNumEndpoints:          1
+[ 2405.585549]       bInterfaceClass:       14
+[ 2405.585549]       bInterfaceSubClass:     2
+[ 2405.585549]       bInterfaceProtocol:     0
+[ 2405.585550]       iInterface:             0
+[ 2405.585551]       Endpoint Descriptor:
+                       bLength                 7
+                       bDescriptorType         5
+                       bEndpointAddress     0x82  EP 2 IN
+                       bmAttributes            5
+                         Transfer Type            Isochronous
+                         Synch Type               Asynchronous
+                         Usage Type               Data
+                       wMaxPacketSize     0x0080  1x 128 bytes
+                       bInterval               1
+[ 2405.585552]     Interface Descriptor altsetting: 3
+[ 2405.585552]       bLength:                9
+[ 2405.585552]       bDescriptorType:        4
+[ 2405.585553]       bInterfaceNumber:       1
+[ 2405.585553]       bAlternateSetting:      2
+[ 2405.585553]       bNumEndpoints:          1
+[ 2405.585553]       bInterfaceClass:       14
+[ 2405.585554]       bInterfaceSubClass:     2
+[ 2405.585554]       bInterfaceProtocol:     0
+[ 2405.585554]       iInterface:             0
+[ 2405.585556]       Endpoint Descriptor:
+                       bLength                 7
+                       bDescriptorType         5
+                       bEndpointAddress     0x82  EP 2 IN
+                       bmAttributes            5
+                         Transfer Type            Isochronous
+                         Synch Type               Asynchronous
+                         Usage Type               Data
+                       wMaxPacketSize     0x0100  1x 256 bytes
+                       bInterval               1
+[ 2405.585556]     Interface Descriptor altsetting: 4
+[ 2405.585556]       bLength:                9
+[ 2405.585557]       bDescriptorType:        4
+[ 2405.585557]       bInterfaceNumber:       1
+[ 2405.585557]       bAlternateSetting:      3
+[ 2405.585557]       bNumEndpoints:          1
+[ 2405.585558]       bInterfaceClass:       14
+[ 2405.585558]       bInterfaceSubClass:     2
+[ 2405.585558]       bInterfaceProtocol:     0
+[ 2405.585559]       iInterface:             0
+[ 2405.585560]       Endpoint Descriptor:
+                       bLength                 7
+                       bDescriptorType         5
+                       bEndpointAddress     0x82  EP 2 IN
+                       bmAttributes            5
+                         Transfer Type            Isochronous
+                         Synch Type               Asynchronous
+                         Usage Type               Data
+                       wMaxPacketSize     0x0200  1x 512 bytes
+                       bInterval               1
+[ 2405.585560]     Interface Descriptor altsetting: 5
+[ 2405.585560]       bLength:                9
+[ 2405.585561]       bDescriptorType:        4
+[ 2405.585561]       bInterfaceNumber:       1
+[ 2405.585561]       bAlternateSetting:      4
+[ 2405.585562]       bNumEndpoints:          1
+[ 2405.585562]       bInterfaceClass:       14
+[ 2405.585562]       bInterfaceSubClass:     2
+[ 2405.585562]       bInterfaceProtocol:     0
+[ 2405.585563]       iInterface:             0
+[ 2405.585564]       Endpoint Descriptor:
+                       bLength                 7
+                       bDescriptorType         5
+                       bEndpointAddress     0x82  EP 2 IN
+                       bmAttributes            5
+                         Transfer Type            Isochronous
+                         Synch Type               Asynchronous
+                         Usage Type               Data
+                       wMaxPacketSize     0x0258  1x 600 bytes
+                       bInterval               1
+[ 2405.585564]     Interface Descriptor altsetting: 6
+[ 2405.585564]       bLength:                9
+[ 2405.585565]       bDescriptorType:        4
+[ 2405.585565]       bInterfaceNumber:       1
+[ 2405.585565]       bAlternateSetting:      5
+[ 2405.585566]       bNumEndpoints:          1
+[ 2405.585566]       bInterfaceClass:       14
+[ 2405.585566]       bInterfaceSubClass:     2
+[ 2405.585566]       bInterfaceProtocol:     0
+[ 2405.585567]       iInterface:             0
+[ 2405.585568]       Endpoint Descriptor:
+                       bLength                 7
+                       bDescriptorType         5
+                       bEndpointAddress     0x82  EP 2 IN
+                       bmAttributes            5
+                         Transfer Type            Isochronous
+                         Synch Type               Asynchronous
+                         Usage Type               Data
+                       wMaxPacketSize     0x0320  1x 800 bytes
+                       bInterval               1
+[ 2405.585568]     Interface Descriptor altsetting: 7
+[ 2405.585568]       bLength:                9
+[ 2405.585569]       bDescriptorType:        4
+[ 2405.585569]       bInterfaceNumber:       1
+[ 2405.585569]       bAlternateSetting:      6
+[ 2405.585570]       bNumEndpoints:          1
+[ 2405.585570]       bInterfaceClass:       14
+[ 2405.585570]       bInterfaceSubClass:     2
+[ 2405.585571]       bInterfaceProtocol:     0
+[ 2405.585571]       iInterface:             0
+[ 2405.585572]       Endpoint Descriptor:
+                       bLength                 7
+                       bDescriptorType         5
+                       bEndpointAddress     0x82  EP 2 IN
+                       bmAttributes            5
+                         Transfer Type            Isochronous
+                         Synch Type               Asynchronous
+                         Usage Type               Data
+                       wMaxPacketSize     0x03bc  1x 956 bytes
+                       bInterval               1
+[ 2405.585573] extra buffer of interface 1:
+[ 3357.974373] extra desc 0: 
+[ 3357.974374] 0e 24 01                 01 79 00 82 00 02 00 00 01 01 00 
+                     VS_INPUT_HEADER
+[ 3357.974378] extra desc 1: 
+[ 3357.974378] 0b 24 06 01 03 00 01 00 00 00 00 
+
+[ 3357.974382] extra desc 2: 
+[ 3357.974382] 1e 24 07             01           01             80 02  e0 01 00 28 23 00 00 28 23 00 00 2c 01 00 15 16 05 00 01 15 16 05 00 
+                     VS_FRAME_MJPEG bFrameIndex  bmCapabilities wWidth wHeight
+                                                              => 640*480
+[ 3357.974391] extra desc 3: 
+[ 3357.974391] 1e 24 07             02           01             40 01 f0 00 00 ca 08 00 00 ca 08 00 00 4b 00 00 15 16 05 00 01 15 16 05 00 
+                     VS_FRAME_MJPEG                           => 320*240
+[ 3357.974400] extra desc 4: 
+[ 3357.974400] 1e 24 07             03           01             a0 00 78 00 80 32 02 00 80 32 02 00 c0 12 00 00 15 16 05 00 01 15 16 05 00 
+                     VS_FRAME_MJPEG                           => 160*120
+[ 3357.974409] extra desc 5: 
+[ 3357.974409] 06 24 0d             01 01 04 
+                     VS_COLORFORMAT
+                     
+                     
+                     
+
+[ 2405.585611]       VideoStreaming Interface Descriptor:
+                       bLength                            14
+                       bDescriptorType                    36
+                       bDescriptorSubtype                  1 
+[ 2405.585611] (INPUT_HEADER)
+[ 2405.585612]         bNumFormats                         1
+                       wTotalLength                      121
+                       bEndPointAddress                  130
+                       bmInfo                              0
+                       bTerminalLink                       2
+                       bStillCaptureMethod                 0
+                       bTriggerSupport                     0
+                       bTriggerUsage                       1
+                       bControlSize                        1
+[ 2405.585613]         bmaControls( 0)                    11
+[ 2405.585613]       VideoStreaming Interface Descriptor:
+                       bLength                            11
+                       bDescriptorType                    36
+                       bDescriptorSubtype                  6 
+[ 2405.585614] (FORMAT_MJPEG)
+[ 2405.585614]         bFormatIndex                        1
+                       bNumFrameDescriptors                3
+                       bFlags                              0
+[ 2405.585614]           Fixed-size samples: No
+[ 2405.585615]         bDefaultFrameIndex                  1
+                       bAspectRatioX                       0
+                       bAspectRatioY                       0
+                       bmInterlaceFlags                 0x00
+[ 2405.585615]           Interlaced stream or variable: No
+[ 2405.585616]           Fields per frame: 1 fields
+[ 2405.585616]           Field 1 first: No
+[ 2405.585616]           Field pattern: 
+[ 2405.585616] Field 1 only
+[ 2405.585617]           bCopyProtect                      0
+[ 2405.585617]       VideoStreaming Interface Descriptor:
+                       bLength                            30
+                       bDescriptorType                    36
+                       bDescriptorSubtype                  7 
+[ 2405.585617] (FRAME_MJPEG)
+[ 2405.585618]         bFrameIndex                         1
+                       bmCapabilities                   0x01
+[ 2405.585618]           Still image supported
+[ 2405.585619]         wWidth                            640
+                       wHeight                           480
+                       dwMinBitRate                  2304000
+                       dwMaxBitRate                  2304000
+[ 2405.585619]         dwMaxVideoFrameBufferSize       76800
+                       dwDefaultFrameInterval         333333
+                       bFrameIntervalType                  1
+[ 2405.585620]         dwFrameInterval( 0)            333333
+[ 2405.585620]       VideoStreaming Interface Descriptor:
+                       bLength                            30
+                       bDescriptorType                    36
+                       bDescriptorSubtype                  7 
+[ 2405.585621] (FRAME_MJPEG)
+[ 2405.585621]         bFrameIndex                         2
+                       bmCapabilities                   0x01
+[ 2405.585621]           Still image supported
+[ 2405.585622]         wWidth                            320
+                       wHeight                           240
+                       dwMinBitRate                   576000
+                       dwMaxBitRate                   576000
+[ 2405.585622]         dwMaxVideoFrameBufferSize       19200
+                       dwDefaultFrameInterval         333333
+                       bFrameIntervalType                  1
+[ 2405.585623]         dwFrameInterval( 0)            333333
+[ 2405.585623]       VideoStreaming Interface Descriptor:
+                       bLength                            30
+                       bDescriptorType                    36
+                       bDescriptorSubtype                  7 
+[ 2405.585623] (FRAME_MJPEG)
+[ 2405.585624]         bFrameIndex                         3
+                       bmCapabilities                   0x01
+[ 2405.585624]           Still image supported
+[ 2405.585625]         wWidth                            160
+                       wHeight                           120
+                       dwMinBitRate                   144000
+                       dwMaxBitRate                   144000
+[ 2405.585625]         dwMaxVideoFrameBufferSize        4800
+                       dwDefaultFrameInterval         333333
+                       bFrameIntervalType                  1
+[ 2405.585625]         dwFrameInterval( 0)            333333
+[ 2405.585626]       VideoStreaming Interface Descriptor:
+                       bLength                             6
+                       bDescriptorType                    36
+                       bDescriptorSubtype                 13 
+[ 2405.585626] (COLORFORMAT)
+[ 2405.585627]         bColorPrimaries                     1 (BT.709,sRGB)
+[ 2405.585627]         bTransferCharacteristics            1 (BT.709)
+[ 2405.585627]         bMatrixCoefficients                 4 (SMPTE 170M (BT.601))
+[ 2405.585640] usbcore: registered new interface driver myUvc
