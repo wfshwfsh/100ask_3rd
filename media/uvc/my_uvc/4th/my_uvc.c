@@ -17,31 +17,15 @@
 
 #define MODULE_NAME "myuvc"
 
-struct v4l2_format myuvc_format;
 
-struct frame_desc{
-	int width;
-	int height;
-};
-
-static struct frame_desc frames[] = {{640, 480}, {352, 288}, {320, 240}, {176, 144}, {160, 120}};
-static int frame_idx=0;
-
-static int bBitsPerPixel = 16; /* lsusb -v -d xxxx:  "bBitsPerPixel" for YUYV only */
-
-
-
-
-/* A1 */
-static int myuvc_open(struct file *filp)
+static unsigned int myuvc_poll(struct file *filp, struct poll_table_struct *poll_table)
 {
     printk("%s \n", __func__);
-
 	return 0;
 }
 
 
-/* A9 把缓存映射到APP的空间,以后APP就可以直接操作这块缓存 */
+
 static int myuvc_mmap(struct file *filp, struct vm_area_struct *vm_area)
 {
     printk("%s \n", __func__);
@@ -49,15 +33,13 @@ static int myuvc_mmap(struct file *filp, struct vm_area_struct *vm_area)
 	return 0;
 }
 
-
-/* A12 APP调用POLL/select来确定缓存是否就绪(有数据) */
-static unsigned int myuvc_poll(struct file *filp, struct poll_table_struct *poll_table)
+static int myuvc_open(struct file *filp)
 {
     printk("%s \n", __func__);
+
 	return 0;
 }
 
-/* A18 关闭 */
 static int myuvc_close(struct file *filp)
 {
     printk("%s \n", __func__);
@@ -69,11 +51,13 @@ static const struct v4l2_file_operations myuvc_fops = {
 	.owner			= THIS_MODULE,
 	.unlocked_ioctl = video_ioctl2,
 
-	.open			= myuvc_open,
-	.mmap 			= myuvc_mmap,
+#if 1
 	.poll  			= myuvc_poll,
-	
+
+	.mmap 			= myuvc_mmap,
+	.open			= myuvc_open,
 	.release		= myuvc_close,
+#endif
 };
 
 int myuvc_querycap(struct file *file, void *fh,
@@ -83,13 +67,10 @@ int myuvc_querycap(struct file *file, void *fh,
 
 	strscpy(cap->driver, "myuvc", sizeof(cap->driver));
 	strscpy(cap->card, "myuvc", sizeof(cap->card));
-	
-	//usb_make_path(stream->dev->udev, cap->bus_info, sizeof(cap->bus_info));
 	snprintf(cap->bus_info, sizeof(cap->bus_info),
 					"platform:%s", MODULE_NAME);
 
-	cap->capabilities = V4L2_CAP_DEVICE_CAPS | V4L2_CAP_STREAMING;
-	cap->device_caps = V4L2_CAP_VIDEO_CAPTURE | V4L2_CAP_STREAMING;
+	cap->capabilities = V4L2_CAP_DEVICE_CAPS;
 
 	return 0;
 }
@@ -99,18 +80,6 @@ int myuvc_enum_fmt_vid_cap(struct file *file, void *fh,
 {
 	printk("%s \n", __func__);
 
-	if (f->index >= 1)
-		return -EINVAL;
-	
-	/* 支持什么格式呢?
-     * 查看VideoStreaming Interface的描述符,
-     * 得到GUID为"59 55 59 32 00 00 10 00 80 00 00 aa 00 38 9b 71"
-     */
-	
-	//strcpy(f->description, "MJPEG");
-	//f->pixelformat = V4L2_PIX_FMT_MJPEG;
-	strcpy(f->description, "4:2:2, packed, YUYV");
-	f->pixelformat = V4L2_PIX_FMT_YUYV;
 	return 0;
 }
 
@@ -118,7 +87,7 @@ int myuvc_g_fmt_vid_cap(struct file *file, void *fh,
 			  struct v4l2_format *f)
 {
 	printk("%s \n", __func__);
-	memcpy(f, &myuvc_format, sizeof(*f));
+
 	return 0;
 }
 
@@ -126,25 +95,7 @@ int myuvc_try_fmt_vid_cap(struct file *file, void *fh,
 				struct v4l2_format *f)
 {
 	printk("%s \n", __func__);
-	if (f->type != V4L2_BUF_TYPE_VIDEO_CAPTURE)
-		return -EINVAL;
-	
-	if (f->fmt.pix.pixelformat != V4L2_PIX_FMT_YUYV)
-        return -EINVAL;
 
-    /* 调整format的width, height, 
-     * 计算bytesperline, sizeimage
-     */
-
-    /* 人工查看描述符, 确定支持哪几种分辨率 */
-    f->fmt.pix.width  = frames[frame_idx].width;
-    f->fmt.pix.height = frames[frame_idx].height;
-    
-	f->fmt.pix.bytesperline =
-		(f->fmt.pix.width * bBitsPerPixel) >> 3;
-	f->fmt.pix.sizeimage =
-		f->fmt.pix.height * f->fmt.pix.bytesperline;
-	
 	return 0;
 }
 
@@ -152,34 +103,17 @@ int myuvc_s_fmt_vid_cap(struct file *file, void *fh,
 			  struct v4l2_format *f)
 {
 	printk("%s \n", __func__);
-	
-	int ret = myuvc_try_fmt_vid_cap(file, NULL, f);
-	if (ret < 0)
-		return ret;
 
-    memcpy(&myuvc_format, f, sizeof(myuvc_format));
 	return 0;
 }
 
-
-/* A7 APP调用该ioctl让驱动程序分配若干个缓存, APP将从这些缓存中读到视频数据 
- * 参考: uvc_alloc_buffers
- */
 int myuvc_reqbufs(struct file *file, void *fh,
 			struct v4l2_requestbuffers *b)
 {
 	printk("%s \n", __func__);
-	
-	
-	
-	
-	
 	return 0;
 }
 
-/* A8 查询缓存状态, 比如地址信息(APP可以用mmap进行映射) 
- * 参考 uvc_query_buffer
- */
 int myuvc_querybuf(struct file *file, void *fh,
 			 struct v4l2_buffer *b)
 {
@@ -188,9 +122,7 @@ int myuvc_querybuf(struct file *file, void *fh,
 	return 0;
 }
 
-/* A10 把缓冲区放入队列, 底层的硬件操作函数将会把数据放入这个队列的缓存 
- * 参考: uvc_queue_buffer
- */
+
 int myuvc_qbuf(struct file *file, void *fh,
 		 struct v4l2_buffer *b)
 {
@@ -199,31 +131,19 @@ int myuvc_qbuf(struct file *file, void *fh,
 	return 0;
 }
 
-/* A13 APP通过poll/select确定有数据后, 把缓存从队列中取出来
- * 参考: uvc_dequeue_buffer
- */
 int myuvc_dqbuf(struct file *file, void *fh,
 		  struct v4l2_buffer *b)
 {
 	return 0;
 }
 
-/* A11 启动传输 
- * 参考: uvc_video_enable(video, 1)
- */
+
 int myuvc_streamon(struct file *file, void *fh,
 			 enum v4l2_buf_type i)
 {
 	return 0;
 }
 
-/*
- * A14 之前已经通过mmap映射了缓存, APP可以直接读数据
- * A15 再次调用myuvc_vidioc_qbuf把缓存放入队列
- * A16 poll...
- */
-
-/* A17 停止 */
 int myuvc_streamoff(struct file *file, void *fh,
 		  enum v4l2_buf_type i)
 {
