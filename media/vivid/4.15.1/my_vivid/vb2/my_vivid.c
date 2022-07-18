@@ -21,13 +21,16 @@
 #include <media/v4l2-ioctl.h>
 
 
+#include <media/videobuf-core.h>
+
+
 
 #define DBG_1	printk("111\n");
 #define DBG_2	printk("222\n");
 #define DBG_3	printk("333\n");
 #define DBG_4	printk("444\n");
 #define DBG_5	printk("555\n");
-
+#define DBG_6	printk("555\n");
 
 #define VIVID_MODULE_NAME "myVivid"
 //#define DEBUG 1
@@ -36,7 +39,8 @@
 /* buffer for one video frame */
 struct myvivid_buffer {
 	/* common v4l buffer stuff -- must be first */
-	struct vb2_buffer	vb;
+	//struct vb2_buffer	vb;
+	struct vb2_v4l2_buffer vb;
 	struct list_head	list;
 	struct vivi_fmt        *fmt;
 };
@@ -55,14 +59,61 @@ static struct mutex myVivid_vb_mutex;
 
 static spinlock_t myVivid_queue_slock;
 
-//static struct list_head  myVivid_vb_local_queue;
-//static struct timer_list myVivid_timer;
+static struct list_head  myVivid_vb_local_queue;
+static struct timer_list myVivid_timer;
 
 //#include "fill_buf.c"
 
 
 
 #define vid_limit 16
+
+
+
+static void myVivid_timer_function(struct timer_list *t)
+{
+	printk("%s \n", __func__);
+    //struct myvivid_buffer *vid_cap_buf;
+	//void *vbuf = NULL;
+	//
+	//DBG_1
+	///* 1. fill video data */
+	///* 1.1 從本地對列取出第一個buffer */
+	//if (list_empty(&myVivid_vb_local_queue)) {
+	//	vid_cap_buf = list_entry(myVivid_vb_local_queue.next, struct myvivid_buffer, list);
+	//}
+    //DBG_2
+    ///* Nobody is waiting on this buffer, return */
+    //if (!waitqueue_active(&vid_cap_buf->vb.vb2_buf.vb2_queue->done_wq))
+    //    goto OUT;
+    //DBG_3
+    ///* Nobody is waiting on this buffer, return */
+    ///* 1.2 Fill buffer */
+    //if (vid_cap_buf) {
+	//	/* Fill buffer */
+    //    vbuf = vb2_plane_vaddr(&vid_cap_buf->vb.vb2_buf, 0);
+    //    memset(vbuf, 0, myVivid_format.fmt.pix.sizeimage);
+	//	//vivid_fillbuff(dev, vid_cap_buf);
+    //}
+	//
+    //DBG_4
+	////vid_cap_buf->vb.vb2_buf.field_count++;
+	//vid_cap_buf->vb.vb2_buf.timestamp = ktime_get_ns();
+    //vid_cap_buf->vb.vb2_buf.state = VIDEOBUF_DONE;
+    //
+    //DBG_5
+    ///* 1.3 把videobuf从本地队列中删除 */
+    //list_del(&vid_cap_buf->list);
+    //
+    ///* 2. wakeup */
+    //wake_up(&vid_cap_buf->vb.vb2_buf.vb2_queue->done_wq);
+    
+    
+OUT:
+	DBG_6
+	/* 3. reset timer */
+	mod_timer(&myVivid_timer, jiffies + (HZ/30));//30fps	
+}
 
 
 
@@ -92,16 +143,21 @@ static int queue_setup(struct vb2_queue *vq,
 
 static int buffer_prepare(struct vb2_buffer *vb)
 {
-    printk("%s\n", __func__);
-	//unsigned long size = myVivid_format.fmt.pix.sizeimage;
-	//
-	//if (vb2_plane_size(vb, 0) < size) {
-	//	printk("%s data will not fit into plane (%lu < %lu)\n",
-	//			__func__, vb2_plane_size(vb, 0), size);
-	//	return -EINVAL;
-	//}
-	//
-	//vb2_set_plane_payload(vb, 0, size);
+	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
+	struct myvivid_buffer *buf = container_of(vbuf, struct myvivid_buffer, vb);
+
+	unsigned long size = myVivid_format.fmt.pix.sizeimage;
+	unsigned long plane_size = vb2_plane_size(vb, 0);
+    
+    printk("%s\n plane_size %d, size %d", __func__, plane_size, size);
+    
+	if (plane_size < size) {
+		printk("%s data will not fit into plane (%lu < %lu)\n",
+				__func__, vb2_plane_size(vb, 0), size);
+		return -EINVAL;
+	}
+	
+	vb2_set_plane_payload(&buf->vb.vb2_buf, 0, size);
 
 
 	//precalculate_bars(dev);
@@ -140,13 +196,14 @@ static void buffer_cleanup(struct vb2_buffer *vb)
 
 static void buffer_queue(struct vb2_buffer *vb)
 {
-	unsigned long flags = 0;
+	struct vb2_v4l2_buffer *vbuf = to_vb2_v4l2_buffer(vb);
+	struct myvivid_buffer *buf = container_of(vbuf, struct myvivid_buffer, vb);
 
 	printk("%s\n", __func__);
 
 	//spin_lock_irqsave(&myVivid_queue_slock, flags);
     //orig: list_add_tail(&buf->list, &dev->vid_cap_active);
-	//list_add_tail(&vb->vb2_queue, &myVivid_vb_vidq);
+	list_add_tail(&buf->list, &myVivid_vb_local_queue);
 	//spin_unlock_irqrestore(&myVivid_queue_slock, flags);
 }
 
@@ -162,7 +219,7 @@ static void stop_streaming(struct vb2_queue *q)
 {
 	printk("%s\n", __func__);
 	//vivi_stop_generating(dev); => trigger timer to stop fill frames
-	return 0;
+	return;
 }
 
 static void vivi_lock(struct vb2_queue *q)
@@ -197,25 +254,34 @@ static int myVivid_open(struct file *file)
 	
 	//mutex_init(&myVivid_vb_mutex);
 	
+	myVivid_timer.expires = jiffies + 1;
+	add_timer(&myVivid_timer);
+    
 	return v4l2_fh_open(file);
 }
 
 static int myVivid_close(struct file *file)
 {
     printk("%s \n", __func__);
-	//videobuf_stop(&myVivid_vb_vidqueue);
-	//videobuf_mmap_free(&myVivid_vb_vidqueue);
-
+	//videobuf_stop(&myVivid_vb_vidq);
+	//videobuf_mmap_free(&myVivid_vb_vidq);
+    
+    del_timer(&myVivid_timer);
+    
 	return v4l2_fh_release(file);
 }
 
 
 int myVivid_mmap(struct file *file, struct vm_area_struct *vma)
 {
-	struct video_device *vdev = video_devdata(file);
-
 	return vb2_mmap(&myVivid_vb_vidq, vma);
 }
+
+unsigned int myVivid_poll(struct file *file, struct poll_table_struct *wait)
+{
+    return vb2_fop_poll(file, wait);
+}
+
 
 static const struct v4l2_file_operations myVivid_fops = {
 	.owner			= THIS_MODULE,
@@ -226,7 +292,7 @@ static const struct v4l2_file_operations myVivid_fops = {
 	.unlocked_ioctl = video_ioctl2,
 	.mmap           = myVivid_mmap,
     
-    //.poll   		= vb2_fop_poll,
+    .poll   		= myVivid_poll,
 };
 
 int myVivid_querycap(struct file *file, void *priv,
@@ -364,7 +430,7 @@ struct v4l2_ioctl_ops myVivid_ioctl_ops = {
 	.vidioc_qbuf		  = myVivid_qbuf,
 	.vidioc_dqbuf		  = myVivid_dqbuf,
 
-#if 0
+#if 1
 	// 启动/停止
 	.vidioc_streamon	  = myVivid_streamon,
 	.vidioc_streamoff	  = myVivid_streamoff,
@@ -427,8 +493,7 @@ static int myVivid_probe(struct platform_device *pdev)
 	}
 
 	/* 用定时器产生数据并唤醒进程 */
-	//timer_setup(&myVivid_timer, myVivid_timer_function, 0);
-	//INIT_LIST_HEAD(&myVivid_vb_local_queue);
+	timer_setup(&myVivid_timer, myVivid_timer_function, 0);
 	
     return 0;
 
