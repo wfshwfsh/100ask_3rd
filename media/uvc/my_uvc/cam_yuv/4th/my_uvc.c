@@ -213,16 +213,14 @@ static unsigned int myuvc_poll(struct file *file, struct poll_table_struct *wait
 		goto done;
 	}
 	buf = list_first_entry(&myuvc_queue.mainqueue, struct myuvc_buffer, stream);
-    printk("%s %d \n", __func__, __LINE__);
-    
+
 	poll_wait(file, &buf->wait, wait);
-	if (buf->state == VIDEOBUF_DONE ||
-	    buf->state == VIDEOBUF_ERROR)
+	if (buf->state == UVC_BUF_STATE_DONE ||
+	    buf->state == UVC_BUF_STATE_ERROR)
 		mask |= POLLIN | POLLRDNORM;
 
 done:
 	//mutex_unlock(&queue->mutex);
-    printk("%s %d \n", __func__, __LINE__);
 	return mask;
 }
 
@@ -333,7 +331,7 @@ static int myuvc_s_fmt_vid_cap(struct file *file, void *fh,
 
 static int myuvc_free_buffers(void)
 {
-    vfree(myuvc_queue.mem);
+    kfree(myuvc_queue.mem);
     memset(&myuvc_queue, 0, sizeof(myuvc_queue));
     return 0;
 }
@@ -370,8 +368,7 @@ static int myuvc_reqbufs(struct file *file, void *fh,
 		goto done;
 	}
 
-	INIT_LIST_HEAD(&myuvc_queue.mainqueue);
-	INIT_LIST_HEAD(&myuvc_queue.irqqueue);
+	
 
 	for (i = 0; i < nbuffers; ++i) {
 		memset(&myuvc_queue.buffer[i], 0, sizeof myuvc_queue.buffer[i]);
@@ -438,25 +435,9 @@ static int myuvc_qbuf(struct file *file, void *fh,
 		 struct v4l2_buffer *v4l2_buf)
 {
 	printk("%s \n", __func__);
-	struct myuvc_buffer *buf;
 	
-	if (v4l2_buf->type != V4L2_BUF_TYPE_VIDEO_CAPTURE ||
-	    v4l2_buf->memory != V4L2_MEMORY_MMAP) {
-		return -EINVAL;
-	}
-
-	if (v4l2_buf->index >= myuvc_queue.count) {
-		return -EINVAL;
-	}
-    
-    buf = &myuvc_queue.buffer[v4l2_buf->index];
-
-	if (buf->state != UVC_BUF_STATE_IDLE) {
-		return -EINVAL;
-	}
-    
-    
-    /* 1. 修改状态 */
+	struct myuvc_buffer *buf = &myuvc_queue.buffer[v4l2_buf->index];
+	
 	buf->state = VIDEOBUF_QUEUED;
 	buf->buf.bytesused = 0;
 	
@@ -481,8 +462,6 @@ static int myuvc_qbuf(struct file *file, void *fh,
 static int myuvc_dqbuf(struct file *file, void *fh,
 		  struct v4l2_buffer *v4l2_buf)
 {
-    printk("%s \n", __func__);
-    int ret=0;
 	struct myuvc_buffer *buf;
 	
 	if (list_empty(&myuvc_queue.mainqueue)) {
@@ -493,28 +472,26 @@ static int myuvc_dqbuf(struct file *file, void *fh,
 	
 	list_del(&buf->stream);
 	
-	memcpy(v4l2_buf, &buf->buf, sizeof *v4l2_buf);
+	memcpy(v4l2_buf, &buf->buf, sizeof *v4l2_buf);//???
 
 	if (buf->vma_use_count)
 		v4l2_buf->flags |= V4L2_BUF_FLAG_MAPPED;
 
 	switch (buf->state) {
 	case VIDEOBUF_ERROR:
-		ret = -EIO;
 	case VIDEOBUF_DONE:
-		buf->state = VIDEOBUF_IDLE;
+		v4l2_buf->flags |= V4L2_BUF_FLAG_DONE;
 		break;
-
-	case VIDEOBUF_IDLE:
 	case VIDEOBUF_QUEUED:
 	case VIDEOBUF_ACTIVE:
+		v4l2_buf->flags |= V4L2_BUF_FLAG_QUEUED;
+		break;
+	case VIDEOBUF_IDLE:
 	default:
-		ret = -EINVAL;
-		goto done;
+		break;
 	}
 	
-done:
-	return ret;
+	return 0;
 }
 
 
@@ -723,7 +700,7 @@ OUT:
 }
 
 
-/* 参考: uvc_video_complete / uvc_video_decode_isoc */
+
 static void myuvc_video_complete(struct urb *urb)
 {
 	u8 *src;
@@ -743,22 +720,18 @@ static void myuvc_video_complete(struct urb *urb)
 			"completion handler.\n", urb->status);
 		return;
 	}
-    
-	printk("%s %d", __func__, __LINE__);
+	
 	if (!list_empty(&myuvc_queue.irqqueue))
 	{
-        printk("%s %d", __func__, __LINE__);
 		buf = list_first_entry(&myuvc_queue.irqqueue, struct myuvc_buffer, irq);
-        printk("%s %d", __func__, __LINE__);
-        
+
 		for (i = 0; i < urb->number_of_packets; ++i) {
-            printk("%s %d", __func__, __LINE__);
 			if (urb->iso_frame_desc[i].status < 0) {
-				printk("USB isochronous frame lost (%d).\n", urb->iso_frame_desc[i].status);
+				printk("USB isochronous frame "
+					"lost (%d).\n", urb->iso_frame_desc[i].status);
 				continue;
 			}
 			
-            printk("%s %d", __func__, __LINE__);
 			src  = urb->transfer_buffer + urb->iso_frame_desc[i].offset;
 			dest = myuvc_queue.mem + buf->buf.m.offset + buf->buf.bytesused;
 			
@@ -769,11 +742,9 @@ static void myuvc_video_complete(struct urb *urb)
              * data[0] : 头部长度
              * data[1] : 错误状态
              */
-            printk("%s %d len=%d, src[0]=%d", __func__, __LINE__, len, src[0]);
 			if (len < 2 || src[0] < 2 || src[0] > len)
 				continue;
 
-            printk("%s %d", __func__, __LINE__);
 			/* Skip payloads marked with the error bit ("error frames"). */
 			if (src[1] & UVC_STREAM_ERR) {
 				printk("Dropping payload (error bit set).\n");
@@ -785,42 +756,38 @@ static void myuvc_video_complete(struct urb *urb)
 			
 			/* Decode the payload data. :uvc_video_decode_data*/
 			maxlen = buf->buf.length - buf->buf.bytesused;
-			nbytes = min(len, maxlen);
+			nbytes = min((unsigned int)len, maxlen);
 			
-            printk("%s %d", __func__, __LINE__);
 			/* copy data */
 			memcpy(dest, src+src[0], nbytes);
 			buf->buf.bytesused += nbytes;
 			
-            printk("%s %d", __func__, __LINE__);
 			if (len > maxlen) {
                 buf->state = VIDEOBUF_DONE;
             }
 			
-            printk("%s %d", __func__, __LINE__);
 			/* Process the header again. :uvc_video_decode_end*/
 			/* 判斷是否已收到一偵數據 */
 			if (src[1] & UVC_STREAM_EOF && buf->buf.bytesused != 0) {
 				printk("Frame complete (EOF found).\n");
-				if (0 == len)/* len == 頭部長度 => data是空的 */
+				if (src[0] == len)/* len == 頭部長度 => data是空的 */
 					printk("EOF in empty payload.\n");
-				buf->state = VIDEOBUF_DONE;
+				buf->state = UVC_BUF_STATE_DONE;
 			}
-            printk("%s %d", __func__, __LINE__);
+			
+			//
+			if (buf->state == UVC_BUF_STATE_DONE ||
+				buf->state == UVC_BUF_STATE_ERROR)
+			{
+				list_del(&buf->irq);
+				wake_up(&buf->wait);
+			}
 		}
-    
-        //当接收完一帧数据, 从irqqueue中删除这个缓冲区 唤醒等待数据的进程
-        if (buf->state == VIDEOBUF_DONE ||
-            buf->state == VIDEOBUF_ERROR)
-        {
-            list_del(&buf->irq);
-            wake_up(&buf->wait);
-        }
 	}
 	
 	/* 再次提交URB */
 	if ((ret = usb_submit_urb(urb, GFP_ATOMIC)) < 0) {
-		printk("Failed to resubmit video URB (%d).\n", ret);
+		uvc_printk(KERN_ERR, "Failed to resubmit video URB (%d).\n", ret);
 	}
 }
 
@@ -852,22 +819,21 @@ static int myuvc_alloc_init_urbs(void)
 	
 	
 	psize = wMaxPacketSize; /* 实时传输端点一次能传输的最大字节数 */
-	size = myuvc_params.dwMaxVideoFrameSize; /* 一帧数据的最大长度 */
+	size = myuvc_params.dwMaxVideoFrameSize;
 	
 	npackets = DIV_ROUND_UP(size, psize);
-	if (npackets > 32)
-		npackets = 32;
-
-    size = myuvc_queue.urb_size = psize * npackets;
+	if (npackets > UVC_MAX_PACKETS)
+		npackets = UVC_MAX_PACKETS;
 
 	/* Retry allocations until one succeed. */
 	for (i = 0; i < MYUVC_URBS; ++i) {
 		/* 1. 分配usb_buffers */
+		myuvc_queue.urb_buffer[i] =
+			    kmalloc(myuvc_queue.urb_size, GFP_KERNEL | __GFP_NOWARN);
 		
 		//myuvc_queue.urb_buffer[i] = usb_buffer_alloc( \
 			myuvc_udev, size, \
 			GFP_KERNEL | __GFP_NOWARN, &myuvc_queue.urb_dma[i]);
-        myuvc_queue.urb_buffer[i] = kmalloc(myuvc_queue.urb_size, GFP_KERNEL | __GFP_NOWARN);
 			
 		if (!myuvc_queue.urb_buffer[i]) {
 			myuvc_uninit_urbs();
@@ -887,8 +853,9 @@ static int myuvc_alloc_init_urbs(void)
 		urb = myuvc_queue.urb[i];
 		
 		urb->dev = myuvc_udev;
-		urb->context = NULL;
-		urb->pipe = usb_rcvisocpipe(myuvc_udev, myuvc_bEndpointAddress);
+		//urb->context = video;
+		urb->pipe = usb_rcvisocpipe(myuvc_udev,
+				myuvc_bEndpointAddress);
 		urb->transfer_flags = URB_ISO_ASAP | URB_NO_TRANSFER_DMA_MAP;
 		urb->interval = 1;//ep->desc.bInterval;
 		urb->transfer_buffer = myuvc_queue.urb_buffer[i];
@@ -1070,6 +1037,8 @@ int myuvc_probe(struct usb_interface *intf, const struct usb_device_id *id)
 			printk("video_register_device failed ??? ret=%d", ret);
 			return ret;
 		}
+		
+		myuvc_streamon(NULL, NULL, 0);
 	}
 
     return 0;

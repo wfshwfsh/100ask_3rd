@@ -1,0 +1,1214 @@
+
+my_vivid.ko:     file format elf64-x86-64
+
+
+Disassembly of section .note.gnu.build-id:
+
+0000000000000000 <.note.gnu.build-id>:
+   0:	04 00                	add    $0x0,%al
+   2:	00 00                	add    %al,(%rax)
+   4:	14 00                	adc    $0x0,%al
+   6:	00 00                	add    %al,(%rax)
+   8:	03 00                	add    (%rax),%eax
+   a:	00 00                	add    %al,(%rax)
+   c:	47                   	rex.RXB
+   d:	4e 55                	rex.WRX push %rbp
+   f:	00 31                	add    %dh,(%rcx)
+  11:	e4 ad                	in     $0xad,%al
+  13:	4a                   	rex.WX
+  14:	4d 2f                	rex.WRB (bad) 
+  16:	6d                   	insl   (%dx),%es:(%rdi)
+  17:	c7                   	(bad)  
+  18:	d6                   	(bad)  
+  19:	21 1d 34 cc 2e 46    	and    %ebx,0x462ecc34(%rip)        # 462ecc53 <myvivid_streamoff+0x462ec373>
+  1f:	58                   	pop    %rax
+  20:	e6 69                	out    %al,$0x69
+  22:	43                   	rex.XB
+  23:	2d                   	.byte 0x2d
+
+Disassembly of section .text:
+
+0000000000000000 <myvivid_dev_release>:
+   0:	e8 00 00 00 00       	callq  5 <myvivid_dev_release+0x5>
+   5:	55                   	push   %rbp
+   6:	48 89 e5             	mov    %rsp,%rbp
+   9:	5d                   	pop    %rbp
+   a:	c3                   	retq   
+   b:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+0000000000000010 <buffer_queue>:
+  10:	e8 00 00 00 00       	callq  15 <buffer_queue+0x5>
+  15:	55                   	push   %rbp
+  16:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+  1d:	48 89 e5             	mov    %rsp,%rbp
+  20:	53                   	push   %rbx
+  21:	48 89 fb             	mov    %rdi,%rbx
+  24:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  2b:	e8 00 00 00 00       	callq  30 <buffer_queue+0x20>
+  30:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 37 <buffer_queue+0x27>
+  37:	48 8d 8b e8 01 00 00 	lea    0x1e8(%rbx),%rcx
+  3e:	48 8b 90 b0 03 00 00 	mov    0x3b0(%rax),%rdx
+  45:	48 89 88 b0 03 00 00 	mov    %rcx,0x3b0(%rax)
+  4c:	48 05 a8 03 00 00    	add    $0x3a8,%rax
+  52:	48 89 83 e8 01 00 00 	mov    %rax,0x1e8(%rbx)
+  59:	48 89 93 f0 01 00 00 	mov    %rdx,0x1f0(%rbx)
+  60:	48 89 0a             	mov    %rcx,(%rdx)
+  63:	5b                   	pop    %rbx
+  64:	5d                   	pop    %rbp
+  65:	c3                   	retq   
+  66:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+  6d:	00 00 00 
+
+0000000000000070 <buffer_prepare>:
+  70:	e8 00 00 00 00       	callq  75 <buffer_prepare+0x5>
+  75:	55                   	push   %rbp
+  76:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+  7d:	48 89 e5             	mov    %rsp,%rbp
+  80:	53                   	push   %rbx
+  81:	48 89 fb             	mov    %rdi,%rbx
+  84:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  8b:	e8 00 00 00 00       	callq  90 <buffer_prepare+0x20>
+  90:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 97 <buffer_prepare+0x27>
+  97:	8b 88 d4 02 00 00    	mov    0x2d4(%rax),%ecx
+  9d:	8b 43 14             	mov    0x14(%rbx),%eax
+  a0:	85 c0                	test   %eax,%eax
+  a2:	74 10                	je     b4 <buffer_prepare+0x44>
+  a4:	8b 53 30             	mov    0x30(%rbx),%edx
+  a7:	48 39 d1             	cmp    %rdx,%rcx
+  aa:	77 14                	ja     c0 <buffer_prepare+0x50>
+  ac:	89 4b 2c             	mov    %ecx,0x2c(%rbx)
+  af:	31 c0                	xor    %eax,%eax
+  b1:	5b                   	pop    %rbx
+  b2:	5d                   	pop    %rbp
+  b3:	c3                   	retq   
+  b4:	48 85 c9             	test   %rcx,%rcx
+  b7:	75 05                	jne    be <buffer_prepare+0x4e>
+  b9:	31 c0                	xor    %eax,%eax
+  bb:	5b                   	pop    %rbx
+  bc:	5d                   	pop    %rbp
+  bd:	c3                   	retq   
+  be:	31 d2                	xor    %edx,%edx
+  c0:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+  c7:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  ce:	e8 00 00 00 00       	callq  d3 <buffer_prepare+0x63>
+  d3:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+  d8:	eb d7                	jmp    b1 <buffer_prepare+0x41>
+  da:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000000e0 <queue_setup>:
+  e0:	e8 00 00 00 00       	callq  e5 <queue_setup+0x5>
+  e5:	55                   	push   %rbp
+  e6:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  ed:	48 89 e5             	mov    %rsp,%rbp
+  f0:	41 55                	push   %r13
+  f2:	41 54                	push   %r12
+  f4:	53                   	push   %rbx
+  f5:	48 89 f3             	mov    %rsi,%rbx
+  f8:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+  ff:	49 89 d4             	mov    %rdx,%r12
+ 102:	49 89 cd             	mov    %rcx,%r13
+ 105:	e8 00 00 00 00       	callq  10a <queue_setup+0x2a>
+ 10a:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 111 <queue_setup+0x31>
+ 111:	8b 33                	mov    (%rbx),%esi
+ 113:	8b 88 d4 02 00 00    	mov    0x2d4(%rax),%ecx
+ 119:	85 f6                	test   %esi,%esi
+ 11b:	89 f0                	mov    %esi,%eax
+ 11d:	48 89 ca             	mov    %rcx,%rdx
+ 120:	75 10                	jne    132 <queue_setup+0x52>
+ 122:	c7 03 20 00 00 00    	movl   $0x20,(%rbx)
+ 128:	b8 20 00 00 00       	mov    $0x20,%eax
+ 12d:	be 20 00 00 00       	mov    $0x20,%esi
+ 132:	48 0f af c1          	imul   %rcx,%rax
+ 136:	83 ee 01             	sub    $0x1,%esi
+ 139:	48 3d 00 00 00 01    	cmp    $0x1000000,%rax
+ 13f:	77 04                	ja     145 <queue_setup+0x65>
+ 141:	eb 15                	jmp    158 <queue_setup+0x78>
+ 143:	89 fe                	mov    %edi,%esi
+ 145:	89 f0                	mov    %esi,%eax
+ 147:	8d 7e ff             	lea    -0x1(%rsi),%edi
+ 14a:	48 0f af c1          	imul   %rcx,%rax
+ 14e:	48 3d 00 00 00 01    	cmp    $0x1000000,%rax
+ 154:	77 ed                	ja     143 <queue_setup+0x63>
+ 156:	89 33                	mov    %esi,(%rbx)
+ 158:	41 c7 04 24 01 00 00 	movl   $0x1,(%r12)
+ 15f:	00 
+ 160:	41 89 55 00          	mov    %edx,0x0(%r13)
+ 164:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 16b:	8b 13                	mov    (%rbx),%edx
+ 16d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 174:	e8 00 00 00 00       	callq  179 <queue_setup+0x99>
+ 179:	31 c0                	xor    %eax,%eax
+ 17b:	5b                   	pop    %rbx
+ 17c:	41 5c                	pop    %r12
+ 17e:	41 5d                	pop    %r13
+ 180:	5d                   	pop    %rbp
+ 181:	c3                   	retq   
+ 182:	0f 1f 40 00          	nopl   0x0(%rax)
+ 186:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 18d:	00 00 00 
+
+0000000000000190 <myvivid_pdev_release>:
+ 190:	e8 00 00 00 00       	callq  195 <myvivid_pdev_release+0x5>
+ 195:	55                   	push   %rbp
+ 196:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 19d:	48 89 e5             	mov    %rsp,%rbp
+ 1a0:	e8 00 00 00 00       	callq  1a5 <myvivid_pdev_release+0x15>
+ 1a5:	5d                   	pop    %rbp
+ 1a6:	c3                   	retq   
+ 1a7:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+ 1ae:	00 00 
+
+00000000000001b0 <myvivid_querycap>:
+ 1b0:	e8 00 00 00 00       	callq  1b5 <myvivid_querycap+0x5>
+ 1b5:	55                   	push   %rbp
+ 1b6:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 1bd:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 1c4:	48 89 e5             	mov    %rsp,%rbp
+ 1c7:	53                   	push   %rbx
+ 1c8:	48 89 d3             	mov    %rdx,%rbx
+ 1cb:	e8 00 00 00 00       	callq  1d0 <myvivid_querycap+0x20>
+ 1d0:	48 89 df             	mov    %rbx,%rdi
+ 1d3:	ba 10 00 00 00       	mov    $0x10,%edx
+ 1d8:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 1df:	e8 00 00 00 00       	callq  1e4 <myvivid_querycap+0x34>
+ 1e4:	48 8d 7b 10          	lea    0x10(%rbx),%rdi
+ 1e8:	ba 20 00 00 00       	mov    $0x20,%edx
+ 1ed:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 1f4:	e8 00 00 00 00       	callq  1f9 <myvivid_querycap+0x49>
+ 1f9:	48 8d 7b 30          	lea    0x30(%rbx),%rdi
+ 1fd:	48 c7 c1 00 00 00 00 	mov    $0x0,%rcx
+ 204:	48 c7 c2 00 00 00 00 	mov    $0x0,%rdx
+ 20b:	be 20 00 00 00       	mov    $0x20,%esi
+ 210:	e8 00 00 00 00       	callq  215 <myvivid_querycap+0x65>
+ 215:	c7 43 50 01 00 00 00 	movl   $0x1,0x50(%rbx)
+ 21c:	c7 43 58 01 00 00 04 	movl   $0x4000001,0x58(%rbx)
+ 223:	31 c0                	xor    %eax,%eax
+ 225:	c7 43 54 01 00 00 84 	movl   $0x84000001,0x54(%rbx)
+ 22c:	5b                   	pop    %rbx
+ 22d:	5d                   	pop    %rbp
+ 22e:	c3                   	retq   
+ 22f:	90                   	nop
+
+0000000000000230 <myvivid_enum_fmt_vid_cap>:
+ 230:	e8 00 00 00 00       	callq  235 <myvivid_enum_fmt_vid_cap+0x5>
+ 235:	55                   	push   %rbp
+ 236:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 23d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 244:	48 89 e5             	mov    %rsp,%rbp
+ 247:	53                   	push   %rbx
+ 248:	48 89 d3             	mov    %rdx,%rbx
+ 24b:	e8 00 00 00 00       	callq  250 <myvivid_enum_fmt_vid_cap+0x20>
+ 250:	8b 03                	mov    (%rbx),%eax
+ 252:	85 c0                	test   %eax,%eax
+ 254:	75 2f                	jne    285 <myvivid_enum_fmt_vid_cap+0x55>
+ 256:	48 b9 34 3a 32 3a 32 	movabs $0x70202c323a323a34,%rcx
+ 25d:	2c 20 70 
+ 260:	48 ba 61 63 6b 65 64 	movabs $0x59202c64656b6361,%rdx
+ 267:	2c 20 59 
+ 26a:	c7 43 1c 55 59 56 00 	movl   $0x565955,0x1c(%rbx)
+ 271:	48 89 4b 0c          	mov    %rcx,0xc(%rbx)
+ 275:	48 89 53 14          	mov    %rdx,0x14(%rbx)
+ 279:	31 c0                	xor    %eax,%eax
+ 27b:	c7 43 2c 59 55 59 56 	movl   $0x56595559,0x2c(%rbx)
+ 282:	5b                   	pop    %rbx
+ 283:	5d                   	pop    %rbp
+ 284:	c3                   	retq   
+ 285:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+ 28a:	eb f6                	jmp    282 <myvivid_enum_fmt_vid_cap+0x52>
+ 28c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000000290 <myvivid_g_fmt_vid_cap>:
+ 290:	e8 00 00 00 00       	callq  295 <myvivid_g_fmt_vid_cap+0x5>
+ 295:	55                   	push   %rbp
+ 296:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 29d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 2a4:	48 89 e5             	mov    %rsp,%rbp
+ 2a7:	53                   	push   %rbx
+ 2a8:	48 89 d3             	mov    %rdx,%rbx
+ 2ab:	e8 00 00 00 00       	callq  2b0 <myvivid_g_fmt_vid_cap+0x20>
+ 2b0:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 2b7 <myvivid_g_fmt_vid_cap+0x27>
+ 2b7:	48 8d 7b 08          	lea    0x8(%rbx),%rdi
+ 2bb:	48 83 e7 f8          	and    $0xfffffffffffffff8,%rdi
+ 2bf:	48 8b 90 b8 02 00 00 	mov    0x2b8(%rax),%rdx
+ 2c6:	48 8d b0 b8 02 00 00 	lea    0x2b8(%rax),%rsi
+ 2cd:	48 89 13             	mov    %rdx,(%rbx)
+ 2d0:	48 8b 80 78 03 00 00 	mov    0x378(%rax),%rax
+ 2d7:	48 89 83 c0 00 00 00 	mov    %rax,0xc0(%rbx)
+ 2de:	48 29 fb             	sub    %rdi,%rbx
+ 2e1:	31 c0                	xor    %eax,%eax
+ 2e3:	48 29 de             	sub    %rbx,%rsi
+ 2e6:	81 c3 c8 00 00 00    	add    $0xc8,%ebx
+ 2ec:	c1 eb 03             	shr    $0x3,%ebx
+ 2ef:	89 d9                	mov    %ebx,%ecx
+ 2f1:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+ 2f4:	5b                   	pop    %rbx
+ 2f5:	5d                   	pop    %rbp
+ 2f6:	c3                   	retq   
+ 2f7:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+ 2fe:	00 00 
+
+0000000000000300 <myvivid_remove>:
+ 300:	e8 00 00 00 00       	callq  305 <myvivid_remove+0x5>
+ 305:	55                   	push   %rbp
+ 306:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 30d:	48 89 e5             	mov    %rsp,%rbp
+ 310:	e8 00 00 00 00       	callq  315 <myvivid_remove+0x15>
+ 315:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 31c <myvivid_remove+0x1c>
+ 31c:	e8 00 00 00 00       	callq  321 <myvivid_remove+0x21>
+ 321:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 328 <myvivid_remove+0x28>
+ 328:	48 8b 78 78          	mov    0x78(%rax),%rdi
+ 32c:	48 85 ff             	test   %rdi,%rdi
+ 32f:	74 15                	je     346 <myvivid_remove+0x46>
+ 331:	e8 00 00 00 00       	callq  336 <myvivid_remove+0x36>
+ 336:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 33d <myvivid_remove+0x3d>
+ 33d:	48 8b 78 78          	mov    0x78(%rax),%rdi
+ 341:	e8 00 00 00 00       	callq  346 <myvivid_remove+0x46>
+ 346:	31 c0                	xor    %eax,%eax
+ 348:	5d                   	pop    %rbp
+ 349:	c3                   	retq   
+ 34a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+0000000000000350 <myvivid_timer_function>:
+ 350:	e8 00 00 00 00       	callq  355 <myvivid_timer_function+0x5>
+ 355:	55                   	push   %rbp
+ 356:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 35d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 364:	48 89 e5             	mov    %rsp,%rbp
+ 367:	e8 00 00 00 00       	callq  36c <myvivid_timer_function+0x1c>
+ 36c:	48 8b 35 00 00 00 00 	mov    0x0(%rip),%rsi        # 373 <myvivid_timer_function+0x23>
+ 373:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 37a:	48 83 c6 08          	add    $0x8,%rsi
+ 37e:	e8 00 00 00 00       	callq  383 <myvivid_timer_function+0x33>
+ 383:	5d                   	pop    %rbp
+ 384:	c3                   	retq   
+ 385:	90                   	nop
+ 386:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 38d:	00 00 00 
+
+0000000000000390 <stop_streaming>:
+ 390:	e8 00 00 00 00       	callq  395 <stop_streaming+0x5>
+ 395:	55                   	push   %rbp
+ 396:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 39d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 3a4:	48 89 e5             	mov    %rsp,%rbp
+ 3a7:	e8 00 00 00 00       	callq  3ac <stop_streaming+0x1c>
+ 3ac:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 3b3:	e8 00 00 00 00       	callq  3b8 <stop_streaming+0x28>
+ 3b8:	5d                   	pop    %rbp
+ 3b9:	c3                   	retq   
+ 3ba:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000003c0 <start_streaming>:
+ 3c0:	e8 00 00 00 00       	callq  3c5 <start_streaming+0x5>
+ 3c5:	55                   	push   %rbp
+ 3c6:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 3cd:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 3d4:	48 89 e5             	mov    %rsp,%rbp
+ 3d7:	e8 00 00 00 00       	callq  3dc <start_streaming+0x1c>
+ 3dc:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 3e3 <start_streaming+0x23>
+ 3e3:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 3ea:	48 83 c0 01          	add    $0x1,%rax
+ 3ee:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 3f5 <start_streaming+0x35>
+ 3f5:	e8 00 00 00 00       	callq  3fa <start_streaming+0x3a>
+ 3fa:	31 c0                	xor    %eax,%eax
+ 3fc:	5d                   	pop    %rbp
+ 3fd:	c3                   	retq   
+ 3fe:	66 90                	xchg   %ax,%ax
+
+0000000000000400 <myvivid_probe>:
+ 400:	e8 00 00 00 00       	callq  405 <myvivid_probe+0x5>
+ 405:	55                   	push   %rbp
+ 406:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 40d:	48 89 e5             	mov    %rsp,%rbp
+ 410:	41 54                	push   %r12
+ 412:	49 89 fc             	mov    %rdi,%r12
+ 415:	53                   	push   %rbx
+ 416:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 41d:	49 83 c4 10          	add    $0x10,%r12
+ 421:	e8 00 00 00 00       	callq  426 <myvivid_probe+0x26>
+ 426:	ba c0 80 40 01       	mov    $0x14080c0,%edx
+ 42b:	be d0 03 00 00       	mov    $0x3d0,%esi
+ 430:	4c 89 e7             	mov    %r12,%rdi
+ 433:	e8 00 00 00 00       	callq  438 <myvivid_probe+0x38>
+ 438:	48 85 c0             	test   %rax,%rax
+ 43b:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 442 <myvivid_probe+0x42>
+ 442:	0f 84 c7 01 00 00    	je     60f <myvivid_probe+0x20f>
+ 448:	48 89 c6             	mov    %rax,%rsi
+ 44b:	4c 89 e7             	mov    %r12,%rdi
+ 44e:	e8 00 00 00 00       	callq  453 <myvivid_probe+0x53>
+ 453:	85 c0                	test   %eax,%eax
+ 455:	89 c3                	mov    %eax,%ebx
+ 457:	0f 88 9f 01 00 00    	js     5fc <myvivid_probe+0x1fc>
+ 45d:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 464 <myvivid_probe+0x64>
+ 464:	48 8d b8 80 00 00 00 	lea    0x80(%rax),%rdi
+ 46b:	c7 80 80 00 00 00 01 	movl   $0x1,0x80(%rax)
+ 472:	00 00 00 
+ 475:	c7 80 84 00 00 00 01 	movl   $0x1,0x84(%rax)
+ 47c:	00 00 00 
+ 47f:	c7 80 d0 00 00 00 f8 	movl   $0x1f8,0xd0(%rax)
+ 486:	01 00 00 
+ 489:	48 c7 80 b0 00 00 00 	movq   $0x0,0xb0(%rax)
+ 490:	00 00 00 00 
+ 494:	48 c7 80 b8 00 00 00 	movq   $0x0,0xb8(%rax)
+ 49b:	00 00 00 00 
+ 49f:	c7 80 d4 00 00 00 00 	movl   $0x2000,0xd4(%rax)
+ 4a6:	20 00 00 
+ 4a9:	c7 80 dc 00 00 00 01 	movl   $0x1,0xdc(%rax)
+ 4b0:	00 00 00 
+ 4b3:	48 89 80 c8 00 00 00 	mov    %rax,0xc8(%rax)
+ 4ba:	4c 89 a0 88 00 00 00 	mov    %r12,0x88(%rax)
+ 4c1:	e8 00 00 00 00       	callq  4c6 <myvivid_probe+0xc6>
+ 4c6:	85 c0                	test   %eax,%eax
+ 4c8:	89 c3                	mov    %eax,%ebx
+ 4ca:	74 13                	je     4df <myvivid_probe+0xdf>
+ 4cc:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 4d3 <myvivid_probe+0xd3>
+ 4d3:	e8 00 00 00 00       	callq  4d8 <myvivid_probe+0xd8>
+ 4d8:	89 d8                	mov    %ebx,%eax
+ 4da:	5b                   	pop    %rbx
+ 4db:	41 5c                	pop    %r12
+ 4dd:	5d                   	pop    %rbp
+ 4de:	c3                   	retq   
+ 4df:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 4e6 <myvivid_probe+0xe6>
+ 4e6:	48 c7 c2 00 00 00 00 	mov    $0x0,%rdx
+ 4ed:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 4f4:	48 8d 87 a8 03 00 00 	lea    0x3a8(%rdi),%rax
+ 4fb:	48 81 c7 b8 03 00 00 	add    $0x3b8,%rdi
+ 502:	48 89 47 f0          	mov    %rax,-0x10(%rdi)
+ 506:	48 89 47 f8          	mov    %rax,-0x8(%rdi)
+ 50a:	e8 00 00 00 00       	callq  50f <myvivid_probe+0x10f>
+ 50f:	4c 8b 25 00 00 00 00 	mov    0x0(%rip),%r12        # 516 <myvivid_probe+0x116>
+ 516:	e8 00 00 00 00       	callq  51b <myvivid_probe+0x11b>
+ 51b:	49 89 44 24 78       	mov    %rax,0x78(%r12)
+ 520:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 527 <myvivid_probe+0x127>
+ 527:	48 8b 78 78          	mov    0x78(%rax),%rdi
+ 52b:	48 85 ff             	test   %rdi,%rdi
+ 52e:	0f 84 f1 00 00 00    	je     625 <myvivid_probe+0x225>
+ 534:	48 81 c7 c0 04 00 00 	add    $0x4c0,%rdi
+ 53b:	ba 20 00 00 00       	mov    $0x20,%edx
+ 540:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 547:	e8 00 00 00 00       	callq  54c <myvivid_probe+0x14c>
+ 54c:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 553 <myvivid_probe+0x153>
+ 553:	31 f6                	xor    %esi,%esi
+ 555:	48 8b 50 78          	mov    0x78(%rax),%rdx
+ 559:	48 8d 88 80 00 00 00 	lea    0x80(%rax),%rcx
+ 560:	48 c7 82 20 05 00 00 	movq   $0x0,0x520(%rdx)
+ 567:	00 00 00 00 
+ 56b:	48 8b 50 78          	mov    0x78(%rax),%rdx
+ 56f:	48 c7 82 a8 01 00 00 	movq   $0x0,0x1a8(%rdx)
+ 576:	00 00 00 00 
+ 57a:	48 8b 50 78          	mov    0x78(%rax),%rdx
+ 57e:	48 c7 82 28 05 00 00 	movq   $0x0,0x528(%rdx)
+ 585:	00 00 00 00 
+ 589:	48 8b 50 78          	mov    0x78(%rax),%rdx
+ 58d:	c7 82 b0 01 00 00 01 	movl   $0x5000001,0x1b0(%rdx)
+ 594:	00 00 05 
+ 597:	48 8b 50 78          	mov    0x78(%rax),%rdx
+ 59b:	48 89 8a b0 04 00 00 	mov    %rcx,0x4b0(%rdx)
+ 5a2:	48 8b 50 78          	mov    0x78(%rax),%rdx
+ 5a6:	b9 01 00 00 00       	mov    $0x1,%ecx
+ 5ab:	48 89 82 98 04 00 00 	mov    %rax,0x498(%rdx)
+ 5b2:	48 8b 50 78          	mov    0x78(%rax),%rdx
+ 5b6:	48 89 82 50 02 00 00 	mov    %rax,0x250(%rdx)
+ 5bd:	48 8b 78 78          	mov    0x78(%rax),%rdi
+ 5c1:	ba ff ff ff ff       	mov    $0xffffffff,%edx
+ 5c6:	48 8b 87 a8 01 00 00 	mov    0x1a8(%rdi),%rax
+ 5cd:	4c 8b 00             	mov    (%rax),%r8
+ 5d0:	e8 00 00 00 00       	callq  5d5 <myvivid_probe+0x1d5>
+ 5d5:	85 c0                	test   %eax,%eax
+ 5d7:	89 c3                	mov    %eax,%ebx
+ 5d9:	78 67                	js     642 <myvivid_probe+0x242>
+ 5db:	45 31 c0             	xor    %r8d,%r8d
+ 5de:	31 c9                	xor    %ecx,%ecx
+ 5e0:	31 d2                	xor    %edx,%edx
+ 5e2:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 5e9:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 5f0:	e8 00 00 00 00       	callq  5f5 <myvivid_probe+0x1f5>
+ 5f5:	31 c0                	xor    %eax,%eax
+ 5f7:	5b                   	pop    %rbx
+ 5f8:	41 5c                	pop    %r12
+ 5fa:	5d                   	pop    %rbp
+ 5fb:	c3                   	retq   
+ 5fc:	89 c6                	mov    %eax,%esi
+ 5fe:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 605:	e8 00 00 00 00       	callq  60a <myvivid_probe+0x20a>
+ 60a:	e9 bd fe ff ff       	jmpq   4cc <myvivid_probe+0xcc>
+ 60f:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 616:	e8 00 00 00 00       	callq  61b <myvivid_probe+0x21b>
+ 61b:	b8 f4 ff ff ff       	mov    $0xfffffff4,%eax
+ 620:	e9 b5 fe ff ff       	jmpq   4da <myvivid_probe+0xda>
+ 625:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 62c:	e8 00 00 00 00       	callq  631 <myvivid_probe+0x231>
+ 631:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 638 <myvivid_probe+0x238>
+ 638:	e8 00 00 00 00       	callq  63d <myvivid_probe+0x23d>
+ 63d:	e9 8a fe ff ff       	jmpq   4cc <myvivid_probe+0xcc>
+ 642:	89 c6                	mov    %eax,%esi
+ 644:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 64b:	e8 00 00 00 00       	callq  650 <myvivid_probe+0x250>
+ 650:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 657 <myvivid_probe+0x257>
+ 657:	48 8b 78 78          	mov    0x78(%rax),%rdi
+ 65b:	e8 00 00 00 00       	callq  660 <myvivid_probe+0x260>
+ 660:	eb cf                	jmp    631 <myvivid_probe+0x231>
+ 662:	0f 1f 40 00          	nopl   0x0(%rax)
+ 666:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 66d:	00 00 00 
+
+0000000000000670 <myvivid_try_fmt_vid_cap>:
+ 670:	e8 00 00 00 00       	callq  675 <myvivid_try_fmt_vid_cap+0x5>
+ 675:	55                   	push   %rbp
+ 676:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 67d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 684:	48 89 e5             	mov    %rsp,%rbp
+ 687:	53                   	push   %rbx
+ 688:	48 89 d3             	mov    %rdx,%rbx
+ 68b:	e8 00 00 00 00       	callq  690 <myvivid_try_fmt_vid_cap+0x20>
+ 690:	81 7b 10 59 55 59 56 	cmpl   $0x56595559,0x10(%rbx)
+ 697:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+ 69c:	75 09                	jne    6a7 <myvivid_try_fmt_vid_cap+0x37>
+ 69e:	f7 43 14 fb ff ff ff 	testl  $0xfffffffb,0x14(%rbx)
+ 6a5:	74 06                	je     6ad <myvivid_try_fmt_vid_cap+0x3d>
+ 6a7:	48 8b 5d f8          	mov    -0x8(%rbp),%rbx
+ 6ab:	c9                   	leaveq 
+ 6ac:	c3                   	retq   
+ 6ad:	4c 8d 43 0c          	lea    0xc(%rbx),%r8
+ 6b1:	6a 00                	pushq  $0x0
+ 6b3:	48 8d 7b 08          	lea    0x8(%rbx),%rdi
+ 6b7:	6a 00                	pushq  $0x0
+ 6b9:	68 00 03 00 00       	pushq  $0x300
+ 6be:	41 b9 20 00 00 00    	mov    $0x20,%r9d
+ 6c4:	b9 02 00 00 00       	mov    $0x2,%ecx
+ 6c9:	ba 00 04 00 00       	mov    $0x400,%edx
+ 6ce:	be 30 00 00 00       	mov    $0x30,%esi
+ 6d3:	e8 00 00 00 00       	callq  6d8 <myvivid_try_fmt_vid_cap+0x68>
+ 6d8:	8b 43 08             	mov    0x8(%rbx),%eax
+ 6db:	8b 73 0c             	mov    0xc(%rbx),%esi
+ 6de:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 6e5:	c1 e0 04             	shl    $0x4,%eax
+ 6e8:	c1 e8 03             	shr    $0x3,%eax
+ 6eb:	89 43 18             	mov    %eax,0x18(%rbx)
+ 6ee:	0f af c6             	imul   %esi,%eax
+ 6f1:	89 43 1c             	mov    %eax,0x1c(%rbx)
+ 6f4:	e8 00 00 00 00       	callq  6f9 <myvivid_try_fmt_vid_cap+0x89>
+ 6f9:	8b 73 18             	mov    0x18(%rbx),%esi
+ 6fc:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 703:	e8 00 00 00 00       	callq  708 <myvivid_try_fmt_vid_cap+0x98>
+ 708:	8b 73 1c             	mov    0x1c(%rbx),%esi
+ 70b:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 712:	e8 00 00 00 00       	callq  717 <myvivid_try_fmt_vid_cap+0xa7>
+ 717:	31 c0                	xor    %eax,%eax
+ 719:	48 83 c4 18          	add    $0x18,%rsp
+ 71d:	eb 88                	jmp    6a7 <myvivid_try_fmt_vid_cap+0x37>
+ 71f:	90                   	nop
+
+0000000000000720 <myvivid_s_fmt_vid_cap>:
+ 720:	e8 00 00 00 00       	callq  725 <myvivid_s_fmt_vid_cap+0x5>
+ 725:	55                   	push   %rbp
+ 726:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 72d:	48 89 e5             	mov    %rsp,%rbp
+ 730:	41 54                	push   %r12
+ 732:	53                   	push   %rbx
+ 733:	49 89 fc             	mov    %rdi,%r12
+ 736:	48 89 d3             	mov    %rdx,%rbx
+ 739:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 740:	e8 00 00 00 00       	callq  745 <myvivid_s_fmt_vid_cap+0x25>
+ 745:	31 f6                	xor    %esi,%esi
+ 747:	48 89 da             	mov    %rbx,%rdx
+ 74a:	4c 89 e7             	mov    %r12,%rdi
+ 74d:	e8 00 00 00 00       	callq  752 <myvivid_s_fmt_vid_cap+0x32>
+ 752:	85 c0                	test   %eax,%eax
+ 754:	78 48                	js     79e <myvivid_s_fmt_vid_cap+0x7e>
+ 756:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 75d <myvivid_s_fmt_vid_cap+0x3d>
+ 75d:	48 8b 03             	mov    (%rbx),%rax
+ 760:	48 89 de             	mov    %rbx,%rsi
+ 763:	48 89 87 b8 02 00 00 	mov    %rax,0x2b8(%rdi)
+ 76a:	48 8b 83 c0 00 00 00 	mov    0xc0(%rbx),%rax
+ 771:	48 8d 8f b8 02 00 00 	lea    0x2b8(%rdi),%rcx
+ 778:	48 81 c7 c0 02 00 00 	add    $0x2c0,%rdi
+ 77f:	48 89 87 b8 00 00 00 	mov    %rax,0xb8(%rdi)
+ 786:	48 83 e7 f8          	and    $0xfffffffffffffff8,%rdi
+ 78a:	31 c0                	xor    %eax,%eax
+ 78c:	48 29 f9             	sub    %rdi,%rcx
+ 78f:	48 29 ce             	sub    %rcx,%rsi
+ 792:	81 c1 c8 00 00 00    	add    $0xc8,%ecx
+ 798:	c1 e9 03             	shr    $0x3,%ecx
+ 79b:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+ 79e:	5b                   	pop    %rbx
+ 79f:	41 5c                	pop    %r12
+ 7a1:	5d                   	pop    %rbp
+ 7a2:	c3                   	retq   
+ 7a3:	0f 1f 00             	nopl   (%rax)
+ 7a6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 7ad:	00 00 00 
+
+00000000000007b0 <myvivid_reqbufs>:
+ 7b0:	e8 00 00 00 00       	callq  7b5 <myvivid_reqbufs+0x5>
+ 7b5:	55                   	push   %rbp
+ 7b6:	48 89 e5             	mov    %rsp,%rbp
+ 7b9:	41 55                	push   %r13
+ 7bb:	41 54                	push   %r12
+ 7bd:	53                   	push   %rbx
+ 7be:	49 89 f4             	mov    %rsi,%r12
+ 7c1:	48 89 fb             	mov    %rdi,%rbx
+ 7c4:	49 89 d5             	mov    %rdx,%r13
+ 7c7:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 7ce:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 7d5:	e8 00 00 00 00       	callq  7da <myvivid_reqbufs+0x2a>
+ 7da:	4c 89 ea             	mov    %r13,%rdx
+ 7dd:	4c 89 e6             	mov    %r12,%rsi
+ 7e0:	48 89 df             	mov    %rbx,%rdi
+ 7e3:	e8 00 00 00 00       	callq  7e8 <myvivid_reqbufs+0x38>
+ 7e8:	5b                   	pop    %rbx
+ 7e9:	41 5c                	pop    %r12
+ 7eb:	41 5d                	pop    %r13
+ 7ed:	5d                   	pop    %rbp
+ 7ee:	c3                   	retq   
+ 7ef:	90                   	nop
+
+00000000000007f0 <myvivid_querybuf>:
+ 7f0:	e8 00 00 00 00       	callq  7f5 <myvivid_querybuf+0x5>
+ 7f5:	55                   	push   %rbp
+ 7f6:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 7fd:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 804:	48 89 e5             	mov    %rsp,%rbp
+ 807:	53                   	push   %rbx
+ 808:	48 89 d3             	mov    %rdx,%rbx
+ 80b:	e8 00 00 00 00       	callq  810 <myvivid_querybuf+0x20>
+ 810:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 817 <myvivid_querybuf+0x27>
+ 817:	48 89 de             	mov    %rbx,%rsi
+ 81a:	48 8d b8 80 00 00 00 	lea    0x80(%rax),%rdi
+ 821:	e8 00 00 00 00       	callq  826 <myvivid_querybuf+0x36>
+ 826:	5b                   	pop    %rbx
+ 827:	5d                   	pop    %rbp
+ 828:	c3                   	retq   
+ 829:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000000830 <myvivid_qbuf>:
+ 830:	e8 00 00 00 00       	callq  835 <myvivid_qbuf+0x5>
+ 835:	55                   	push   %rbp
+ 836:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 83d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 844:	48 89 e5             	mov    %rsp,%rbp
+ 847:	53                   	push   %rbx
+ 848:	48 89 d3             	mov    %rdx,%rbx
+ 84b:	e8 00 00 00 00       	callq  850 <myvivid_qbuf+0x20>
+ 850:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 857 <myvivid_qbuf+0x27>
+ 857:	48 89 de             	mov    %rbx,%rsi
+ 85a:	48 8d b8 80 00 00 00 	lea    0x80(%rax),%rdi
+ 861:	e8 00 00 00 00       	callq  866 <myvivid_qbuf+0x36>
+ 866:	5b                   	pop    %rbx
+ 867:	5d                   	pop    %rbp
+ 868:	c3                   	retq   
+ 869:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000000870 <myvivid_dqbuf>:
+ 870:	e8 00 00 00 00       	callq  875 <myvivid_dqbuf+0x5>
+ 875:	55                   	push   %rbp
+ 876:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+ 87d:	48 89 e5             	mov    %rsp,%rbp
+ 880:	41 54                	push   %r12
+ 882:	53                   	push   %rbx
+ 883:	49 89 fc             	mov    %rdi,%r12
+ 886:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+ 88d:	48 89 d3             	mov    %rdx,%rbx
+ 890:	e8 00 00 00 00       	callq  895 <myvivid_dqbuf+0x25>
+ 895:	41 8b 54 24 40       	mov    0x40(%r12),%edx
+ 89a:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 8a1 <myvivid_dqbuf+0x31>
+ 8a1:	48 89 de             	mov    %rbx,%rsi
+ 8a4:	c1 ea 0b             	shr    $0xb,%edx
+ 8a7:	48 8d b8 80 00 00 00 	lea    0x80(%rax),%rdi
+ 8ae:	83 e2 01             	and    $0x1,%edx
+ 8b1:	e8 00 00 00 00       	callq  8b6 <myvivid_dqbuf+0x46>
+ 8b6:	5b                   	pop    %rbx
+ 8b7:	41 5c                	pop    %r12
+ 8b9:	5d                   	pop    %rbp
+ 8ba:	c3                   	retq   
+ 8bb:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+
+00000000000008c0 <myvivid_streamon>:
+ 8c0:	e8 00 00 00 00       	callq  8c5 <myvivid_streamon+0x5>
+ 8c5:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 8cc <myvivid_streamon+0xc>
+ 8cc:	55                   	push   %rbp
+ 8cd:	89 d6                	mov    %edx,%esi
+ 8cf:	48 89 e5             	mov    %rsp,%rbp
+ 8d2:	48 8d b8 80 00 00 00 	lea    0x80(%rax),%rdi
+ 8d9:	e8 00 00 00 00       	callq  8de <myvivid_streamon+0x1e>
+ 8de:	5d                   	pop    %rbp
+ 8df:	c3                   	retq   
+
+00000000000008e0 <myvivid_streamoff>:
+ 8e0:	e8 00 00 00 00       	callq  8e5 <myvivid_streamoff+0x5>
+ 8e5:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 8ec <myvivid_streamoff+0xc>
+ 8ec:	55                   	push   %rbp
+ 8ed:	89 d6                	mov    %edx,%esi
+ 8ef:	48 89 e5             	mov    %rsp,%rbp
+ 8f2:	48 8d b8 80 00 00 00 	lea    0x80(%rax),%rdi
+ 8f9:	e8 00 00 00 00       	callq  8fe <myvivid_streamoff+0x1e>
+ 8fe:	5d                   	pop    %rbp
+ 8ff:	c3                   	retq   
+
+Disassembly of section .init.text:
+
+0000000000000000 <init_module>:
+   0:	e8 00 00 00 00       	callq  5 <init_module+0x5>
+   5:	55                   	push   %rbp
+   6:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+   d:	48 89 e5             	mov    %rsp,%rbp
+  10:	53                   	push   %rbx
+  11:	e8 00 00 00 00       	callq  16 <init_module+0x16>
+  16:	85 c0                	test   %eax,%eax
+  18:	74 12                	je     2c <init_module+0x2c>
+  1a:	89 c3                	mov    %eax,%ebx
+  1c:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  23:	e8 00 00 00 00       	callq  28 <init_module+0x28>
+  28:	89 d8                	mov    %ebx,%eax
+  2a:	eb 35                	jmp    61 <init_module+0x61>
+  2c:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+  33:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  3a:	e8 00 00 00 00       	callq  3f <init_module+0x3f>
+  3f:	89 c3                	mov    %eax,%ebx
+  41:	31 c0                	xor    %eax,%eax
+  43:	85 db                	test   %ebx,%ebx
+  45:	74 1a                	je     61 <init_module+0x61>
+  47:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  4e:	e8 00 00 00 00       	callq  53 <init_module+0x53>
+  53:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  5a:	e8 00 00 00 00       	callq  5f <init_module+0x5f>
+  5f:	89 d8                	mov    %ebx,%eax
+  61:	5b                   	pop    %rbx
+  62:	5d                   	pop    %rbp
+  63:	c3                   	retq   
+
+Disassembly of section .exit.text:
+
+0000000000000000 <cleanup_module>:
+   0:	55                   	push   %rbp
+   1:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+   8:	48 89 e5             	mov    %rsp,%rbp
+   b:	e8 00 00 00 00       	callq  10 <cleanup_module+0x10>
+  10:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+  17:	e8 00 00 00 00       	callq  1c <cleanup_module+0x1c>
+  1c:	5d                   	pop    %rbp
+  1d:	c3                   	retq   
+
+Disassembly of section .rodata.str1.1:
+
+0000000000000000 <.rodata.str1.1>:
+   0:	25 73 0a 00 25       	and    $0x25000a73,%eax
+   5:	73 2c                	jae    33 <.rodata.str1.1+0x33>
+   7:	20 63 6f             	and    %ah,0x6f(%rbx)
+   a:	75 6e                	jne    7a <.rodata.str1.1+0x7a>
+   c:	74 3d                	je     4b <.rodata.str1.1+0x4b>
+   e:	25 64 2c 20 73       	and    $0x73202c64,%eax
+  13:	69 7a 65 3d 25 6c 64 	imul   $0x646c253d,0x65(%rdx),%edi
+  1a:	0a 00                	or     (%rax),%al
+  1c:	70 6c                	jo     8a <.rodata.str1.1+0x8a>
+  1e:	61                   	(bad)  
+  1f:	74 66                	je     87 <.rodata.str1.1+0x87>
+  21:	6f                   	outsl  %ds:(%rsi),(%dx)
+  22:	72 6d                	jb     91 <.rodata.str1.1+0x91>
+  24:	20 72 65             	and    %dh,0x65(%rdx)
+  27:	6c                   	insb   (%dx),%es:(%rdi)
+  28:	65 61                	gs (bad) 
+  2a:	73 65                	jae    91 <.rodata.str1.1+0x91>
+  2c:	20 0a                	and    %cl,(%rdx)
+  2e:	00 25 73 20 0a 00    	add    %ah,0xa2073(%rip)        # a20a7 <myvivid_streamoff+0xa17c7>
+  34:	6d                   	insl   (%dx),%es:(%rdi)
+  35:	79 76                	jns    ad <.rodata.str1.1+0xad>
+  37:	69 76 69 64 00 70 6c 	imul   $0x6c700064,0x69(%rsi),%esi
+  3e:	61                   	(bad)  
+  3f:	74 66                	je     a7 <.rodata.str1.1+0xa7>
+  41:	6f                   	outsl  %ds:(%rsi),(%dx)
+  42:	72 6d                	jb     b1 <.rodata.str1.1+0xb1>
+  44:	3a 25 73 00 72 65    	cmp    0x65720073(%rip),%ah        # 657200bd <myvivid_streamoff+0x6571f7dd>
+  4a:	6d                   	insl   (%dx),%es:(%rdi)
+  4b:	6f                   	outsl  %ds:(%rsi),(%dx)
+  4c:	76 65                	jbe    b3 <__func__.41469+0x13>
+  4e:	20 0a                	and    %cl,(%rdx)
+  50:	00 26                	add    %ah,(%rsi)
+  52:	6d                   	insl   (%dx),%es:(%rdi)
+  53:	79 76                	jns    cb <__func__.41463+0xb>
+  55:	69 76 69 64 5f 64 65 	imul   $0x65645f64,0x69(%rsi),%esi
+  5c:	76 2d                	jbe    8b <.rodata.str1.1+0x8b>
+  5e:	3e 77 61             	ja,pt  c2 <__func__.41463+0x2>
+  61:	69 74 71 00 66 61 69 	imul   $0x6c696166,0x0(%rcx,%rsi,2),%esi
+  68:	6c 
+  69:	65 64 20 74 6f 20    	gs and %dh,%fs:0x20(%rdi,%rbp,2)
+  6f:	61                   	(bad)  
+  70:	6c                   	insb   (%dx),%es:(%rdi)
+  71:	6c                   	insb   (%dx),%es:(%rdi)
+  72:	6f                   	outsl  %ds:(%rsi),(%dx)
+  73:	63 20                	movslq (%rax),%esp
+  75:	76 69                	jbe    e0 <queue_setup>
+  77:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  7a:	20 64 65 76          	and    %ah,0x76(%rbp,%riz,2)
+  7e:	69 63 65 20 00 68 65 	imul   $0x65680020,0x65(%rbx),%esp
+  85:	69 67 68 74 20 3d 20 	imul   $0x203d2074,0x68(%rdi),%esp
+  8c:	25 64 0a 00 62       	and    $0x62000a64,%eax
+  91:	79 74                	jns    107 <__UNIQUE_ID_vermagic27+0xf>
+  93:	65 73 70             	gs jae 106 <__UNIQUE_ID_vermagic27+0xe>
+  96:	65 72 6c             	gs jb  105 <__UNIQUE_ID_vermagic27+0xd>
+  99:	69 6e 65 20 3d 20 25 	imul   $0x25203d20,0x65(%rsi),%ebp
+  a0:	64 0a 00             	or     %fs:(%rax),%al
+  a3:	73 69                	jae    10e <__UNIQUE_ID_vermagic27+0x16>
+  a5:	7a 65                	jp     10c <__UNIQUE_ID_vermagic27+0x14>
+  a7:	69 6d 61 67 65 20 3d 	imul   $0x3d206567,0x61(%rbp),%ebp
+  ae:	20                   	.byte 0x20
+  af:	25                   	.byte 0x25
+  b0:	64 0a 00             	or     %fs:(%rax),%al
+
+Disassembly of section .rodata.str1.8:
+
+0000000000000000 <.rodata.str1.8>:
+   0:	25 73 20 64 61       	and    $0x61642073,%eax
+   5:	74 61                	je     68 <.rodata.str1.8+0x68>
+   7:	20 77 69             	and    %dh,0x69(%rdi)
+   a:	6c                   	insb   (%dx),%es:(%rdi)
+   b:	6c                   	insb   (%dx),%es:(%rdi)
+   c:	20 6e 6f             	and    %ch,0x6f(%rsi)
+   f:	74 20                	je     31 <.rodata.str1.8+0x31>
+  11:	66 69 74 20 69 6e 74 	imul   $0x746e,0x69(%rax,%riz,1),%si
+  18:	6f                   	outsl  %ds:(%rsi),(%dx)
+  19:	20 70 6c             	and    %dh,0x6c(%rax)
+  1c:	61                   	(bad)  
+  1d:	6e                   	outsb  %ds:(%rsi),(%dx)
+  1e:	65 20 28             	and    %ch,%gs:(%rax)
+  21:	25 6c 75 20 3c       	and    $0x3c20756c,%eax
+  26:	20 25 6c 75 29 0a    	and    %ah,0xa29756c(%rip)        # a297598 <myvivid_streamoff+0xa296cb8>
+  2c:	00 00                	add    %al,(%rax)
+  2e:	00 00                	add    %al,(%rax)
+  30:	01 33                	add    %esi,(%rbx)
+  32:	61                   	(bad)  
+  33:	6c                   	insb   (%dx),%es:(%rdi)
+  34:	6c                   	insb   (%dx),%es:(%rdi)
+  35:	6f                   	outsl  %ds:(%rsi),(%dx)
+  36:	63 61 74             	movslq 0x74(%rcx),%esp
+  39:	65 20 6d 65          	and    %ch,%gs:0x65(%rbp)
+  3d:	6d                   	insl   (%dx),%es:(%rdi)
+  3e:	6f                   	outsl  %ds:(%rsi),(%dx)
+  3f:	72 79                	jb     ba <.rodata.str1.8+0xba>
+  41:	20 66 6f             	and    %ah,0x6f(%rsi)
+  44:	72 20                	jb     66 <.rodata.str1.8+0x66>
+  46:	76 69                	jbe    b1 <.rodata.str1.8+0xb1>
+  48:	76 69                	jbe    b3 <.rodata.str1.8+0xb3>
+  4a:	20 66 61             	and    %ah,0x61(%rsi)
+  4d:	69 6c 65 64 0a 00 00 	imul   $0xa,0x64(%rbp,%riz,2),%ebp
+  54:	00 
+  55:	00 00                	add    %al,(%rax)
+  57:	00 01                	add    %al,(%rcx)
+  59:	33 76 34             	xor    0x34(%rsi),%esi
+  5c:	6c                   	insb   (%dx),%es:(%rdi)
+  5d:	32 5f 64             	xor    0x64(%rdi),%bl
+  60:	65 76 69             	gs jbe cc <.rodata.str1.8+0xcc>
+  63:	63 65 20             	movslq 0x20(%rbp),%esp
+  66:	72 65                	jb     cd <.rodata.str1.8+0xcd>
+  68:	67 73 69             	addr32 jae d4 <.rodata.str1.8+0xd4>
+  6b:	74 65                	je     d2 <.rodata.str1.8+0xd2>
+  6d:	72 20                	jb     8f <.rodata.str1.8+0x8f>
+  6f:	66 61                	data16 (bad) 
+  71:	69 6c 2c 20 72 65 74 	imul   $0x28746572,0x20(%rsp,%rbp,1),%ebp
+  78:	28 
+  79:	25 64 29 0a 00       	and    $0xa2964,%eax
+  7e:	00 00                	add    %al,(%rax)
+  80:	01 33                	add    %esi,(%rbx)
+  82:	76 69                	jbe    ed <.rodata.str1.8+0xed>
+  84:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  87:	5f                   	pop    %rdi
+  88:	64 65 76 69          	fs gs jbe f5 <.rodata.str1.8+0xf5>
+  8c:	63 65 20             	movslq 0x20(%rbp),%esp
+  8f:	72 65                	jb     f6 <.rodata.str1.8+0xf6>
+  91:	67 69 73 74 65 72 20 	imul   $0x66207265,0x74(%ebx),%esi
+  98:	66 
+  99:	61                   	(bad)  
+  9a:	69 6c 65 64 2c 20 72 	imul   $0x6572202c,0x64(%rbp,%riz,2),%ebp
+  a1:	65 
+  a2:	74 28                	je     cc <.rodata.str1.8+0xcc>
+  a4:	25 64 29 0a 00       	and    $0xa2964,%eax
+  a9:	00 00                	add    %al,(%rax)
+  ab:	00 00                	add    %al,(%rax)
+  ad:	00 00                	add    %al,(%rax)
+  af:	00 70 6c             	add    %dh,0x6c(%rax)
+  b2:	61                   	(bad)  
+  b3:	74 66                	je     11b <__func__.41441+0xb>
+  b5:	6f                   	outsl  %ds:(%rsi),(%dx)
+  b6:	72 6d                	jb     125 <__func__.41441+0x15>
+  b8:	5f                   	pop    %rdi
+  b9:	64 65 76 69          	fs gs jbe 126 <__func__.41441+0x16>
+  bd:	63 65 5f             	movslq 0x5f(%rbp),%esp
+  c0:	72 65                	jb     127 <__func__.41441+0x17>
+  c2:	67 69 73 74 65 72 20 	imul   $0x46207265,0x74(%ebx),%esi
+  c9:	46 
+  ca:	41                   	rex.B
+  cb:	49                   	rex.WB
+  cc:	4c 20 3f             	rex.WR and %r15b,(%rdi)
+  cf:	3f                   	(bad)  
+  d0:	3f                   	(bad)  
+  d1:	00 00                	add    %al,(%rax)
+  d3:	00 00                	add    %al,(%rax)
+  d5:	00 00                	add    %al,(%rax)
+  d7:	00 70 6c             	add    %dh,0x6c(%rax)
+  da:	61                   	(bad)  
+  db:	74 66                	je     143 <__func__.41435+0x13>
+  dd:	6f                   	outsl  %ds:(%rsi),(%dx)
+  de:	72 6d                	jb     14d <__func__.41435+0x1d>
+  e0:	5f                   	pop    %rdi
+  e1:	64 72 69             	fs jb  14d <__func__.41435+0x1d>
+  e4:	76 65                	jbe    14b <__func__.41435+0x1b>
+  e6:	72 5f                	jb     147 <__func__.41435+0x17>
+  e8:	72 65                	jb     14f <__func__.41435+0x1f>
+  ea:	67 69 73 74 65 72 20 	imul   $0x46207265,0x74(%ebx),%esi
+  f1:	46 
+  f2:	41                   	rex.B
+  f3:	49                   	rex.WB
+  f4:	4c 20 3f             	rex.WR and %r15b,(%rdi)
+  f7:	3f                   	(bad)  
+  f8:	3f                   	(bad)  
+	...
+
+Disassembly of section .rodata:
+
+0000000000000000 <__func__.41374>:
+   0:	71 75                	jno    77 <__func__.41499+0xf>
+   2:	65 75 65             	gs jne 6a <__func__.41499+0x2>
+   5:	5f                   	pop    %rdi
+   6:	73 65                	jae    6d <__func__.41499+0x5>
+   8:	74 75                	je     7f <__func__.41481+0x7>
+   a:	70 00                	jo     c <__func__.41374+0xc>
+   c:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000010 <__func__.41382>:
+  10:	62                   	(bad)  
+  11:	75 66                	jne    79 <__func__.41481+0x1>
+  13:	66 65 72 5f          	data16 gs jb 76 <__func__.41499+0xe>
+  17:	70 72                	jo     8b <__func__.41475+0x3>
+  19:	65 70 61             	gs jo  7d <__func__.41481+0x5>
+  1c:	72 65                	jb     83 <__func__.41481+0xb>
+	...
+
+0000000000000020 <__func__.41417>:
+  20:	73 74                	jae    96 <__func__.41475+0xe>
+  22:	61                   	(bad)  
+  23:	72 74                	jb     99 <__func__.41475+0x11>
+  25:	5f                   	pop    %rdi
+  26:	73 74                	jae    9c <__func__.41475+0x14>
+  28:	72 65                	jb     8f <__func__.41475+0x7>
+  2a:	61                   	(bad)  
+  2b:	6d                   	insl   (%dx),%es:(%rdi)
+  2c:	69 6e 67 00 73 74 6f 	imul   $0x6f747300,0x67(%rsi),%ebp
+
+0000000000000030 <__func__.41421>:
+  30:	73 74                	jae    a6 <__func__.41469+0x6>
+  32:	6f                   	outsl  %ds:(%rsi),(%dx)
+  33:	70 5f                	jo     94 <__func__.41475+0xc>
+  35:	73 74                	jae    ab <__func__.41469+0xb>
+  37:	72 65                	jb     9e <__func__.41475+0x16>
+  39:	61                   	(bad)  
+  3a:	6d                   	insl   (%dx),%es:(%rdi)
+  3b:	69 6e 67 00 00 62 75 	imul   $0x75620000,0x67(%rsi),%ebp
+
+0000000000000040 <__func__.41399>:
+  40:	62                   	(bad)  
+  41:	75 66                	jne    a9 <__func__.41469+0x9>
+  43:	66 65 72 5f          	data16 gs jb a6 <__func__.41469+0x6>
+  47:	71 75                	jno    be <__func__.41469+0x1e>
+  49:	65 75 65             	gs jne b1 <__func__.41469+0x11>
+  4c:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000050 <__func__.41365>:
+  50:	6d                   	insl   (%dx),%es:(%rdi)
+  51:	79 76                	jns    c9 <__func__.41463+0x9>
+  53:	69 76 69 64 5f 74 69 	imul   $0x69745f64,0x69(%rsi),%esi
+  5a:	6d                   	insl   (%dx),%es:(%rdi)
+  5b:	65 72 5f             	gs jb  bd <__func__.41469+0x1d>
+  5e:	66 75 6e             	data16 jne cf <__func__.41463+0xf>
+  61:	63 74 69 6f          	movslq 0x6f(%rcx,%rbp,2),%esi
+  65:	6e                   	outsb  %ds:(%rsi),(%dx)
+	...
+
+0000000000000068 <__func__.41499>:
+  68:	6d                   	insl   (%dx),%es:(%rdi)
+  69:	79 76                	jns    e1 <__func__.41456+0x11>
+  6b:	69 76 69 64 5f 70 72 	imul   $0x72705f64,0x69(%rsi),%esi
+  72:	6f                   	outsl  %ds:(%rsi),(%dx)
+  73:	62                   	(bad)  
+  74:	65 00 00             	add    %al,%gs:(%rax)
+	...
+
+0000000000000078 <__func__.41481>:
+  78:	6d                   	insl   (%dx),%es:(%rdi)
+  79:	79 76                	jns    f1 <__func__.41447+0x1>
+  7b:	69 76 69 64 5f 64 71 	imul   $0x71645f64,0x69(%rsi),%esi
+  82:	62                   	(bad)  
+  83:	75 66                	jne    eb <__func__.41456+0x1b>
+  85:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000088 <__func__.41475>:
+  88:	6d                   	insl   (%dx),%es:(%rdi)
+  89:	79 76                	jns    101 <__func__.41447+0x11>
+  8b:	69 76 69 64 5f 71 62 	imul   $0x62715f64,0x69(%rsi),%esi
+  92:	75 66                	jne    fa <__func__.41447+0xa>
+	...
+
+00000000000000a0 <__func__.41469>:
+  a0:	6d                   	insl   (%dx),%es:(%rdi)
+  a1:	79 76                	jns    119 <__func__.41441+0x9>
+  a3:	69 76 69 64 5f 71 75 	imul   $0x75715f64,0x69(%rsi),%esi
+  aa:	65 72 79             	gs jb  126 <__func__.41441+0x16>
+  ad:	62                   	(bad)  
+  ae:	75 66                	jne    116 <__func__.41441+0x6>
+	...
+
+00000000000000c0 <__func__.41463>:
+  c0:	6d                   	insl   (%dx),%es:(%rdi)
+  c1:	79 76                	jns    139 <__func__.41435+0x9>
+  c3:	69 76 69 64 5f 72 65 	imul   $0x65725f64,0x69(%rsi),%esi
+  ca:	71 62                	jno    12e <__func__.41441+0x1e>
+  cc:	75 66                	jne    134 <__func__.41435+0x4>
+  ce:	73 00                	jae    d0 <__func__.41456>
+
+00000000000000d0 <__func__.41456>:
+  d0:	6d                   	insl   (%dx),%es:(%rdi)
+  d1:	79 76                	jns    149 <__func__.41435+0x19>
+  d3:	69 76 69 64 5f 73 5f 	imul   $0x5f735f64,0x69(%rsi),%esi
+  da:	66 6d                	insw   (%dx),%es:(%rdi)
+  dc:	74 5f                	je     13d <__func__.41435+0xd>
+  de:	76 69                	jbe    149 <__func__.41435+0x19>
+  e0:	64 5f                	fs pop %rdi
+  e2:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+00000000000000f0 <__func__.41447>:
+  f0:	6d                   	insl   (%dx),%es:(%rdi)
+  f1:	79 76                	jns    169 <__func__.41429+0x19>
+  f3:	69 76 69 64 5f 74 72 	imul   $0x72745f64,0x69(%rsi),%esi
+  fa:	79 5f                	jns    15b <__func__.41429+0xb>
+  fc:	66 6d                	insw   (%dx),%es:(%rdi)
+  fe:	74 5f                	je     15f <__func__.41429+0xf>
+ 100:	76 69                	jbe    16b <__func__.41429+0x1b>
+ 102:	64 5f                	fs pop %rdi
+ 104:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+0000000000000110 <__func__.41441>:
+ 110:	6d                   	insl   (%dx),%es:(%rdi)
+ 111:	79 76                	jns    189 <myvivid_fops+0x9>
+ 113:	69 76 69 64 5f 67 5f 	imul   $0x5f675f64,0x69(%rsi),%esi
+ 11a:	66 6d                	insw   (%dx),%es:(%rdi)
+ 11c:	74 5f                	je     17d <__func__.41429+0x2d>
+ 11e:	76 69                	jbe    189 <myvivid_fops+0x9>
+ 120:	64 5f                	fs pop %rdi
+ 122:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+0000000000000130 <__func__.41435>:
+ 130:	6d                   	insl   (%dx),%es:(%rdi)
+ 131:	79 76                	jns    1a9 <myvivid_fops+0x29>
+ 133:	69 76 69 64 5f 65 6e 	imul   $0x6e655f64,0x69(%rsi),%esi
+ 13a:	75 6d                	jne    1a9 <myvivid_fops+0x29>
+ 13c:	5f                   	pop    %rdi
+ 13d:	66 6d                	insw   (%dx),%es:(%rdi)
+ 13f:	74 5f                	je     1a0 <myvivid_fops+0x20>
+ 141:	76 69                	jbe    1ac <myvivid_fops+0x2c>
+ 143:	64 5f                	fs pop %rdi
+ 145:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+0000000000000150 <__func__.41429>:
+ 150:	6d                   	insl   (%dx),%es:(%rdi)
+ 151:	79 76                	jns    1c9 <myvivid_fops+0x49>
+ 153:	69 76 69 64 5f 71 75 	imul   $0x75715f64,0x69(%rsi),%esi
+ 15a:	65 72 79             	gs jb  1d6 <myvivid_fops+0x56>
+ 15d:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+0000000000000180 <myvivid_fops>:
+	...
+
+00000000000001e0 <myvivid_qops>:
+	...
+
+Disassembly of section .modinfo:
+
+0000000000000000 <__UNIQUE_ID_license126>:
+   0:	6c                   	insb   (%dx),%es:(%rdi)
+   1:	69 63 65 6e 73 65 3d 	imul   $0x3d65736e,0x65(%rbx),%esp
+   8:	47 50                	rex.RXB push %r8
+   a:	4c 00 61 75          	rex.WR add %r12b,0x75(%rcx)
+
+000000000000000c <__UNIQUE_ID_author125>:
+   c:	61                   	(bad)  
+   d:	75 74                	jne    83 <__UNIQUE_ID_srcversion30+0x23>
+   f:	68 6f 72 3d 57       	pushq  $0x573d726f
+  14:	69 6c 6c 20 43 68 65 	imul   $0x6e656843,0x20(%rsp,%rbp,2),%ebp
+  1b:	6e 
+	...
+
+000000000000001d <__UNIQUE_ID_description124>:
+  1d:	64 65 73 63          	fs gs jae 84 <__UNIQUE_ID_srcversion30+0x24>
+  21:	72 69                	jb     8c <__UNIQUE_ID_srcversion30+0x2c>
+  23:	70 74                	jo     99 <__UNIQUE_ID_srcversion30+0x39>
+  25:	69 6f 6e 3d 56 69 72 	imul   $0x7269563d,0x6e(%rdi),%ebp
+  2c:	74 75                	je     a3 <__module_depends+0x3>
+  2e:	61                   	(bad)  
+  2f:	6c                   	insb   (%dx),%es:(%rdi)
+  30:	20 56 69             	and    %dl,0x69(%rsi)
+  33:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  36:	20 54 65 73          	and    %dl,0x73(%rbp,%riz,2)
+  3a:	74 20                	je     5c <__UNIQUE_ID_description124+0x3f>
+  3c:	44 72 69             	rex.R jb a8 <__module_depends+0x8>
+  3f:	76 65                	jbe    a6 <__module_depends+0x6>
+  41:	72 00                	jb     43 <__UNIQUE_ID_description124+0x26>
+	...
+
+0000000000000060 <__UNIQUE_ID_srcversion30>:
+  60:	73 72                	jae    d4 <__module_depends+0x34>
+  62:	63 76 65             	movslq 0x65(%rsi),%esi
+  65:	72 73                	jb     da <__module_depends+0x3a>
+  67:	69 6f 6e 3d 46 46 31 	imul   $0x3146463d,0x6e(%rdi),%ebp
+  6e:	33 32                	xor    (%rdx),%esi
+  70:	44                   	rex.R
+  71:	42                   	rex.X
+  72:	45                   	rex.RB
+  73:	46 39 37             	rex.RX cmp %r14d,(%rdi)
+  76:	35 36 41 39 43       	xor    $0x43394136,%eax
+  7b:	30 35 30 36 46 37    	xor    %dh,0x37463630(%rip)        # 374636b1 <myvivid_streamoff+0x37462dd1>
+  81:	38 00                	cmp    %al,(%rax)
+	...
+
+00000000000000a0 <__module_depends>:
+  a0:	64 65 70 65          	fs gs jo 109 <__UNIQUE_ID_vermagic27+0x11>
+  a4:	6e                   	outsb  %ds:(%rsi),(%dx)
+  a5:	64 73 3d             	fs jae e5 <__UNIQUE_ID_retpoline29+0x7>
+  a8:	76 69                	jbe    113 <__UNIQUE_ID_vermagic27+0x1b>
+  aa:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  ad:	62                   	(bad)  
+  ae:	75 66                	jne    116 <__UNIQUE_ID_vermagic27+0x1e>
+  b0:	32 2d 76 34 6c 32    	xor    0x326c3476(%rip),%ch        # 326c352c <myvivid_streamoff+0x326c2c4c>
+  b6:	2c 76                	sub    $0x76,%al
+  b8:	69 64 65 6f 64 65 76 	imul   $0x2c766564,0x6f(%rbp,%riz,2),%esp
+  bf:	2c 
+  c0:	76 34                	jbe    f6 <__UNIQUE_ID_name28+0xc>
+  c2:	6c                   	insb   (%dx),%es:(%rdi)
+  c3:	32 2d 63 6f 6d 6d    	xor    0x6d6d6f63(%rip),%ch        # 6d6d702c <myvivid_streamoff+0x6d6d674c>
+  c9:	6f                   	outsl  %ds:(%rsi),(%dx)
+  ca:	6e                   	outsb  %ds:(%rsi),(%dx)
+  cb:	2c 76                	sub    $0x76,%al
+  cd:	69 64 65 6f 62 75 66 	imul   $0x32667562,0x6f(%rbp,%riz,2),%esp
+  d4:	32 
+  d5:	2d 76 6d 61 6c       	sub    $0x6c616d76,%eax
+  da:	6c                   	insb   (%dx),%es:(%rdi)
+  db:	6f                   	outsl  %ds:(%rsi),(%dx)
+  dc:	63 00                	movslq (%rax),%eax
+
+00000000000000de <__UNIQUE_ID_retpoline29>:
+  de:	72 65                	jb     145 <__func__.41435+0x15>
+  e0:	74 70                	je     152 <__func__.41429+0x2>
+  e2:	6f                   	outsl  %ds:(%rsi),(%dx)
+  e3:	6c                   	insb   (%dx),%es:(%rdi)
+  e4:	69 6e 65 3d 59 00 6e 	imul   $0x6e00593d,0x65(%rsi),%ebp
+
+00000000000000ea <__UNIQUE_ID_name28>:
+  ea:	6e                   	outsb  %ds:(%rsi),(%dx)
+  eb:	61                   	(bad)  
+  ec:	6d                   	insl   (%dx),%es:(%rdi)
+  ed:	65 3d 6d 79 5f 76    	gs cmp $0x765f796d,%eax
+  f3:	69 76 69 64 00 76 65 	imul   $0x65760064,0x69(%rsi),%esi
+
+00000000000000f8 <__UNIQUE_ID_vermagic27>:
+  f8:	76 65                	jbe    15f <__func__.41429+0xf>
+  fa:	72 6d                	jb     169 <__func__.41429+0x19>
+  fc:	61                   	(bad)  
+  fd:	67 69 63 3d 34 2e 31 	imul   $0x35312e34,0x3d(%ebx),%esp
+ 104:	35 
+ 105:	2e 30 2d 31 34 32 2d 	xor    %ch,%cs:0x2d323431(%rip)        # 2d32353d <myvivid_streamoff+0x2d322c5d>
+ 10c:	67 65 6e             	outsb  %gs:(%esi),(%dx)
+ 10f:	65 72 69             	gs jb  17b <__func__.41429+0x2b>
+ 112:	63 20                	movslq (%rax),%esp
+ 114:	53                   	push   %rbx
+ 115:	4d 50                	rex.WRB push %r8
+ 117:	20 6d 6f             	and    %ch,0x6f(%rbp)
+ 11a:	64 5f                	fs pop %rdi
+ 11c:	75 6e                	jne    18c <myvivid_fops+0xc>
+ 11e:	6c                   	insb   (%dx),%es:(%rdi)
+ 11f:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 120:	61                   	(bad)  
+ 121:	64 20 00             	and    %al,%fs:(%rax)
+
+Disassembly of section __mcount_loc:
+
+0000000000000000 <__mcount_loc>:
+	...
+
+Disassembly of section .data:
+
+0000000000000000 <myvivid_pdrv>:
+	...
+
+00000000000000c0 <myvivid_pdev>:
+	...
+
+00000000000003e0 <myvivid_ioctl_ops>:
+	...
+
+Disassembly of section .gnu.linkonce.this_module:
+
+0000000000000000 <__this_module>:
+	...
+  18:	6d                   	insl   (%dx),%es:(%rdi)
+  19:	79 5f                	jns    7a <__this_module+0x7a>
+  1b:	76 69                	jbe    86 <__this_module+0x86>
+  1d:	76 69                	jbe    88 <__this_module+0x88>
+  1f:	64 00 00             	add    %al,%fs:(%rax)
+	...
+
+Disassembly of section .bss:
+
+0000000000000000 <__key.41502>:
+	...
+
+0000000000000028 <myvivid_dev>:
+	...
+
+Disassembly of section .comment:
+
+0000000000000000 <.comment>:
+   0:	00 47 43             	add    %al,0x43(%rdi)
+   3:	43 3a 20             	rex.XB cmp (%r8),%spl
+   6:	28 55 62             	sub    %dl,0x62(%rbp)
+   9:	75 6e                	jne    79 <__func__.41481+0x1>
+   b:	74 75                	je     82 <__func__.41481+0xa>
+   d:	20 35 2e 34 2e 30    	and    %dh,0x302e342e(%rip)        # 302e3441 <myvivid_streamoff+0x302e2b61>
+  13:	2d 36 75 62 75       	sub    $0x75627536,%eax
+  18:	6e                   	outsb  %ds:(%rsi),(%dx)
+  19:	74 75                	je     90 <__func__.41475+0x8>
+  1b:	31 7e 31             	xor    %edi,0x31(%rsi)
+  1e:	36 2e 30 34 2e       	ss xor %dh,%cs:(%rsi,%rbp,1)
+  23:	31 32                	xor    %esi,(%rdx)
+  25:	29 20                	sub    %esp,(%rax)
+  27:	35 2e 34 2e 30       	xor    $0x302e342e,%eax
+  2c:	20 32                	and    %dh,(%rdx)
+  2e:	30 31                	xor    %dh,(%rcx)
+  30:	36 30 36             	xor    %dh,%ss:(%rsi)
+  33:	30 39                	xor    %bh,(%rcx)
+  35:	00 00                	add    %al,(%rax)
+  37:	47                   	rex.RXB
+  38:	43                   	rex.XB
+  39:	43 3a 20             	rex.XB cmp (%r8),%spl
+  3c:	28 55 62             	sub    %dl,0x62(%rbp)
+  3f:	75 6e                	jne    af <__func__.41469+0xf>
+  41:	74 75                	je     b8 <__func__.41469+0x18>
+  43:	20 35 2e 34 2e 30    	and    %dh,0x302e342e(%rip)        # 302e3477 <myvivid_streamoff+0x302e2b97>
+  49:	2d 36 75 62 75       	sub    $0x75627536,%eax
+  4e:	6e                   	outsb  %ds:(%rsi),(%dx)
+  4f:	74 75                	je     c6 <__func__.41463+0x6>
+  51:	31 7e 31             	xor    %edi,0x31(%rsi)
+  54:	36 2e 30 34 2e       	ss xor %dh,%cs:(%rsi,%rbp,1)
+  59:	31 32                	xor    %esi,(%rdx)
+  5b:	29 20                	sub    %esp,(%rax)
+  5d:	35 2e 34 2e 30       	xor    $0x302e342e,%eax
+  62:	20 32                	and    %dh,(%rdx)
+  64:	30 31                	xor    %dh,(%rcx)
+  66:	36 30 36             	xor    %dh,%ss:(%rsi)
+  69:	30 39                	xor    %bh,(%rcx)
+	...

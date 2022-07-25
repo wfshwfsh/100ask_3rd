@@ -1,0 +1,2224 @@
+
+my_uvc.ko:     file format elf64-x86-64
+
+
+Disassembly of section .note.gnu.build-id:
+
+0000000000000000 <.note.gnu.build-id>:
+   0:	04 00                	add    $0x0,%al
+   2:	00 00                	add    %al,(%rax)
+   4:	14 00                	adc    $0x0,%al
+   6:	00 00                	add    %al,(%rax)
+   8:	03 00                	add    (%rax),%eax
+   a:	00 00                	add    %al,(%rax)
+   c:	47                   	rex.RXB
+   d:	4e 55                	rex.WRX push %rbp
+   f:	00 2a                	add    %ch,(%rdx)
+  11:	2a 24 9d c5 aa ff 82 	sub    -0x7d00553b(,%rbx,4),%ah
+  18:	5b                   	pop    %rbx
+  19:	b7 f2                	mov    $0xf2,%bh
+  1b:	ad                   	lods   %ds:(%rsi),%eax
+  1c:	41 54                	push   %r12
+  1e:	2b 96 a5 ed b1 55    	sub    0x55b1eda5(%rsi),%edx
+
+Disassembly of section .text:
+
+0000000000000000 <myuvc_vm_open>:
+       0:	e8 00 00 00 00       	callq  5 <myuvc_vm_open+0x5>
+       5:	48 8b 87 b0 00 00 00 	mov    0xb0(%rdi),%rax
+       c:	55                   	push   %rbp
+       d:	48 89 e5             	mov    %rsp,%rbp
+      10:	48 83 00 01          	addq   $0x1,(%rax)
+      14:	5d                   	pop    %rbp
+      15:	c3                   	retq   
+      16:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+      1d:	00 00 00 
+
+0000000000000020 <myuvc_vm_close>:
+      20:	e8 00 00 00 00       	callq  25 <myuvc_vm_close+0x5>
+      25:	48 8b 87 b0 00 00 00 	mov    0xb0(%rdi),%rax
+      2c:	55                   	push   %rbp
+      2d:	48 89 e5             	mov    %rsp,%rbp
+      30:	48 83 28 01          	subq   $0x1,(%rax)
+      34:	5d                   	pop    %rbp
+      35:	c3                   	retq   
+      36:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+      3d:	00 00 00 
+
+0000000000000040 <myuvc_uninit_urbs>:
+      40:	e8 00 00 00 00       	callq  45 <myuvc_uninit_urbs+0x5>
+      45:	55                   	push   %rbp
+      46:	48 89 e5             	mov    %rsp,%rbp
+      49:	53                   	push   %rbx
+      4a:	48 c7 c3 00 00 00 00 	mov    $0x0,%rbx
+      51:	48 8b bb 10 15 00 00 	mov    0x1510(%rbx),%rdi
+      58:	48 85 ff             	test   %rdi,%rdi
+      5b:	74 10                	je     6d <myuvc_uninit_urbs+0x2d>
+      5d:	e8 00 00 00 00       	callq  62 <myuvc_uninit_urbs+0x22>
+      62:	48 c7 83 10 15 00 00 	movq   $0x0,0x1510(%rbx)
+      69:	00 00 00 00 
+      6d:	48 8b bb 10 14 00 00 	mov    0x1410(%rbx),%rdi
+      74:	48 85 ff             	test   %rdi,%rdi
+      77:	74 10                	je     89 <myuvc_uninit_urbs+0x49>
+      79:	e8 00 00 00 00       	callq  7e <myuvc_uninit_urbs+0x3e>
+      7e:	48 c7 83 10 14 00 00 	movq   $0x0,0x1410(%rbx)
+      85:	00 00 00 00 
+      89:	48 83 c3 08          	add    $0x8,%rbx
+      8d:	48 81 fb 00 00 00 00 	cmp    $0x0,%rbx
+      94:	75 bb                	jne    51 <myuvc_uninit_urbs+0x11>
+      96:	5b                   	pop    %rbx
+      97:	5d                   	pop    %rbp
+      98:	c3                   	retq   
+      99:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000000000a0 <myuvc_streamoff>:
+      a0:	e8 00 00 00 00       	callq  a5 <myuvc_streamoff+0x5>
+      a5:	55                   	push   %rbp
+      a6:	48 89 e5             	mov    %rsp,%rbp
+      a9:	53                   	push   %rbx
+      aa:	48 c7 c3 00 00 00 00 	mov    $0x0,%rbx
+      b1:	48 8b bb 10 14 00 00 	mov    0x1410(%rbx),%rdi
+      b8:	48 85 ff             	test   %rdi,%rdi
+      bb:	74 05                	je     c2 <myuvc_streamoff+0x22>
+      bd:	e8 00 00 00 00       	callq  c2 <myuvc_streamoff+0x22>
+      c2:	48 83 c3 08          	add    $0x8,%rbx
+      c6:	48 81 fb 00 00 00 00 	cmp    $0x0,%rbx
+      cd:	75 e2                	jne    b1 <myuvc_streamoff+0x11>
+      cf:	e8 6c ff ff ff       	callq  40 <myuvc_uninit_urbs>
+      d4:	8b 35 00 00 00 00    	mov    0x0(%rip),%esi        # da <myuvc_streamoff+0x3a>
+      da:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # e1 <myuvc_streamoff+0x41>
+      e1:	31 d2                	xor    %edx,%edx
+      e3:	e8 00 00 00 00       	callq  e8 <myuvc_streamoff+0x48>
+      e8:	31 c0                	xor    %eax,%eax
+      ea:	5b                   	pop    %rbx
+      eb:	5d                   	pop    %rbp
+      ec:	c3                   	retq   
+      ed:	0f 1f 00             	nopl   (%rax)
+
+00000000000000f0 <myuvc_qbuf>:
+      f0:	e8 00 00 00 00       	callq  f5 <myuvc_qbuf+0x5>
+      f5:	55                   	push   %rbp
+      f6:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+      fd:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     104:	48 89 e5             	mov    %rsp,%rbp
+     107:	53                   	push   %rbx
+     108:	48 89 d3             	mov    %rdx,%rbx
+     10b:	e8 00 00 00 00       	callq  110 <myuvc_qbuf+0x20>
+     110:	8b 13                	mov    (%rbx),%edx
+     112:	48 8b 35 00 00 00 00 	mov    0x0(%rip),%rsi        # 119 <myuvc_qbuf+0x29>
+     119:	48 8d 04 92          	lea    (%rdx,%rdx,4),%rax
+     11d:	48 c1 e0 05          	shl    $0x5,%rax
+     121:	48 8d 88 00 00 00 00 	lea    0x0(%rax),%rcx
+     128:	c7 80 00 00 00 00 02 	movl   $0x2,0x0(%rax)
+     12f:	00 00 00 
+     132:	c7 80 00 00 00 00 00 	movl   $0x0,0x0(%rax)
+     139:	00 00 00 
+     13c:	48 05 00 00 00 00    	add    $0x0,%rax
+     142:	48 c7 81 90 00 00 00 	movq   $0x0,0x90(%rcx)
+     149:	00 00 00 00 
+     14d:	48 89 b1 98 00 00 00 	mov    %rsi,0x98(%rcx)
+     154:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 15b <myuvc_qbuf+0x6b>
+     15b:	48 89 06             	mov    %rax,(%rsi)
+     15e:	48 8d 44 92 05       	lea    0x5(%rdx,%rdx,4),%rax
+     163:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 16a <myuvc_qbuf+0x7a>
+     16a:	48 c1 e0 05          	shl    $0x5,%rax
+     16e:	48 05 00 00 00 00    	add    $0x0,%rax
+     174:	48 c7 00 00 00 00 00 	movq   $0x0,(%rax)
+     17b:	48 89 50 08          	mov    %rdx,0x8(%rax)
+     17f:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 186 <myuvc_qbuf+0x96>
+     186:	48 89 02             	mov    %rax,(%rdx)
+     189:	31 c0                	xor    %eax,%eax
+     18b:	5b                   	pop    %rbx
+     18c:	5d                   	pop    %rbp
+     18d:	c3                   	retq   
+     18e:	66 90                	xchg   %ax,%ax
+
+0000000000000190 <myuvc_try_fmt_vid_cap>:
+     190:	e8 00 00 00 00       	callq  195 <myuvc_try_fmt_vid_cap+0x5>
+     195:	55                   	push   %rbp
+     196:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     19d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     1a4:	48 89 e5             	mov    %rsp,%rbp
+     1a7:	53                   	push   %rbx
+     1a8:	48 89 d3             	mov    %rdx,%rbx
+     1ab:	e8 00 00 00 00       	callq  1b0 <myuvc_try_fmt_vid_cap+0x20>
+     1b0:	83 3b 01             	cmpl   $0x1,(%rbx)
+     1b3:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+     1b8:	75 27                	jne    1e1 <myuvc_try_fmt_vid_cap+0x51>
+     1ba:	81 7b 10 59 55 59 56 	cmpl   $0x56595559,0x10(%rbx)
+     1c1:	75 1e                	jne    1e1 <myuvc_try_fmt_vid_cap+0x51>
+     1c3:	c7 43 08 60 01 00 00 	movl   $0x160,0x8(%rbx)
+     1ca:	c7 43 0c 20 01 00 00 	movl   $0x120,0xc(%rbx)
+     1d1:	31 c0                	xor    %eax,%eax
+     1d3:	c7 43 18 c0 02 00 00 	movl   $0x2c0,0x18(%rbx)
+     1da:	c7 43 1c 00 18 03 00 	movl   $0x31800,0x1c(%rbx)
+     1e1:	5b                   	pop    %rbx
+     1e2:	5d                   	pop    %rbp
+     1e3:	c3                   	retq   
+     1e4:	66 90                	xchg   %ax,%ax
+     1e6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+     1ed:	00 00 00 
+
+00000000000001f0 <myuvc_close>:
+     1f0:	e8 00 00 00 00       	callq  1f5 <myuvc_close+0x5>
+     1f5:	55                   	push   %rbp
+     1f6:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     1fd:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     204:	48 89 e5             	mov    %rsp,%rbp
+     207:	e8 00 00 00 00       	callq  20c <myuvc_close+0x1c>
+     20c:	31 c0                	xor    %eax,%eax
+     20e:	5d                   	pop    %rbp
+     20f:	c3                   	retq   
+
+0000000000000210 <myuvc_open>:
+     210:	e8 00 00 00 00       	callq  215 <myuvc_open+0x5>
+     215:	55                   	push   %rbp
+     216:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     21d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     224:	48 89 e5             	mov    %rsp,%rbp
+     227:	e8 00 00 00 00       	callq  22c <myuvc_open+0x1c>
+     22c:	31 c0                	xor    %eax,%eax
+     22e:	5d                   	pop    %rbp
+     22f:	c3                   	retq   
+
+0000000000000230 <myuvc_poll>:
+     230:	e8 00 00 00 00       	callq  235 <myuvc_poll+0x5>
+     235:	55                   	push   %rbp
+     236:	48 89 e5             	mov    %rsp,%rbp
+     239:	41 55                	push   %r13
+     23b:	41 54                	push   %r12
+     23d:	53                   	push   %rbx
+     23e:	49 89 fd             	mov    %rdi,%r13
+     241:	48 89 f3             	mov    %rsi,%rbx
+     244:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     24b:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     252:	e8 00 00 00 00       	callq  257 <myuvc_poll+0x27>
+     257:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 25e <myuvc_poll+0x2e>
+     25e:	b8 08 00 00 00       	mov    $0x8,%eax
+     263:	48 81 fa 00 00 00 00 	cmp    $0x0,%rdx
+     26a:	74 39                	je     2a5 <myuvc_poll+0x75>
+     26c:	4c 8b 25 00 00 00 00 	mov    0x0(%rip),%r12        # 273 <myuvc_poll+0x43>
+     273:	48 85 db             	test   %rbx,%rbx
+     276:	49 8d 74 24 e8       	lea    -0x18(%r12),%rsi
+     27b:	74 18                	je     295 <myuvc_poll+0x65>
+     27d:	48 8b 03             	mov    (%rbx),%rax
+     280:	48 85 c0             	test   %rax,%rax
+     283:	74 10                	je     295 <myuvc_poll+0x65>
+     285:	48 85 f6             	test   %rsi,%rsi
+     288:	74 0b                	je     295 <myuvc_poll+0x65>
+     28a:	48 89 da             	mov    %rbx,%rdx
+     28d:	4c 89 ef             	mov    %r13,%rdi
+     290:	e8 00 00 00 00       	callq  295 <myuvc_poll+0x65>
+     295:	41 8b 44 24 d8       	mov    -0x28(%r12),%eax
+     29a:	83 e8 03             	sub    $0x3,%eax
+     29d:	83 f8 02             	cmp    $0x2,%eax
+     2a0:	19 c0                	sbb    %eax,%eax
+     2a2:	83 e0 41             	and    $0x41,%eax
+     2a5:	5b                   	pop    %rbx
+     2a6:	41 5c                	pop    %r12
+     2a8:	41 5d                	pop    %r13
+     2aa:	5d                   	pop    %rbp
+     2ab:	c3                   	retq   
+     2ac:	0f 1f 40 00          	nopl   0x0(%rax)
+
+00000000000002b0 <myuvc_dev_release>:
+     2b0:	e8 00 00 00 00       	callq  2b5 <myuvc_dev_release+0x5>
+     2b5:	55                   	push   %rbp
+     2b6:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     2bd:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     2c4:	48 89 e5             	mov    %rsp,%rbp
+     2c7:	e8 00 00 00 00       	callq  2cc <myuvc_dev_release+0x1c>
+     2cc:	5d                   	pop    %rbp
+     2cd:	c3                   	retq   
+     2ce:	66 90                	xchg   %ax,%ax
+
+00000000000002d0 <myuvc_g_fmt_vid_cap>:
+     2d0:	e8 00 00 00 00       	callq  2d5 <myuvc_g_fmt_vid_cap+0x5>
+     2d5:	55                   	push   %rbp
+     2d6:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     2dd:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     2e4:	48 89 e5             	mov    %rsp,%rbp
+     2e7:	53                   	push   %rbx
+     2e8:	48 89 d3             	mov    %rdx,%rbx
+     2eb:	e8 00 00 00 00       	callq  2f0 <myuvc_g_fmt_vid_cap+0x20>
+     2f0:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 2f7 <myuvc_g_fmt_vid_cap+0x27>
+     2f7:	48 8d 7b 08          	lea    0x8(%rbx),%rdi
+     2fb:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     302:	48 83 e7 f8          	and    $0xfffffffffffffff8,%rdi
+     306:	48 89 03             	mov    %rax,(%rbx)
+     309:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 310 <myuvc_g_fmt_vid_cap+0x40>
+     310:	48 89 83 c8 00 00 00 	mov    %rax,0xc8(%rbx)
+     317:	48 29 fb             	sub    %rdi,%rbx
+     31a:	31 c0                	xor    %eax,%eax
+     31c:	48 29 de             	sub    %rbx,%rsi
+     31f:	81 c3 d0 00 00 00    	add    $0xd0,%ebx
+     325:	c1 eb 03             	shr    $0x3,%ebx
+     328:	89 d9                	mov    %ebx,%ecx
+     32a:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+     32d:	5b                   	pop    %rbx
+     32e:	5d                   	pop    %rbp
+     32f:	c3                   	retq   
+
+0000000000000330 <myuvc_enum_fmt_vid_cap>:
+     330:	e8 00 00 00 00       	callq  335 <myuvc_enum_fmt_vid_cap+0x5>
+     335:	55                   	push   %rbp
+     336:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     33d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     344:	48 89 e5             	mov    %rsp,%rbp
+     347:	53                   	push   %rbx
+     348:	48 89 d3             	mov    %rdx,%rbx
+     34b:	e8 00 00 00 00       	callq  350 <myuvc_enum_fmt_vid_cap+0x20>
+     350:	8b 03                	mov    (%rbx),%eax
+     352:	85 c0                	test   %eax,%eax
+     354:	75 2f                	jne    385 <myuvc_enum_fmt_vid_cap+0x55>
+     356:	48 b9 34 3a 32 3a 32 	movabs $0x70202c323a323a34,%rcx
+     35d:	2c 20 70 
+     360:	48 ba 61 63 6b 65 64 	movabs $0x59202c64656b6361,%rdx
+     367:	2c 20 59 
+     36a:	c7 43 1c 55 59 56 00 	movl   $0x565955,0x1c(%rbx)
+     371:	48 89 4b 0c          	mov    %rcx,0xc(%rbx)
+     375:	48 89 53 14          	mov    %rdx,0x14(%rbx)
+     379:	31 c0                	xor    %eax,%eax
+     37b:	c7 43 2c 59 55 59 56 	movl   $0x56595559,0x2c(%rbx)
+     382:	5b                   	pop    %rbx
+     383:	5d                   	pop    %rbp
+     384:	c3                   	retq   
+     385:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+     38a:	eb f6                	jmp    382 <myuvc_enum_fmt_vid_cap+0x52>
+     38c:	0f 1f 40 00          	nopl   0x0(%rax)
+
+0000000000000390 <myuvc_dqbuf>:
+     390:	e8 00 00 00 00       	callq  395 <myuvc_dqbuf+0x5>
+     395:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 39c <myuvc_dqbuf+0xc>
+     39c:	55                   	push   %rbp
+     39d:	48 89 e5             	mov    %rsp,%rbp
+     3a0:	48 3d 00 00 00 00    	cmp    $0x0,%rax
+     3a6:	0f 84 c0 00 00 00    	je     46c <myuvc_dqbuf+0xdc>
+     3ac:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 3b3 <myuvc_dqbuf+0x23>
+     3b3:	48 bf 00 01 00 00 00 	movabs $0xdead000000000100,%rdi
+     3ba:	00 ad de 
+     3bd:	48 8b 48 08          	mov    0x8(%rax),%rcx
+     3c1:	48 8b 30             	mov    (%rax),%rsi
+     3c4:	48 89 4e 08          	mov    %rcx,0x8(%rsi)
+     3c8:	48 89 31             	mov    %rsi,(%rcx)
+     3cb:	48 8b 48 80          	mov    -0x80(%rax),%rcx
+     3cf:	48 89 38             	mov    %rdi,(%rax)
+     3d2:	48 bf 00 02 00 00 00 	movabs $0xdead000000000200,%rdi
+     3d9:	00 ad de 
+     3dc:	48 89 78 08          	mov    %rdi,0x8(%rax)
+     3e0:	48 89 0a             	mov    %rcx,(%rdx)
+     3e3:	48 8b 48 88          	mov    -0x78(%rax),%rcx
+     3e7:	48 89 4a 08          	mov    %rcx,0x8(%rdx)
+     3eb:	48 8b 48 90          	mov    -0x70(%rax),%rcx
+     3ef:	48 89 4a 10          	mov    %rcx,0x10(%rdx)
+     3f3:	48 8b 48 98          	mov    -0x68(%rax),%rcx
+     3f7:	48 89 4a 18          	mov    %rcx,0x18(%rdx)
+     3fb:	48 8b 48 a0          	mov    -0x60(%rax),%rcx
+     3ff:	48 89 4a 20          	mov    %rcx,0x20(%rdx)
+     403:	48 8b 48 a8          	mov    -0x58(%rax),%rcx
+     407:	48 89 4a 28          	mov    %rcx,0x28(%rdx)
+     40b:	48 8b 48 b0          	mov    -0x50(%rax),%rcx
+     40f:	48 89 4a 30          	mov    %rcx,0x30(%rdx)
+     413:	48 8b 48 b8          	mov    -0x48(%rax),%rcx
+     417:	48 89 4a 38          	mov    %rcx,0x38(%rdx)
+     41b:	48 8b 48 c0          	mov    -0x40(%rax),%rcx
+     41f:	48 89 4a 40          	mov    %rcx,0x40(%rdx)
+     423:	48 8b 48 c8          	mov    -0x38(%rax),%rcx
+     427:	48 89 4a 48          	mov    %rcx,0x48(%rdx)
+     42b:	48 8b 48 d0          	mov    -0x30(%rax),%rcx
+     42f:	48 89 4a 50          	mov    %rcx,0x50(%rdx)
+     433:	48 83 78 e0 00       	cmpq   $0x0,-0x20(%rax)
+     438:	75 1a                	jne    454 <myuvc_dqbuf+0xc4>
+     43a:	8b 40 d8             	mov    -0x28(%rax),%eax
+     43d:	83 f8 02             	cmp    $0x2,%eax
+     440:	7c 1e                	jl     460 <myuvc_dqbuf+0xd0>
+     442:	83 f8 03             	cmp    $0x3,%eax
+     445:	7e 1d                	jle    464 <myuvc_dqbuf+0xd4>
+     447:	83 f8 05             	cmp    $0x5,%eax
+     44a:	7f 14                	jg     460 <myuvc_dqbuf+0xd0>
+     44c:	31 c0                	xor    %eax,%eax
+     44e:	83 4a 0c 04          	orl    $0x4,0xc(%rdx)
+     452:	5d                   	pop    %rbp
+     453:	c3                   	retq   
+     454:	83 4a 0c 01          	orl    $0x1,0xc(%rdx)
+     458:	8b 40 d8             	mov    -0x28(%rax),%eax
+     45b:	83 f8 02             	cmp    $0x2,%eax
+     45e:	7d e2                	jge    442 <myuvc_dqbuf+0xb2>
+     460:	31 c0                	xor    %eax,%eax
+     462:	5d                   	pop    %rbp
+     463:	c3                   	retq   
+     464:	31 c0                	xor    %eax,%eax
+     466:	83 4a 0c 02          	orl    $0x2,0xc(%rdx)
+     46a:	5d                   	pop    %rbp
+     46b:	c3                   	retq   
+     46c:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+     471:	5d                   	pop    %rbp
+     472:	c3                   	retq   
+     473:	0f 1f 00             	nopl   (%rax)
+     476:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+     47d:	00 00 00 
+
+0000000000000480 <myuvc_querybuf>:
+     480:	e8 00 00 00 00       	callq  485 <myuvc_querybuf+0x5>
+     485:	55                   	push   %rbp
+     486:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     48d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     494:	48 89 e5             	mov    %rsp,%rbp
+     497:	53                   	push   %rbx
+     498:	48 89 d3             	mov    %rdx,%rbx
+     49b:	e8 00 00 00 00       	callq  4a0 <myuvc_querybuf+0x20>
+     4a0:	8b 13                	mov    (%rbx),%edx
+     4a2:	3b 15 00 00 00 00    	cmp    0x0(%rip),%edx        # 4a8 <myuvc_querybuf+0x28>
+     4a8:	0f 83 c4 00 00 00    	jae    572 <myuvc_querybuf+0xf2>
+     4ae:	48 8d 0c 92          	lea    (%rdx,%rdx,4),%rcx
+     4b2:	48 c1 e1 05          	shl    $0x5,%rcx
+     4b6:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     4bd:	48 89 33             	mov    %rsi,(%rbx)
+     4c0:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     4c7:	48 89 73 08          	mov    %rsi,0x8(%rbx)
+     4cb:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     4d2:	48 89 73 10          	mov    %rsi,0x10(%rbx)
+     4d6:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     4dd:	48 89 73 18          	mov    %rsi,0x18(%rbx)
+     4e1:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     4e8:	48 89 73 20          	mov    %rsi,0x20(%rbx)
+     4ec:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     4f3:	48 89 73 28          	mov    %rsi,0x28(%rbx)
+     4f7:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     4fe:	48 89 73 30          	mov    %rsi,0x30(%rbx)
+     502:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     509:	48 89 73 38          	mov    %rsi,0x38(%rbx)
+     50d:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     514:	48 89 73 40          	mov    %rsi,0x40(%rbx)
+     518:	48 8b b1 00 00 00 00 	mov    0x0(%rcx),%rsi
+     51f:	48 89 73 48          	mov    %rsi,0x48(%rbx)
+     523:	48 8b 81 00 00 00 00 	mov    0x0(%rcx),%rax
+     52a:	48 89 43 50          	mov    %rax,0x50(%rbx)
+     52e:	48 83 b9 00 00 00 00 	cmpq   $0x0,0x0(%rcx)
+     535:	00 
+     536:	75 26                	jne    55e <myuvc_querybuf+0xde>
+     538:	48 8d 04 92          	lea    (%rdx,%rdx,4),%rax
+     53c:	48 c1 e0 05          	shl    $0x5,%rax
+     540:	8b 80 00 00 00 00    	mov    0x0(%rax),%eax
+     546:	83 f8 02             	cmp    $0x2,%eax
+     549:	7c 22                	jl     56d <myuvc_querybuf+0xed>
+     54b:	83 f8 03             	cmp    $0x3,%eax
+     54e:	7e 14                	jle    564 <myuvc_querybuf+0xe4>
+     550:	83 f8 05             	cmp    $0x5,%eax
+     553:	7f 18                	jg     56d <myuvc_querybuf+0xed>
+     555:	83 4b 0c 04          	orl    $0x4,0xc(%rbx)
+     559:	31 c0                	xor    %eax,%eax
+     55b:	5b                   	pop    %rbx
+     55c:	5d                   	pop    %rbp
+     55d:	c3                   	retq   
+     55e:	83 4b 0c 01          	orl    $0x1,0xc(%rbx)
+     562:	eb d4                	jmp    538 <myuvc_querybuf+0xb8>
+     564:	83 4b 0c 02          	orl    $0x2,0xc(%rbx)
+     568:	31 c0                	xor    %eax,%eax
+     56a:	5b                   	pop    %rbx
+     56b:	5d                   	pop    %rbp
+     56c:	c3                   	retq   
+     56d:	31 c0                	xor    %eax,%eax
+     56f:	5b                   	pop    %rbx
+     570:	5d                   	pop    %rbp
+     571:	c3                   	retq   
+     572:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+     577:	eb e2                	jmp    55b <myuvc_querybuf+0xdb>
+     579:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000000580 <myuvc_s_fmt_vid_cap>:
+     580:	e8 00 00 00 00       	callq  585 <myuvc_s_fmt_vid_cap+0x5>
+     585:	55                   	push   %rbp
+     586:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     58d:	48 89 e5             	mov    %rsp,%rbp
+     590:	41 54                	push   %r12
+     592:	53                   	push   %rbx
+     593:	49 89 fc             	mov    %rdi,%r12
+     596:	48 89 d3             	mov    %rdx,%rbx
+     599:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     5a0:	e8 00 00 00 00       	callq  5a5 <myuvc_s_fmt_vid_cap+0x25>
+     5a5:	31 f6                	xor    %esi,%esi
+     5a7:	48 89 da             	mov    %rbx,%rdx
+     5aa:	4c 89 e7             	mov    %r12,%rdi
+     5ad:	e8 de fb ff ff       	callq  190 <myuvc_try_fmt_vid_cap>
+     5b2:	85 c0                	test   %eax,%eax
+     5b4:	78 17                	js     5cd <myuvc_s_fmt_vid_cap+0x4d>
+     5b6:	48 c7 c0 00 00 00 00 	mov    $0x0,%rax
+     5bd:	b9 1a 00 00 00       	mov    $0x1a,%ecx
+     5c2:	48 89 de             	mov    %rbx,%rsi
+     5c5:	48 89 c7             	mov    %rax,%rdi
+     5c8:	31 c0                	xor    %eax,%eax
+     5ca:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+     5cd:	5b                   	pop    %rbx
+     5ce:	41 5c                	pop    %r12
+     5d0:	5d                   	pop    %rbp
+     5d1:	c3                   	retq   
+     5d2:	0f 1f 40 00          	nopl   0x0(%rax)
+     5d6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+     5dd:	00 00 00 
+
+00000000000005e0 <myuvc_video_complete>:
+     5e0:	e8 00 00 00 00       	callq  5e5 <myuvc_video_complete+0x5>
+     5e5:	55                   	push   %rbp
+     5e6:	48 89 e5             	mov    %rsp,%rbp
+     5e9:	41 57                	push   %r15
+     5eb:	41 56                	push   %r14
+     5ed:	41 55                	push   %r13
+     5ef:	41 54                	push   %r12
+     5f1:	53                   	push   %rbx
+     5f2:	48 83 ec 10          	sub    $0x10,%rsp
+     5f6:	8b 77 60             	mov    0x60(%rdi),%esi
+     5f9:	85 f6                	test   %esi,%esi
+     5fb:	0f 85 e5 01 00 00    	jne    7e6 <myuvc_video_complete+0x206>
+     601:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 608 <myuvc_video_complete+0x28>
+     608:	49 89 ff             	mov    %rdi,%r15
+     60b:	48 3d 00 00 00 00    	cmp    $0x0,%rax
+     611:	0f 84 60 01 00 00    	je     777 <myuvc_video_complete+0x197>
+     617:	8b 87 a4 00 00 00    	mov    0xa4(%rdi),%eax
+     61d:	4c 8b 25 00 00 00 00 	mov    0x0(%rip),%r12        # 624 <myuvc_video_complete+0x44>
+     624:	85 c0                	test   %eax,%eax
+     626:	0f 8e 4b 01 00 00    	jle    777 <myuvc_video_complete+0x197>
+     62c:	49 8d 44 24 d8       	lea    -0x28(%r12),%rax
+     631:	31 db                	xor    %ebx,%ebx
+     633:	48 89 45 c8          	mov    %rax,-0x38(%rbp)
+     637:	48 63 c3             	movslq %ebx,%rax
+     63a:	48 c1 e0 04          	shl    $0x4,%rax
+     63e:	4c 01 f8             	add    %r15,%rax
+     641:	8b b0 cc 00 00 00    	mov    0xcc(%rax),%esi
+     647:	85 f6                	test   %esi,%esi
+     649:	0f 88 6a 01 00 00    	js     7b9 <myuvc_video_complete+0x1d9>
+     64f:	44 8b a8 c8 00 00 00 	mov    0xc8(%rax),%r13d
+     656:	41 83 fd 01          	cmp    $0x1,%r13d
+     65a:	0f 8e 07 01 00 00    	jle    767 <myuvc_video_complete+0x187>
+     660:	44 8b b0 c0 00 00 00 	mov    0xc0(%rax),%r14d
+     667:	4d 03 77 68          	add    0x68(%r15),%r14
+     66b:	41 0f b6 36          	movzbl (%r14),%esi
+     66f:	40 80 fe 01          	cmp    $0x1,%sil
+     673:	0f 86 ee 00 00 00    	jbe    767 <myuvc_video_complete+0x187>
+     679:	40 0f b6 d6          	movzbl %sil,%edx
+     67d:	41 39 d5             	cmp    %edx,%r13d
+     680:	0f 8c e1 00 00 00    	jl     767 <myuvc_video_complete+0x187>
+     686:	41 f6 46 01 40       	testb  $0x40,0x1(%r14)
+     68b:	0f 85 36 01 00 00    	jne    7c7 <myuvc_video_complete+0x1e7>
+     691:	41 8b 84 24 78 ff ff 	mov    -0x88(%r12),%eax
+     698:	ff 
+     699:	41 8b 4c 24 b8       	mov    -0x48(%r12),%ecx
+     69e:	41 29 d5             	sub    %edx,%r13d
+     6a1:	41 8b 7c 24 b0       	mov    -0x50(%r12),%edi
+     6a6:	29 c1                	sub    %eax,%ecx
+     6a8:	41 39 cd             	cmp    %ecx,%r13d
+     6ab:	41 89 c9             	mov    %ecx,%r9d
+     6ae:	89 4d d0             	mov    %ecx,-0x30(%rbp)
+     6b1:	45 0f 46 cd          	cmovbe %r13d,%r9d
+     6b5:	48 01 c7             	add    %rax,%rdi
+     6b8:	48 03 3d 00 00 00 00 	add    0x0(%rip),%rdi        # 6bf <myuvc_video_complete+0xdf>
+     6bf:	49 63 d1             	movslq %r9d,%rdx
+     6c2:	4c 01 f6             	add    %r14,%rsi
+     6c5:	44 89 4d d4          	mov    %r9d,-0x2c(%rbp)
+     6c9:	e8 00 00 00 00       	callq  6ce <myuvc_video_complete+0xee>
+     6ce:	44 8b 4d d4          	mov    -0x2c(%rbp),%r9d
+     6d2:	8b 4d d0             	mov    -0x30(%rbp),%ecx
+     6d5:	45 03 8c 24 78 ff ff 	add    -0x88(%r12),%r9d
+     6dc:	ff 
+     6dd:	41 39 cd             	cmp    %ecx,%r13d
+     6e0:	45 89 8c 24 78 ff ff 	mov    %r9d,-0x88(%r12)
+     6e7:	ff 
+     6e8:	0f 8e a9 00 00 00    	jle    797 <myuvc_video_complete+0x1b7>
+     6ee:	41 c7 44 24 c8 04 00 	movl   $0x4,-0x38(%r12)
+     6f5:	00 00 
+     6f7:	41 f6 46 01 02       	testb  $0x2,0x1(%r14)
+     6fc:	74 27                	je     725 <myuvc_video_complete+0x145>
+     6fe:	45 85 c9             	test   %r9d,%r9d
+     701:	74 22                	je     725 <myuvc_video_complete+0x145>
+     703:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     70a:	e8 00 00 00 00       	callq  70f <myuvc_video_complete+0x12f>
+     70f:	41 0f b6 06          	movzbl (%r14),%eax
+     713:	41 39 c5             	cmp    %eax,%r13d
+     716:	0f 84 b9 00 00 00    	je     7d5 <myuvc_video_complete+0x1f5>
+     71c:	41 c7 44 24 c8 03 00 	movl   $0x3,-0x38(%r12)
+     723:	00 00 
+     725:	49 8b 14 24          	mov    (%r12),%rdx
+     729:	49 8b 44 24 08       	mov    0x8(%r12),%rax
+     72e:	31 c9                	xor    %ecx,%ecx
+     730:	48 8b 7d c8          	mov    -0x38(%rbp),%rdi
+     734:	be 03 00 00 00       	mov    $0x3,%esi
+     739:	48 89 42 08          	mov    %rax,0x8(%rdx)
+     73d:	48 89 10             	mov    %rdx,(%rax)
+     740:	48 b8 00 01 00 00 00 	movabs $0xdead000000000100,%rax
+     747:	00 ad de 
+     74a:	49 89 04 24          	mov    %rax,(%r12)
+     74e:	48 b8 00 02 00 00 00 	movabs $0xdead000000000200,%rax
+     755:	00 ad de 
+     758:	ba 01 00 00 00       	mov    $0x1,%edx
+     75d:	49 89 44 24 08       	mov    %rax,0x8(%r12)
+     762:	e8 00 00 00 00       	callq  767 <myuvc_video_complete+0x187>
+     767:	83 c3 01             	add    $0x1,%ebx
+     76a:	41 39 9f a4 00 00 00 	cmp    %ebx,0xa4(%r15)
+     771:	0f 8f c0 fe ff ff    	jg     637 <myuvc_video_complete+0x57>
+     777:	be 20 00 08 01       	mov    $0x1080020,%esi
+     77c:	4c 89 ff             	mov    %r15,%rdi
+     77f:	e8 00 00 00 00       	callq  784 <myuvc_video_complete+0x1a4>
+     784:	85 c0                	test   %eax,%eax
+     786:	78 6c                	js     7f4 <myuvc_video_complete+0x214>
+     788:	48 83 c4 10          	add    $0x10,%rsp
+     78c:	5b                   	pop    %rbx
+     78d:	41 5c                	pop    %r12
+     78f:	41 5d                	pop    %r13
+     791:	41 5e                	pop    %r14
+     793:	41 5f                	pop    %r15
+     795:	5d                   	pop    %rbp
+     796:	c3                   	retq   
+     797:	41 f6 46 01 02       	testb  $0x2,0x1(%r14)
+     79c:	74 09                	je     7a7 <myuvc_video_complete+0x1c7>
+     79e:	45 85 c9             	test   %r9d,%r9d
+     7a1:	0f 85 5c ff ff ff    	jne    703 <myuvc_video_complete+0x123>
+     7a7:	41 8b 44 24 c8       	mov    -0x38(%r12),%eax
+     7ac:	83 e8 03             	sub    $0x3,%eax
+     7af:	83 f8 01             	cmp    $0x1,%eax
+     7b2:	77 b3                	ja     767 <myuvc_video_complete+0x187>
+     7b4:	e9 6c ff ff ff       	jmpq   725 <myuvc_video_complete+0x145>
+     7b9:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     7c0:	e8 00 00 00 00       	callq  7c5 <myuvc_video_complete+0x1e5>
+     7c5:	eb a0                	jmp    767 <myuvc_video_complete+0x187>
+     7c7:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     7ce:	e8 00 00 00 00       	callq  7d3 <myuvc_video_complete+0x1f3>
+     7d3:	eb 92                	jmp    767 <myuvc_video_complete+0x187>
+     7d5:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     7dc:	e8 00 00 00 00       	callq  7e1 <myuvc_video_complete+0x201>
+     7e1:	e9 36 ff ff ff       	jmpq   71c <myuvc_video_complete+0x13c>
+     7e6:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     7ed:	e8 00 00 00 00       	callq  7f2 <myuvc_video_complete+0x212>
+     7f2:	eb 94                	jmp    788 <myuvc_video_complete+0x1a8>
+     7f4:	89 c6                	mov    %eax,%esi
+     7f6:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     7fd:	e8 00 00 00 00       	callq  802 <myuvc_video_complete+0x222>
+     802:	eb 84                	jmp    788 <myuvc_video_complete+0x1a8>
+     804:	66 90                	xchg   %ax,%ax
+     806:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+     80d:	00 00 00 
+
+0000000000000810 <myuvc_reqbufs>:
+     810:	e8 00 00 00 00       	callq  815 <myuvc_reqbufs+0x5>
+     815:	55                   	push   %rbp
+     816:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     81d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     824:	48 89 e5             	mov    %rsp,%rbp
+     827:	41 57                	push   %r15
+     829:	41 56                	push   %r14
+     82b:	41 55                	push   %r13
+     82d:	41 54                	push   %r12
+     82f:	53                   	push   %rbx
+     830:	48 89 d3             	mov    %rdx,%rbx
+     833:	48 83 ec 08          	sub    $0x8,%rsp
+     837:	e8 00 00 00 00       	callq  83c <myuvc_reqbufs+0x2c>
+     83c:	44 8b 23             	mov    (%rbx),%r12d
+     83f:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 846 <myuvc_reqbufs+0x36>
+     846:	48 c7 c3 00 00 00 00 	mov    $0x0,%rbx
+     84d:	44 8b 2d 00 00 00 00 	mov    0x0(%rip),%r13d        # 854 <myuvc_reqbufs+0x44>
+     854:	e8 00 00 00 00       	callq  859 <myuvc_reqbufs+0x49>
+     859:	31 c0                	xor    %eax,%eax
+     85b:	b9 e7 02 00 00       	mov    $0x2e7,%ecx
+     860:	48 89 df             	mov    %rbx,%rdi
+     863:	41 83 fc 00          	cmp    $0x0,%r12d
+     867:	f3 48 ab             	rep stos %rax,%es:(%rdi)
+     86a:	0f 84 c3 00 00 00    	je     933 <myuvc_reqbufs+0x123>
+     870:	0f 8e cf 00 00 00    	jle    945 <myuvc_reqbufs+0x135>
+     876:	41 81 c5 ff 0f 00 00 	add    $0xfff,%r13d
+     87d:	44 89 e3             	mov    %r12d,%ebx
+     880:	41 81 e5 00 f0 ff ff 	and    $0xfffff000,%r13d
+     887:	41 0f af dd          	imul   %r13d,%ebx
+     88b:	eb 0d                	jmp    89a <myuvc_reqbufs+0x8a>
+     88d:	44 29 eb             	sub    %r13d,%ebx
+     890:	41 83 ec 01          	sub    $0x1,%r12d
+     894:	0f 84 ab 00 00 00    	je     945 <myuvc_reqbufs+0x135>
+     89a:	89 df                	mov    %ebx,%edi
+     89c:	e8 00 00 00 00       	callq  8a1 <myuvc_reqbufs+0x91>
+     8a1:	48 85 c0             	test   %rax,%rax
+     8a4:	48 89 45 d0          	mov    %rax,-0x30(%rbp)
+     8a8:	74 e3                	je     88d <myuvc_reqbufs+0x7d>
+     8aa:	48 c7 c3 00 00 00 00 	mov    $0x0,%rbx
+     8b1:	45 31 f6             	xor    %r14d,%r14d
+     8b4:	45 31 ff             	xor    %r15d,%r15d
+     8b7:	31 c0                	xor    %eax,%eax
+     8b9:	48 89 df             	mov    %rbx,%rdi
+     8bc:	b9 14 00 00 00       	mov    $0x14,%ecx
+     8c1:	f3 48 ab             	rep stos %rax,%es:(%rdi)
+     8c4:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # 8ca <myuvc_reqbufs+0xba>
+     8ca:	48 8d 7b 68          	lea    0x68(%rbx),%rdi
+     8ce:	44 89 3b             	mov    %r15d,(%rbx)
+     8d1:	44 89 73 40          	mov    %r14d,0x40(%rbx)
+     8d5:	c7 43 04 01 00 00 00 	movl   $0x1,0x4(%rbx)
+     8dc:	48 c7 c2 00 00 00 00 	mov    $0x0,%rdx
+     8e3:	c7 43 10 01 00 00 00 	movl   $0x1,0x10(%rbx)
+     8ea:	c7 43 3c 01 00 00 00 	movl   $0x1,0x3c(%rbx)
+     8f1:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     8f8:	89 43 48             	mov    %eax,0x48(%rbx)
+     8fb:	c7 43 58 06 00 00 00 	movl   $0x6,0x58(%rbx)
+     902:	41 83 c7 01          	add    $0x1,%r15d
+     906:	48 81 c3 a0 00 00 00 	add    $0xa0,%rbx
+     90d:	45 01 ee             	add    %r13d,%r14d
+     910:	e8 00 00 00 00       	callq  915 <myuvc_reqbufs+0x105>
+     915:	45 39 fc             	cmp    %r15d,%r12d
+     918:	75 9d                	jne    8b7 <myuvc_reqbufs+0xa7>
+     91a:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+     91e:	44 89 25 00 00 00 00 	mov    %r12d,0x0(%rip)        # 925 <myuvc_reqbufs+0x115>
+     925:	44 89 2d 00 00 00 00 	mov    %r13d,0x0(%rip)        # 92c <myuvc_reqbufs+0x11c>
+     92c:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 933 <myuvc_reqbufs+0x123>
+     933:	48 83 c4 08          	add    $0x8,%rsp
+     937:	44 89 e0             	mov    %r12d,%eax
+     93a:	5b                   	pop    %rbx
+     93b:	41 5c                	pop    %r12
+     93d:	41 5d                	pop    %r13
+     93f:	41 5e                	pop    %r14
+     941:	41 5f                	pop    %r15
+     943:	5d                   	pop    %rbp
+     944:	c3                   	retq   
+     945:	41 bc f4 ff ff ff    	mov    $0xfffffff4,%r12d
+     94b:	eb e6                	jmp    933 <myuvc_reqbufs+0x123>
+     94d:	0f 1f 00             	nopl   (%rax)
+
+0000000000000950 <myuvc_querycap>:
+     950:	e8 00 00 00 00       	callq  955 <myuvc_querycap+0x5>
+     955:	55                   	push   %rbp
+     956:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     95d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     964:	48 89 e5             	mov    %rsp,%rbp
+     967:	53                   	push   %rbx
+     968:	48 89 d3             	mov    %rdx,%rbx
+     96b:	e8 00 00 00 00       	callq  970 <myuvc_querycap+0x20>
+     970:	48 89 df             	mov    %rbx,%rdi
+     973:	ba 10 00 00 00       	mov    $0x10,%edx
+     978:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     97f:	e8 00 00 00 00       	callq  984 <myuvc_querycap+0x34>
+     984:	48 8d 7b 10          	lea    0x10(%rbx),%rdi
+     988:	ba 20 00 00 00       	mov    $0x20,%edx
+     98d:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     994:	e8 00 00 00 00       	callq  999 <myuvc_querycap+0x49>
+     999:	48 8d 7b 30          	lea    0x30(%rbx),%rdi
+     99d:	48 c7 c1 00 00 00 00 	mov    $0x0,%rcx
+     9a4:	48 c7 c2 00 00 00 00 	mov    $0x0,%rdx
+     9ab:	be 20 00 00 00       	mov    $0x20,%esi
+     9b0:	e8 00 00 00 00       	callq  9b5 <myuvc_querycap+0x65>
+     9b5:	c7 43 58 01 00 00 04 	movl   $0x4000001,0x58(%rbx)
+     9bc:	c7 43 54 01 00 00 84 	movl   $0x84000001,0x54(%rbx)
+     9c3:	31 c0                	xor    %eax,%eax
+     9c5:	5b                   	pop    %rbx
+     9c6:	5d                   	pop    %rbp
+     9c7:	c3                   	retq   
+     9c8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+     9cf:	00 
+
+00000000000009d0 <myuvc_mmap>:
+     9d0:	e8 00 00 00 00       	callq  9d5 <myuvc_mmap+0x5>
+     9d5:	55                   	push   %rbp
+     9d6:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     9dd:	48 89 e5             	mov    %rsp,%rbp
+     9e0:	41 57                	push   %r15
+     9e2:	41 56                	push   %r14
+     9e4:	41 55                	push   %r13
+     9e6:	41 54                	push   %r12
+     9e8:	49 89 f5             	mov    %rsi,%r13
+     9eb:	53                   	push   %rbx
+     9ec:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     9f3:	48 83 ec 08          	sub    $0x8,%rsp
+     9f7:	e8 00 00 00 00       	callq  9fc <myuvc_mmap+0x2c>
+     9fc:	4d 8b 7d 00          	mov    0x0(%r13),%r15
+     a00:	4d 8b 65 08          	mov    0x8(%r13),%r12
+     a04:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+     a09:	8b 0d 00 00 00 00    	mov    0x0(%rip),%ecx        # a0f <myuvc_mmap+0x3f>
+     a0f:	4d 29 fc             	sub    %r15,%r12
+     a12:	85 c9                	test   %ecx,%ecx
+     a14:	74 3f                	je     a55 <myuvc_mmap+0x85>
+     a16:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # a1c <myuvc_mmap+0x4c>
+     a1c:	49 8b b5 98 00 00 00 	mov    0x98(%r13),%rsi
+     a23:	49 c7 c6 00 00 00 00 	mov    $0x0,%r14
+     a2a:	c1 e8 0c             	shr    $0xc,%eax
+     a2d:	48 39 f0             	cmp    %rsi,%rax
+     a30:	74 32                	je     a64 <myuvc_mmap+0x94>
+     a32:	31 d2                	xor    %edx,%edx
+     a34:	eb 13                	jmp    a49 <myuvc_mmap+0x79>
+     a36:	49 81 c6 a0 00 00 00 	add    $0xa0,%r14
+     a3d:	41 8b 46 40          	mov    0x40(%r14),%eax
+     a41:	c1 e8 0c             	shr    $0xc,%eax
+     a44:	48 39 f0             	cmp    %rsi,%rax
+     a47:	74 1b                	je     a64 <myuvc_mmap+0x94>
+     a49:	83 c2 01             	add    $0x1,%edx
+     a4c:	39 ca                	cmp    %ecx,%edx
+     a4e:	75 e6                	jne    a36 <myuvc_mmap+0x66>
+     a50:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+     a55:	48 83 c4 08          	add    $0x8,%rsp
+     a59:	5b                   	pop    %rbx
+     a5a:	41 5c                	pop    %r12
+     a5c:	41 5d                	pop    %r13
+     a5e:	41 5e                	pop    %r14
+     a60:	41 5f                	pop    %r15
+     a62:	5d                   	pop    %rbp
+     a63:	c3                   	retq   
+     a64:	48 63 15 00 00 00 00 	movslq 0x0(%rip),%rdx        # a6b <myuvc_mmap+0x9b>
+     a6b:	b8 ea ff ff ff       	mov    $0xffffffea,%eax
+     a70:	49 39 d4             	cmp    %rdx,%r12
+     a73:	75 e0                	jne    a55 <myuvc_mmap+0x85>
+     a75:	49 81 4d 50 00 40 00 	orq    $0x4000,0x50(%r13)
+     a7c:	00 
+     a7d:	41 8b 5e 40          	mov    0x40(%r14),%ebx
+     a81:	48 03 1d 00 00 00 00 	add    0x0(%rip),%rbx        # a88 <myuvc_mmap+0xb8>
+     a88:	4d 85 e4             	test   %r12,%r12
+     a8b:	74 3d                	je     aca <myuvc_mmap+0xfa>
+     a8d:	49 29 df             	sub    %rbx,%r15
+     a90:	4c 89 7d d0          	mov    %r15,-0x30(%rbp)
+     a94:	eb 10                	jmp    aa6 <myuvc_mmap+0xd6>
+     a96:	48 81 c3 00 10 00 00 	add    $0x1000,%rbx
+     a9d:	49 81 ec 00 10 00 00 	sub    $0x1000,%r12
+     aa4:	74 26                	je     acc <myuvc_mmap+0xfc>
+     aa6:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+     aaa:	48 89 df             	mov    %rbx,%rdi
+     aad:	4c 8d 3c 18          	lea    (%rax,%rbx,1),%r15
+     ab1:	e8 00 00 00 00       	callq  ab6 <myuvc_mmap+0xe6>
+     ab6:	4c 89 fe             	mov    %r15,%rsi
+     ab9:	48 89 c2             	mov    %rax,%rdx
+     abc:	4c 89 ef             	mov    %r13,%rdi
+     abf:	e8 00 00 00 00       	callq  ac4 <myuvc_mmap+0xf4>
+     ac4:	85 c0                	test   %eax,%eax
+     ac6:	79 ce                	jns    a96 <myuvc_mmap+0xc6>
+     ac8:	eb 8b                	jmp    a55 <myuvc_mmap+0x85>
+     aca:	31 c0                	xor    %eax,%eax
+     acc:	4d 89 b5 b0 00 00 00 	mov    %r14,0xb0(%r13)
+     ad3:	49 c7 85 90 00 00 00 	movq   $0x0,0x90(%r13)
+     ada:	00 00 00 00 
+     ade:	49 83 06 01          	addq   $0x1,(%r14)
+     ae2:	48 83 c4 08          	add    $0x8,%rsp
+     ae6:	5b                   	pop    %rbx
+     ae7:	41 5c                	pop    %r12
+     ae9:	41 5d                	pop    %r13
+     aeb:	41 5e                	pop    %r14
+     aed:	41 5f                	pop    %r15
+     aef:	5d                   	pop    %rbp
+     af0:	c3                   	retq   
+     af1:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+     af6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+     afd:	00 00 00 
+
+0000000000000b00 <myuvc_disconnect>:
+     b00:	e8 00 00 00 00       	callq  b05 <myuvc_disconnect+0x5>
+     b05:	8b 15 00 00 00 00    	mov    0x0(%rip),%edx        # b0b <myuvc_disconnect+0xb>
+     b0b:	55                   	push   %rbp
+     b0c:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     b13:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     b1a:	48 89 e5             	mov    %rsp,%rbp
+     b1d:	8d 42 01             	lea    0x1(%rdx),%eax
+     b20:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # b26 <myuvc_disconnect+0x26>
+     b26:	e8 00 00 00 00       	callq  b2b <myuvc_disconnect+0x2b>
+     b2b:	83 3d 00 00 00 00 02 	cmpl   $0x2,0x0(%rip)        # b32 <myuvc_disconnect+0x32>
+     b32:	74 02                	je     b36 <myuvc_disconnect+0x36>
+     b34:	5d                   	pop    %rbp
+     b35:	c3                   	retq   
+     b36:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # b3d <myuvc_disconnect+0x3d>
+     b3d:	e8 00 00 00 00       	callq  b42 <myuvc_disconnect+0x42>
+     b42:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # b49 <myuvc_disconnect+0x49>
+     b49:	e8 00 00 00 00       	callq  b4e <myuvc_disconnect+0x4e>
+     b4e:	5d                   	pop    %rbp
+     b4f:	c3                   	retq   
+
+0000000000000b50 <myuvc_streamon>:
+     b50:	e8 00 00 00 00       	callq  b55 <myuvc_streamon+0x5>
+     b55:	55                   	push   %rbp
+     b56:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     b5d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     b64:	48 89 e5             	mov    %rsp,%rbp
+     b67:	41 56                	push   %r14
+     b69:	41 55                	push   %r13
+     b6b:	41 54                	push   %r12
+     b6d:	53                   	push   %rbx
+     b6e:	e8 00 00 00 00       	callq  b73 <myuvc_streamon+0x23>
+     b73:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     b7a:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     b81:	e8 00 00 00 00       	callq  b86 <myuvc_streamon+0x36>
+     b86:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # b8d <myuvc_streamon+0x3d>
+     b8d:	b8 01 00 00 00       	mov    $0x1,%eax
+     b92:	ba 1a 00 00 00       	mov    $0x1a,%edx
+     b97:	be c0 80 40 01       	mov    $0x14080c0,%esi
+     b9c:	48 c7 05 00 00 00 00 	movq   $0x0,0x0(%rip)        # ba7 <myuvc_streamon+0x57>
+     ba3:	00 00 00 00 
+     ba7:	48 c7 05 00 00 00 00 	movq   $0x0,0x0(%rip)        # bb2 <myuvc_streamon+0x62>
+     bae:	00 00 00 00 
+     bb2:	48 c7 05 00 00 00 00 	movq   $0x0,0x0(%rip)        # bbd <myuvc_streamon+0x6d>
+     bb9:	00 00 00 00 
+     bbd:	c7 05 00 00 00 00 00 	movl   $0x0,0x0(%rip)        # bc7 <myuvc_streamon+0x77>
+     bc4:	00 00 00 
+     bc7:	66 89 05 00 00 00 00 	mov    %ax,0x0(%rip)        # bce <myuvc_streamon+0x7e>
+     bce:	c6 05 00 00 00 00 01 	movb   $0x1,0x0(%rip)        # bd5 <myuvc_streamon+0x85>
+     bd5:	c6 05 00 00 00 00 02 	movb   $0x2,0x0(%rip)        # bdc <myuvc_streamon+0x8c>
+     bdc:	c7 05 00 00 00 00 15 	movl   $0x51615,0x0(%rip)        # be6 <myuvc_streamon+0x96>
+     be3:	16 05 00 
+     be6:	e8 00 00 00 00       	callq  beb <myuvc_streamon+0x9b>
+     beb:	48 85 c0             	test   %rax,%rax
+     bee:	0f 84 b8 05 00 00    	je     11ac <myuvc_streamon+0x65c>
+     bf4:	48 89 c3             	mov    %rax,%rbx
+     bf7:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # bfe <myuvc_streamon+0xae>
+     bfe:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # c05 <myuvc_streamon+0xb5>
+     c05:	44 0f b7 0d 00 00 00 	movzwl 0x0(%rip),%r9d        # c0d <myuvc_streamon+0xbd>
+     c0c:	00 
+     c0d:	41 b8 00 01 00 00    	mov    $0x100,%r8d
+     c13:	b9 21 00 00 00       	mov    $0x21,%ecx
+     c18:	ba 01 00 00 00       	mov    $0x1,%edx
+     c1d:	66 89 03             	mov    %ax,(%rbx)
+     c20:	0f b6 05 00 00 00 00 	movzbl 0x0(%rip),%eax        # c27 <myuvc_streamon+0xd7>
+     c27:	88 43 02             	mov    %al,0x2(%rbx)
+     c2a:	0f b6 05 00 00 00 00 	movzbl 0x0(%rip),%eax        # c31 <myuvc_streamon+0xe1>
+     c31:	88 43 03             	mov    %al,0x3(%rbx)
+     c34:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # c3a <myuvc_streamon+0xea>
+     c3a:	89 43 04             	mov    %eax,0x4(%rbx)
+     c3d:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # c44 <myuvc_streamon+0xf4>
+     c44:	66 89 43 08          	mov    %ax,0x8(%rbx)
+     c48:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # c4f <myuvc_streamon+0xff>
+     c4f:	66 89 43 0a          	mov    %ax,0xa(%rbx)
+     c53:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # c5a <myuvc_streamon+0x10a>
+     c5a:	66 89 43 0c          	mov    %ax,0xc(%rbx)
+     c5e:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # c65 <myuvc_streamon+0x115>
+     c65:	66 89 43 0e          	mov    %ax,0xe(%rbx)
+     c69:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # c70 <myuvc_streamon+0x120>
+     c70:	66 89 43 10          	mov    %ax,0x10(%rbx)
+     c74:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # c7a <myuvc_streamon+0x12a>
+     c7a:	89 43 12             	mov    %eax,0x12(%rbx)
+     c7d:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # c83 <myuvc_streamon+0x133>
+     c83:	89 43 16             	mov    %eax,0x16(%rbx)
+     c86:	8b 37                	mov    (%rdi),%esi
+     c88:	68 88 13 00 00       	pushq  $0x1388
+     c8d:	6a 1a                	pushq  $0x1a
+     c8f:	53                   	push   %rbx
+     c90:	c1 e6 08             	shl    $0x8,%esi
+     c93:	81 ce 00 00 00 80    	or     $0x80000000,%esi
+     c99:	e8 00 00 00 00       	callq  c9e <myuvc_streamon+0x14e>
+     c9e:	48 83 c4 18          	add    $0x18,%rsp
+     ca2:	83 f8 1a             	cmp    $0x1a,%eax
+     ca5:	0f 85 4e 05 00 00    	jne    11f9 <myuvc_streamon+0x6a9>
+     cab:	45 31 e4             	xor    %r12d,%r12d
+     cae:	48 89 df             	mov    %rbx,%rdi
+     cb1:	e8 00 00 00 00       	callq  cb6 <myuvc_streamon+0x166>
+     cb6:	44 89 e6             	mov    %r12d,%esi
+     cb9:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     cc0:	e8 00 00 00 00       	callq  cc5 <myuvc_streamon+0x175>
+     cc5:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     ccc:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     cd3:	e8 00 00 00 00       	callq  cd8 <myuvc_streamon+0x188>
+     cd8:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # cdf <myuvc_streamon+0x18f>
+     cdf:	ba 1a 00 00 00       	mov    $0x1a,%edx
+     ce4:	be c0 00 40 01       	mov    $0x14000c0,%esi
+     ce9:	e8 00 00 00 00       	callq  cee <myuvc_streamon+0x19e>
+     cee:	48 85 c0             	test   %rax,%rax
+     cf1:	48 89 c3             	mov    %rax,%rbx
+     cf4:	0f 84 9d 04 00 00    	je     1197 <myuvc_streamon+0x647>
+     cfa:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # d01 <myuvc_streamon+0x1b1>
+     d01:	44 0f b7 0d 00 00 00 	movzwl 0x0(%rip),%r9d        # d09 <myuvc_streamon+0x1b9>
+     d08:	00 
+     d09:	41 b8 00 01 00 00    	mov    $0x100,%r8d
+     d0f:	b9 a1 00 00 00       	mov    $0xa1,%ecx
+     d14:	ba 81 00 00 00       	mov    $0x81,%edx
+     d19:	8b 37                	mov    (%rdi),%esi
+     d1b:	68 88 13 00 00       	pushq  $0x1388
+     d20:	6a 1a                	pushq  $0x1a
+     d22:	50                   	push   %rax
+     d23:	c1 e6 08             	shl    $0x8,%esi
+     d26:	81 ce 80 00 00 80    	or     $0x80000080,%esi
+     d2c:	e8 00 00 00 00       	callq  d31 <myuvc_streamon+0x1e1>
+     d31:	48 83 c4 18          	add    $0x18,%rsp
+     d35:	83 f8 1a             	cmp    $0x1a,%eax
+     d38:	41 89 c4             	mov    %eax,%r12d
+     d3b:	0f 84 aa 03 00 00    	je     10eb <myuvc_streamon+0x59b>
+     d41:	48 89 df             	mov    %rbx,%rdi
+     d44:	e8 00 00 00 00       	callq  d49 <myuvc_streamon+0x1f9>
+     d49:	45 85 e4             	test   %r12d,%r12d
+     d4c:	be 00 00 00 00       	mov    $0x0,%esi
+     d51:	41 0f 4e f4          	cmovle %r12d,%esi
+     d55:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     d5c:	e8 00 00 00 00       	callq  d61 <myuvc_streamon+0x211>
+     d61:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+     d68:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     d6f:	e8 00 00 00 00       	callq  d74 <myuvc_streamon+0x224>
+     d74:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # d7b <myuvc_streamon+0x22b>
+     d7b:	ba 1a 00 00 00       	mov    $0x1a,%edx
+     d80:	be c0 80 40 01       	mov    $0x14080c0,%esi
+     d85:	e8 00 00 00 00       	callq  d8a <myuvc_streamon+0x23a>
+     d8a:	48 85 c0             	test   %rax,%rax
+     d8d:	48 89 c3             	mov    %rax,%rbx
+     d90:	0f 84 0b 04 00 00    	je     11a1 <myuvc_streamon+0x651>
+     d96:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # d9d <myuvc_streamon+0x24d>
+     d9d:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # da4 <myuvc_streamon+0x254>
+     da4:	41 b8 00 02 00 00    	mov    $0x200,%r8d
+     daa:	44 0f b7 0d 00 00 00 	movzwl 0x0(%rip),%r9d        # db2 <myuvc_streamon+0x262>
+     db1:	00 
+     db2:	b9 21 00 00 00       	mov    $0x21,%ecx
+     db7:	ba 01 00 00 00       	mov    $0x1,%edx
+     dbc:	66 89 03             	mov    %ax,(%rbx)
+     dbf:	0f b6 05 00 00 00 00 	movzbl 0x0(%rip),%eax        # dc6 <myuvc_streamon+0x276>
+     dc6:	88 43 02             	mov    %al,0x2(%rbx)
+     dc9:	0f b6 05 00 00 00 00 	movzbl 0x0(%rip),%eax        # dd0 <myuvc_streamon+0x280>
+     dd0:	88 43 03             	mov    %al,0x3(%rbx)
+     dd3:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # dd9 <myuvc_streamon+0x289>
+     dd9:	89 43 04             	mov    %eax,0x4(%rbx)
+     ddc:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # de3 <myuvc_streamon+0x293>
+     de3:	66 89 43 08          	mov    %ax,0x8(%rbx)
+     de7:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # dee <myuvc_streamon+0x29e>
+     dee:	66 89 43 0a          	mov    %ax,0xa(%rbx)
+     df2:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # df9 <myuvc_streamon+0x2a9>
+     df9:	66 89 43 0c          	mov    %ax,0xc(%rbx)
+     dfd:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # e04 <myuvc_streamon+0x2b4>
+     e04:	66 89 43 0e          	mov    %ax,0xe(%rbx)
+     e08:	0f b7 05 00 00 00 00 	movzwl 0x0(%rip),%eax        # e0f <myuvc_streamon+0x2bf>
+     e0f:	66 89 43 10          	mov    %ax,0x10(%rbx)
+     e13:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # e19 <myuvc_streamon+0x2c9>
+     e19:	89 43 12             	mov    %eax,0x12(%rbx)
+     e1c:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # e22 <myuvc_streamon+0x2d2>
+     e22:	89 43 16             	mov    %eax,0x16(%rbx)
+     e25:	8b 37                	mov    (%rdi),%esi
+     e27:	68 88 13 00 00       	pushq  $0x1388
+     e2c:	6a 1a                	pushq  $0x1a
+     e2e:	53                   	push   %rbx
+     e2f:	c1 e6 08             	shl    $0x8,%esi
+     e32:	81 ce 00 00 00 80    	or     $0x80000000,%esi
+     e38:	e8 00 00 00 00       	callq  e3d <myuvc_streamon+0x2ed>
+     e3d:	48 83 c4 18          	add    $0x18,%rsp
+     e41:	83 f8 1a             	cmp    $0x1a,%eax
+     e44:	0f 85 8a 03 00 00    	jne    11d4 <myuvc_streamon+0x684>
+     e4a:	45 31 e4             	xor    %r12d,%r12d
+     e4d:	48 89 df             	mov    %rbx,%rdi
+     e50:	e8 00 00 00 00       	callq  e55 <myuvc_streamon+0x305>
+     e55:	44 89 e6             	mov    %r12d,%esi
+     e58:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     e5f:	e8 00 00 00 00       	callq  e64 <myuvc_streamon+0x314>
+     e64:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     e6b:	e8 00 00 00 00       	callq  e70 <myuvc_streamon+0x320>
+     e70:	0f b7 35 00 00 00 00 	movzwl 0x0(%rip),%esi        # e77 <myuvc_streamon+0x327>
+     e77:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     e7e:	e8 00 00 00 00       	callq  e83 <myuvc_streamon+0x333>
+     e83:	0f b6 35 00 00 00 00 	movzbl 0x0(%rip),%esi        # e8a <myuvc_streamon+0x33a>
+     e8a:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     e91:	e8 00 00 00 00       	callq  e96 <myuvc_streamon+0x346>
+     e96:	0f b6 35 00 00 00 00 	movzbl 0x0(%rip),%esi        # e9d <myuvc_streamon+0x34d>
+     e9d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     ea4:	e8 00 00 00 00       	callq  ea9 <myuvc_streamon+0x359>
+     ea9:	8b 35 00 00 00 00    	mov    0x0(%rip),%esi        # eaf <myuvc_streamon+0x35f>
+     eaf:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     eb6:	e8 00 00 00 00       	callq  ebb <myuvc_streamon+0x36b>
+     ebb:	0f b7 35 00 00 00 00 	movzwl 0x0(%rip),%esi        # ec2 <myuvc_streamon+0x372>
+     ec2:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     ec9:	e8 00 00 00 00       	callq  ece <myuvc_streamon+0x37e>
+     ece:	0f b7 35 00 00 00 00 	movzwl 0x0(%rip),%esi        # ed5 <myuvc_streamon+0x385>
+     ed5:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     edc:	e8 00 00 00 00       	callq  ee1 <myuvc_streamon+0x391>
+     ee1:	0f b7 35 00 00 00 00 	movzwl 0x0(%rip),%esi        # ee8 <myuvc_streamon+0x398>
+     ee8:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     eef:	e8 00 00 00 00       	callq  ef4 <myuvc_streamon+0x3a4>
+     ef4:	0f b7 35 00 00 00 00 	movzwl 0x0(%rip),%esi        # efb <myuvc_streamon+0x3ab>
+     efb:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f02:	e8 00 00 00 00       	callq  f07 <myuvc_streamon+0x3b7>
+     f07:	0f b7 35 00 00 00 00 	movzwl 0x0(%rip),%esi        # f0e <myuvc_streamon+0x3be>
+     f0e:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f15:	e8 00 00 00 00       	callq  f1a <myuvc_streamon+0x3ca>
+     f1a:	8b 35 00 00 00 00    	mov    0x0(%rip),%esi        # f20 <myuvc_streamon+0x3d0>
+     f20:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f27:	e8 00 00 00 00       	callq  f2c <myuvc_streamon+0x3dc>
+     f2c:	8b 35 00 00 00 00    	mov    0x0(%rip),%esi        # f32 <myuvc_streamon+0x3e2>
+     f32:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f39:	e8 00 00 00 00       	callq  f3e <myuvc_streamon+0x3ee>
+     f3e:	8b 35 00 00 00 00    	mov    0x0(%rip),%esi        # f44 <myuvc_streamon+0x3f4>
+     f44:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f4b:	e8 00 00 00 00       	callq  f50 <myuvc_streamon+0x400>
+     f50:	0f b6 35 00 00 00 00 	movzbl 0x0(%rip),%esi        # f57 <myuvc_streamon+0x407>
+     f57:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f5e:	e8 00 00 00 00       	callq  f63 <myuvc_streamon+0x413>
+     f63:	0f b6 35 00 00 00 00 	movzbl 0x0(%rip),%esi        # f6a <myuvc_streamon+0x41a>
+     f6a:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f71:	e8 00 00 00 00       	callq  f76 <myuvc_streamon+0x426>
+     f76:	0f b6 35 00 00 00 00 	movzbl 0x0(%rip),%esi        # f7d <myuvc_streamon+0x42d>
+     f7d:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f84:	e8 00 00 00 00       	callq  f89 <myuvc_streamon+0x439>
+     f89:	0f b6 35 00 00 00 00 	movzbl 0x0(%rip),%esi        # f90 <myuvc_streamon+0x440>
+     f90:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+     f97:	e8 00 00 00 00       	callq  f9c <myuvc_streamon+0x44c>
+     f9c:	8b 35 00 00 00 00    	mov    0x0(%rip),%esi        # fa2 <myuvc_streamon+0x452>
+     fa2:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # fa9 <myuvc_streamon+0x459>
+     fa9:	ba 08 00 00 00       	mov    $0x8,%edx
+     fae:	e8 00 00 00 00       	callq  fb3 <myuvc_streamon+0x463>
+     fb3:	85 c0                	test   %eax,%eax
+     fb5:	0f 88 23 01 00 00    	js     10de <myuvc_streamon+0x58e>
+     fbb:	44 8b 25 00 00 00 00 	mov    0x0(%rip),%r12d        # fc2 <myuvc_streamon+0x472>
+     fc2:	b8 20 00 00 00       	mov    $0x20,%eax
+     fc7:	49 c7 c5 00 00 00 00 	mov    $0x0,%r13
+     fce:	4d 89 ee             	mov    %r13,%r14
+     fd1:	41 8d 9c 24 ff 03 00 	lea    0x3ff(%r12),%ebx
+     fd8:	00 
+     fd9:	c1 eb 0a             	shr    $0xa,%ebx
+     fdc:	83 fb 20             	cmp    $0x20,%ebx
+     fdf:	0f 47 d8             	cmova  %eax,%ebx
+     fe2:	8b 3d 00 00 00 00    	mov    0x0(%rip),%edi        # fe8 <myuvc_streamon+0x498>
+     fe8:	be c0 02 40 01       	mov    $0x14002c0,%esi
+     fed:	e8 00 00 00 00       	callq  ff2 <myuvc_streamon+0x4a2>
+     ff2:	48 85 c0             	test   %rax,%rax
+     ff5:	49 89 86 10 15 00 00 	mov    %rax,0x1510(%r14)
+     ffc:	0f 84 7a 01 00 00    	je     117c <myuvc_streamon+0x62c>
+    1002:	be c0 00 40 01       	mov    $0x14000c0,%esi
+    1007:	89 df                	mov    %ebx,%edi
+    1009:	e8 00 00 00 00       	callq  100e <myuvc_streamon+0x4be>
+    100e:	48 85 c0             	test   %rax,%rax
+    1011:	49 89 86 10 14 00 00 	mov    %rax,0x1410(%r14)
+    1018:	0f 84 5e 01 00 00    	je     117c <myuvc_streamon+0x62c>
+    101e:	49 83 c6 08          	add    $0x8,%r14
+    1022:	49 81 fe 00 00 00 00 	cmp    $0x0,%r14
+    1029:	75 b7                	jne    fe2 <myuvc_streamon+0x492>
+    102b:	48 8b 35 00 00 00 00 	mov    0x0(%rip),%rsi        # 1032 <myuvc_streamon+0x4e2>
+    1032:	89 d9                	mov    %ebx,%ecx
+    1034:	c1 e1 0a             	shl    $0xa,%ecx
+    1037:	49 8b 85 10 14 00 00 	mov    0x1410(%r13),%rax
+    103e:	48 89 70 48          	mov    %rsi,0x48(%rax)
+    1042:	8b 16                	mov    (%rsi),%edx
+    1044:	48 05 c0 00 00 00    	add    $0xc0,%rax
+    104a:	c7 40 a4 06 00 00 00 	movl   $0x6,-0x5c(%rax)
+    1051:	c7 40 e8 01 00 00 00 	movl   $0x1,-0x18(%rax)
+    1058:	c1 e2 08             	shl    $0x8,%edx
+    105b:	81 ca 80 80 40 00    	or     $0x408080,%edx
+    1061:	89 50 98             	mov    %edx,-0x68(%rax)
+    1064:	49 8b 95 10 15 00 00 	mov    0x1510(%r13),%rdx
+    106b:	48 89 50 a8          	mov    %rdx,-0x58(%rax)
+    106f:	49 8b 95 10 16 00 00 	mov    0x1610(%r13),%rdx
+    1076:	48 c7 40 f8 00 00 00 	movq   $0x0,-0x8(%rax)
+    107d:	00 
+    107e:	89 58 e4             	mov    %ebx,-0x1c(%rax)
+    1081:	44 89 60 c8          	mov    %r12d,-0x38(%rax)
+    1085:	48 89 50 b0          	mov    %rdx,-0x50(%rax)
+    1089:	31 d2                	xor    %edx,%edx
+    108b:	85 db                	test   %ebx,%ebx
+    108d:	74 17                	je     10a6 <myuvc_streamon+0x556>
+    108f:	89 10                	mov    %edx,(%rax)
+    1091:	81 c2 00 04 00 00    	add    $0x400,%edx
+    1097:	c7 40 04 00 04 00 00 	movl   $0x400,0x4(%rax)
+    109e:	48 83 c0 10          	add    $0x10,%rax
+    10a2:	39 ca                	cmp    %ecx,%edx
+    10a4:	75 e9                	jne    108f <myuvc_streamon+0x53f>
+    10a6:	49 83 c5 08          	add    $0x8,%r13
+    10aa:	49 81 fd 00 00 00 00 	cmp    $0x0,%r13
+    10b1:	75 84                	jne    1037 <myuvc_streamon+0x4e7>
+    10b3:	31 db                	xor    %ebx,%ebx
+    10b5:	48 8b 3c dd 00 00 00 	mov    0x0(,%rbx,8),%rdi
+    10bc:	00 
+    10bd:	be c0 00 40 01       	mov    $0x14000c0,%esi
+    10c2:	e8 00 00 00 00       	callq  10c7 <myuvc_streamon+0x577>
+    10c7:	85 c0                	test   %eax,%eax
+    10c9:	41 89 c4             	mov    %eax,%r12d
+    10cc:	0f 88 e5 00 00 00    	js     11b7 <myuvc_streamon+0x667>
+    10d2:	48 83 c3 01          	add    $0x1,%rbx
+    10d6:	48 83 fb 05          	cmp    $0x5,%rbx
+    10da:	75 d9                	jne    10b5 <myuvc_streamon+0x565>
+    10dc:	31 c0                	xor    %eax,%eax
+    10de:	48 8d 65 e0          	lea    -0x20(%rbp),%rsp
+    10e2:	5b                   	pop    %rbx
+    10e3:	41 5c                	pop    %r12
+    10e5:	41 5d                	pop    %r13
+    10e7:	41 5e                	pop    %r14
+    10e9:	5d                   	pop    %rbp
+    10ea:	c3                   	retq   
+    10eb:	0f b7 03             	movzwl (%rbx),%eax
+    10ee:	c6 05 00 00 00 00 00 	movb   $0x0,0x0(%rip)        # 10f5 <myuvc_streamon+0x5a5>
+    10f5:	c6 05 00 00 00 00 00 	movb   $0x0,0x0(%rip)        # 10fc <myuvc_streamon+0x5ac>
+    10fc:	c6 05 00 00 00 00 00 	movb   $0x0,0x0(%rip)        # 1103 <myuvc_streamon+0x5b3>
+    1103:	c6 05 00 00 00 00 00 	movb   $0x0,0x0(%rip)        # 110a <myuvc_streamon+0x5ba>
+    110a:	66 89 05 00 00 00 00 	mov    %ax,0x0(%rip)        # 1111 <myuvc_streamon+0x5c1>
+    1111:	0f b6 43 02          	movzbl 0x2(%rbx),%eax
+    1115:	88 05 00 00 00 00    	mov    %al,0x0(%rip)        # 111b <myuvc_streamon+0x5cb>
+    111b:	0f b6 43 03          	movzbl 0x3(%rbx),%eax
+    111f:	88 05 00 00 00 00    	mov    %al,0x0(%rip)        # 1125 <myuvc_streamon+0x5d5>
+    1125:	8b 43 04             	mov    0x4(%rbx),%eax
+    1128:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 112e <myuvc_streamon+0x5de>
+    112e:	0f b7 43 08          	movzwl 0x8(%rbx),%eax
+    1132:	66 89 05 00 00 00 00 	mov    %ax,0x0(%rip)        # 1139 <myuvc_streamon+0x5e9>
+    1139:	0f b7 43 0a          	movzwl 0xa(%rbx),%eax
+    113d:	66 89 05 00 00 00 00 	mov    %ax,0x0(%rip)        # 1144 <myuvc_streamon+0x5f4>
+    1144:	0f b7 43 0c          	movzwl 0xc(%rbx),%eax
+    1148:	66 89 05 00 00 00 00 	mov    %ax,0x0(%rip)        # 114f <myuvc_streamon+0x5ff>
+    114f:	0f b7 43 0e          	movzwl 0xe(%rbx),%eax
+    1153:	66 89 05 00 00 00 00 	mov    %ax,0x0(%rip)        # 115a <myuvc_streamon+0x60a>
+    115a:	0f b7 43 10          	movzwl 0x10(%rbx),%eax
+    115e:	66 89 05 00 00 00 00 	mov    %ax,0x0(%rip)        # 1165 <myuvc_streamon+0x615>
+    1165:	8b 43 12             	mov    0x12(%rbx),%eax
+    1168:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 116e <myuvc_streamon+0x61e>
+    116e:	8b 43 16             	mov    0x16(%rbx),%eax
+    1171:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 1177 <myuvc_streamon+0x627>
+    1177:	e9 c5 fb ff ff       	jmpq   d41 <myuvc_streamon+0x1f1>
+    117c:	e8 bf ee ff ff       	callq  40 <myuvc_uninit_urbs>
+    1181:	be f4 ff ff ff       	mov    $0xfffffff4,%esi
+    1186:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    118d:	e8 00 00 00 00       	callq  1192 <myuvc_streamon+0x642>
+    1192:	e9 1c ff ff ff       	jmpq   10b3 <myuvc_streamon+0x563>
+    1197:	be f4 ff ff ff       	mov    $0xfffffff4,%esi
+    119c:	e9 b4 fb ff ff       	jmpq   d55 <myuvc_streamon+0x205>
+    11a1:	41 bc f4 ff ff ff    	mov    $0xfffffff4,%r12d
+    11a7:	e9 a9 fc ff ff       	jmpq   e55 <myuvc_streamon+0x305>
+    11ac:	41 bc f4 ff ff ff    	mov    $0xfffffff4,%r12d
+    11b2:	e9 ff fa ff ff       	jmpq   cb6 <myuvc_streamon+0x166>
+    11b7:	89 c2                	mov    %eax,%edx
+    11b9:	89 de                	mov    %ebx,%esi
+    11bb:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    11c2:	e8 00 00 00 00       	callq  11c7 <myuvc_streamon+0x677>
+    11c7:	e8 74 ee ff ff       	callq  40 <myuvc_uninit_urbs>
+    11cc:	44 89 e0             	mov    %r12d,%eax
+    11cf:	e9 0a ff ff ff       	jmpq   10de <myuvc_streamon+0x58e>
+    11d4:	b9 1a 00 00 00       	mov    $0x1a,%ecx
+    11d9:	89 c2                	mov    %eax,%edx
+    11db:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+    11e2:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    11e9:	41 bc fb ff ff ff    	mov    $0xfffffffb,%r12d
+    11ef:	e8 00 00 00 00       	callq  11f4 <myuvc_streamon+0x6a4>
+    11f4:	e9 54 fc ff ff       	jmpq   e4d <myuvc_streamon+0x2fd>
+    11f9:	b9 1a 00 00 00       	mov    $0x1a,%ecx
+    11fe:	89 c2                	mov    %eax,%edx
+    1200:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+    1207:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    120e:	41 bc fb ff ff ff    	mov    $0xfffffffb,%r12d
+    1214:	e8 00 00 00 00       	callq  1219 <myuvc_streamon+0x6c9>
+    1219:	e9 90 fa ff ff       	jmpq   cae <myuvc_streamon+0x15e>
+    121e:	66 90                	xchg   %ax,%ax
+
+0000000000001220 <myuvc_probe>:
+    1220:	e8 00 00 00 00       	callq  1225 <myuvc_probe+0x5>
+    1225:	8b 15 00 00 00 00    	mov    0x0(%rip),%edx        # 122b <myuvc_probe+0xb>
+    122b:	55                   	push   %rbp
+    122c:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+    1233:	48 89 e5             	mov    %rsp,%rbp
+    1236:	41 54                	push   %r12
+    1238:	53                   	push   %rbx
+    1239:	8d 42 01             	lea    0x1(%rdx),%eax
+    123c:	49 89 fc             	mov    %rdi,%r12
+    123f:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    1246:	31 db                	xor    %ebx,%ebx
+    1248:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 124e <myuvc_probe+0x2e>
+    124e:	e8 00 00 00 00       	callq  1253 <myuvc_probe+0x33>
+    1253:	49 8b 44 24 30       	mov    0x30(%r12),%rax
+    1258:	48 2d 98 00 00 00    	sub    $0x98,%rax
+    125e:	83 3d 00 00 00 00 02 	cmpl   $0x2,0x0(%rip)        # 1265 <myuvc_probe+0x45>
+    1265:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 126c <myuvc_probe+0x4c>
+    126c:	74 07                	je     1275 <myuvc_probe+0x55>
+    126e:	89 d8                	mov    %ebx,%eax
+    1270:	5b                   	pop    %rbx
+    1271:	41 5c                	pop    %r12
+    1273:	5d                   	pop    %rbp
+    1274:	c3                   	retq   
+    1275:	49 8b 44 24 08       	mov    0x8(%r12),%rax
+    127a:	0f b6 40 02          	movzbl 0x2(%rax),%eax
+    127e:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 1284 <myuvc_probe+0x64>
+    1284:	e8 00 00 00 00       	callq  1289 <myuvc_probe+0x69>
+    1289:	48 85 c0             	test   %rax,%rax
+    128c:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 1293 <myuvc_probe+0x73>
+    1293:	0f 84 85 00 00 00    	je     131e <myuvc_probe+0xfe>
+    1299:	48 8d b8 c0 04 00 00 	lea    0x4c0(%rax),%rdi
+    12a0:	ba 20 00 00 00       	mov    $0x20,%edx
+    12a5:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+    12ac:	e8 00 00 00 00       	callq  12b1 <myuvc_probe+0x91>
+    12b1:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 12b8 <myuvc_probe+0x98>
+    12b8:	31 f6                	xor    %esi,%esi
+    12ba:	49 c7 c0 00 00 00 00 	mov    $0x0,%r8
+    12c1:	b9 01 00 00 00       	mov    $0x1,%ecx
+    12c6:	ba ff ff ff ff       	mov    $0xffffffff,%edx
+    12cb:	48 c7 87 20 05 00 00 	movq   $0x0,0x520(%rdi)
+    12d2:	00 00 00 00 
+    12d6:	48 c7 87 a8 01 00 00 	movq   $0x0,0x1a8(%rdi)
+    12dd:	00 00 00 00 
+    12e1:	48 c7 87 28 05 00 00 	movq   $0x0,0x528(%rdi)
+    12e8:	00 00 00 00 
+    12ec:	48 c7 87 98 04 00 00 	movq   $0x0,0x498(%rdi)
+    12f3:	00 00 00 00 
+    12f7:	c7 87 b0 01 00 00 00 	movl   $0x4004000,0x1b0(%rdi)
+    12fe:	40 00 04 
+    1301:	e8 00 00 00 00       	callq  1306 <myuvc_probe+0xe6>
+    1306:	85 c0                	test   %eax,%eax
+    1308:	89 c3                	mov    %eax,%ebx
+    130a:	75 28                	jne    1334 <myuvc_probe+0x114>
+    130c:	31 d2                	xor    %edx,%edx
+    130e:	31 f6                	xor    %esi,%esi
+    1310:	31 ff                	xor    %edi,%edi
+    1312:	e8 39 f8 ff ff       	callq  b50 <myuvc_streamon>
+    1317:	89 d8                	mov    %ebx,%eax
+    1319:	5b                   	pop    %rbx
+    131a:	41 5c                	pop    %r12
+    131c:	5d                   	pop    %rbp
+    131d:	c3                   	retq   
+    131e:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    1325:	bb f4 ff ff ff       	mov    $0xfffffff4,%ebx
+    132a:	e8 00 00 00 00       	callq  132f <myuvc_probe+0x10f>
+    132f:	e9 3a ff ff ff       	jmpq   126e <myuvc_probe+0x4e>
+    1334:	89 c6                	mov    %eax,%esi
+    1336:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    133d:	e8 00 00 00 00       	callq  1342 <myuvc_probe+0x122>
+    1342:	e9 27 ff ff ff       	jmpq   126e <myuvc_probe+0x4e>
+    1347:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+    134e:	00 00 
+
+0000000000001350 <init_module>:
+    1350:	e8 00 00 00 00       	callq  1355 <init_module+0x5>
+    1355:	55                   	push   %rbp
+    1356:	48 c7 c2 00 00 00 00 	mov    $0x0,%rdx
+    135d:	48 c7 c6 00 00 00 00 	mov    $0x0,%rsi
+    1364:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    136b:	48 89 e5             	mov    %rsp,%rbp
+    136e:	e8 00 00 00 00       	callq  1373 <init_module+0x23>
+    1373:	31 c0                	xor    %eax,%eax
+    1375:	5d                   	pop    %rbp
+    1376:	c3                   	retq   
+    1377:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+    137e:	00 00 
+
+0000000000001380 <cleanup_module>:
+    1380:	e8 00 00 00 00       	callq  1385 <cleanup_module+0x5>
+    1385:	55                   	push   %rbp
+    1386:	48 c7 c7 00 00 00 00 	mov    $0x0,%rdi
+    138d:	48 89 e5             	mov    %rsp,%rbp
+    1390:	e8 00 00 00 00       	callq  1395 <cleanup_module+0x15>
+    1395:	5d                   	pop    %rbp
+    1396:	c3                   	retq   
+
+Disassembly of section .rodata.str1.1:
+
+0000000000000000 <.rodata.str1.1>:
+   0:	25 73 20 0a 00       	and    $0xa2073,%eax
+   5:	46 72 61             	rex.RX jb 69 <.rodata.str1.1+0x69>
+   8:	6d                   	insl   (%dx),%es:(%rdi)
+   9:	65 20 63 6f          	and    %ah,%gs:0x6f(%rbx)
+   d:	6d                   	insl   (%dx),%es:(%rdi)
+   e:	70 6c                	jo     7c <.rodata.str1.1+0x7c>
+  10:	65 74 65             	gs je  78 <.rodata.str1.1+0x78>
+  13:	20 28                	and    %ch,(%rax)
+  15:	45                   	rex.RB
+  16:	4f                   	rex.WRXB
+  17:	46 20 66 6f          	rex.RX and %r12b,0x6f(%rsi)
+  1b:	75 6e                	jne    8b <.rodata.str1.1+0x8b>
+  1d:	64 29 2e             	sub    %ebp,%fs:(%rsi)
+  20:	0a 00                	or     (%rax),%al
+  22:	45                   	rex.RB
+  23:	4f                   	rex.WRXB
+  24:	46 20 69 6e          	rex.RX and %r13b,0x6e(%rcx)
+  28:	20 65 6d             	and    %ah,0x6d(%rbp)
+  2b:	70 74                	jo     a1 <.rodata.str1.1+0xa1>
+  2d:	79 20                	jns    4f <.rodata.str1.1+0x4f>
+  2f:	70 61                	jo     92 <.rodata.str1.1+0x92>
+  31:	79 6c                	jns    9f <.rodata.str1.1+0x9f>
+  33:	6f                   	outsl  %ds:(%rsi),(%dx)
+  34:	61                   	(bad)  
+  35:	64 2e 0a 00          	fs or  %cs:(%rax),%al
+  39:	26 6d                	es insl (%dx),%es:(%rdi)
+  3b:	79 75                	jns    b2 <.rodata.str1.1+0xb2>
+  3d:	76 63                	jbe    a2 <.rodata.str1.1+0xa2>
+  3f:	5f                   	pop    %rdi
+  40:	71 75                	jno    b7 <__UNIQUE_ID_vermagic27+0xe>
+  42:	65 75 65             	gs jne aa <.rodata.str1.1+0xaa>
+  45:	2e 62                	cs (bad) 
+  47:	75 66                	jne    af <.rodata.str1.1+0xaf>
+  49:	66 65 72 5b          	data16 gs jb a8 <.rodata.str1.1+0xa8>
+  4d:	69 5d 2e 77 61 69 74 	imul   $0x74696177,0x2e(%rbp),%ebx
+  54:	00 6d 79             	add    %ch,0x79(%rbp)
+  57:	75 76                	jne    cf <__func__.41261+0xf>
+  59:	63 00                	movslq (%rax),%eax
+  5b:	70 6c                	jo     c9 <__func__.41261+0x9>
+  5d:	61                   	(bad)  
+  5e:	74 66                	je     c6 <__func__.41261+0x6>
+  60:	6f                   	outsl  %ds:(%rsi),(%dx)
+  61:	72 6d                	jb     d0 <cnt.41459>
+  63:	3a 25 73 00 25 73    	cmp    0x73250073(%rip),%ah        # 732500dc <myuvc_vdev+0x7324e7fc>
+  69:	20 63 6e             	and    %ah,0x6e(%rbx)
+  6c:	74 3d                	je     ab <.rodata.str1.1+0xab>
+  6e:	25 64 0a 00 25       	and    $0x25000a64,%eax
+  73:	73 0a                	jae    7f <.rodata.str1.1+0x7f>
+  75:	00 70 72             	add    %dh,0x72(%rax)
+  78:	6f                   	outsl  %ds:(%rsi),(%dx)
+  79:	62                   	(bad)  
+  7a:	65 00 63 6f          	add    %ah,%gs:0x6f(%rbx)
+  7e:	6d                   	insl   (%dx),%es:(%rdi)
+  7f:	6d                   	insl   (%dx),%es:(%rdi)
+  80:	69 74 00 76 69 64 65 	imul   $0x6f656469,0x76(%rax,%rax,1),%esi
+  87:	6f 
+  88:	20 70 61             	and    %dh,0x61(%rax)
+  8b:	72 61                	jb     ee <__func__.41273+0xe>
+  8d:	6d                   	insl   (%dx),%es:(%rdi)
+  8e:	73 3a                	jae    ca <__func__.41261+0xa>
+  90:	0a 00                	or     (%rax),%al
+  92:	66 61                	data16 (bad) 
+  94:	69 6c 65 64 20 74 6f 	imul   $0x206f7420,0x64(%rbp,%riz,2),%ebp
+  9b:	20 
+  9c:	61                   	(bad)  
+  9d:	6c                   	insb   (%dx),%es:(%rdi)
+  9e:	6c                   	insb   (%dx),%es:(%rdi)
+  9f:	6f                   	outsl  %ds:(%rsi),(%dx)
+  a0:	63 20                	movslq (%rax),%esp
+  a2:	76 69                	jbe    10d <myuvc_streaming_intf+0x9>
+  a4:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  a7:	20 64 65 76          	and    %ah,0x76(%rbp,%riz,2)
+  ab:	69 63 65 00 6d 79 5f 	imul   $0x5f796d00,0x65(%rbx),%esp
+  b2:	75 76                	jne    12a <__func__.41302+0x2>
+  b4:	63 00                	movslq (%rax),%eax
+
+Disassembly of section .rodata.str1.8:
+
+0000000000000000 <.rodata.str1.8>:
+   0:	4e 6f                	rex.WRX outsl %ds:(%rsi),(%dx)
+   2:	6e                   	outsb  %ds:(%rsi),(%dx)
+   3:	2d 7a 65 72 6f       	sub    $0x6f72657a,%eax
+   8:	20 73 74             	and    %dh,0x74(%rbx)
+   b:	61                   	(bad)  
+   c:	74 75                	je     83 <.rodata.str1.8+0x83>
+   e:	73 20                	jae    30 <.rodata.str1.8+0x30>
+  10:	28 25 64 29 20 69    	sub    %ah,0x69202964(%rip)        # 6920297a <myuvc_vdev+0x6920109a>
+  16:	6e                   	outsb  %ds:(%rsi),(%dx)
+  17:	20 76 69             	and    %dh,0x69(%rsi)
+  1a:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  1d:	20 63 6f             	and    %ah,0x6f(%rbx)
+  20:	6d                   	insl   (%dx),%es:(%rdi)
+  21:	70 6c                	jo     8f <.rodata.str1.8+0x8f>
+  23:	65 74 69             	gs je  8f <.rodata.str1.8+0x8f>
+  26:	6f                   	outsl  %ds:(%rsi),(%dx)
+  27:	6e                   	outsb  %ds:(%rsi),(%dx)
+  28:	20 68 61             	and    %ch,0x61(%rax)
+  2b:	6e                   	outsb  %ds:(%rsi),(%dx)
+  2c:	64 6c                	fs insb (%dx),%es:(%rdi)
+  2e:	65 72 2e             	gs jb  5f <.rodata.str1.8+0x5f>
+  31:	0a 00                	or     (%rax),%al
+  33:	00 00                	add    %al,(%rax)
+  35:	00 00                	add    %al,(%rax)
+  37:	00 55 53             	add    %dl,0x53(%rbp)
+  3a:	42 20 69 73          	rex.X and %bpl,0x73(%rcx)
+  3e:	6f                   	outsl  %ds:(%rsi),(%dx)
+  3f:	63 68 72             	movslq 0x72(%rax),%ebp
+  42:	6f                   	outsl  %ds:(%rsi),(%dx)
+  43:	6e                   	outsb  %ds:(%rsi),(%dx)
+  44:	6f                   	outsl  %ds:(%rsi),(%dx)
+  45:	75 73                	jne    ba <.rodata.str1.8+0xba>
+  47:	20 66 72             	and    %ah,0x72(%rsi)
+  4a:	61                   	(bad)  
+  4b:	6d                   	insl   (%dx),%es:(%rdi)
+  4c:	65 20 6c 6f 73       	and    %ch,%gs:0x73(%rdi,%rbp,2)
+  51:	74 20                	je     73 <.rodata.str1.8+0x73>
+  53:	28 25 64 29 2e 0a    	sub    %ah,0xa2e2964(%rip)        # a2e29bd <myuvc_vdev+0xa2e10dd>
+  59:	00 00                	add    %al,(%rax)
+  5b:	00 00                	add    %al,(%rax)
+  5d:	00 00                	add    %al,(%rax)
+  5f:	00 44 72 6f          	add    %al,0x6f(%rdx,%rsi,2)
+  63:	70 70                	jo     d5 <.rodata.str1.8+0xd5>
+  65:	69 6e 67 20 70 61 79 	imul   $0x79617020,0x67(%rsi),%ebp
+  6c:	6c                   	insb   (%dx),%es:(%rdi)
+  6d:	6f                   	outsl  %ds:(%rsi),(%dx)
+  6e:	61                   	(bad)  
+  6f:	64 20 28             	and    %ch,%fs:(%rax)
+  72:	65 72 72             	gs jb  e7 <.rodata.str1.8+0xe7>
+  75:	6f                   	outsl  %ds:(%rsi),(%dx)
+  76:	72 20                	jb     98 <.rodata.str1.8+0x98>
+  78:	62                   	(bad)  
+  79:	69 74 20 73 65 74 29 	imul   $0x2e297465,0x73(%rax,%riz,1),%esi
+  80:	2e 
+  81:	0a 00                	or     (%rax),%al
+  83:	00 00                	add    %al,(%rax)
+  85:	00 00                	add    %al,(%rax)
+  87:	00 01                	add    %al,(%rcx)
+  89:	33 75 76             	xor    0x76(%rbp),%esi
+  8c:	63 76 69             	movslq 0x69(%rsi),%esi
+  8f:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  92:	3a 20                	cmp    (%rax),%ah
+  94:	46 61                	rex.RX (bad) 
+  96:	69 6c 65 64 20 74 6f 	imul   $0x206f7420,0x64(%rbp,%riz,2),%ebp
+  9d:	20 
+  9e:	72 65                	jb     105 <.rodata.str1.8+0x105>
+  a0:	73 75                	jae    117 <.rodata.str1.8+0x117>
+  a2:	62                   	(bad)  
+  a3:	6d                   	insl   (%dx),%es:(%rdi)
+  a4:	69 74 20 76 69 64 65 	imul   $0x6f656469,0x76(%rax,%riz,1),%esi
+  ab:	6f 
+  ac:	20 55 52             	and    %dl,0x52(%rbp)
+  af:	42 20 28             	rex.X and %bpl,(%rax)
+  b2:	25 64 29 2e 0a       	and    $0xa2e2964,%eax
+  b7:	00 01                	add    %al,(%rcx)
+  b9:	33 75 76             	xor    0x76(%rbp),%esi
+  bc:	63 76 69             	movslq 0x69(%rsi),%esi
+  bf:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  c2:	3a 20                	cmp    (%rax),%ah
+  c4:	46 61                	rex.RX (bad) 
+  c6:	69 6c 65 64 20 74 6f 	imul   $0x206f7420,0x64(%rbp,%riz,2),%ebp
+  cd:	20 
+  ce:	73 65                	jae    135 <.rodata.str1.8+0x135>
+  d0:	74 20                	je     f2 <.rodata.str1.8+0xf2>
+  d2:	55                   	push   %rbp
+  d3:	56                   	push   %rsi
+  d4:	43 20 25 73 20 63 6f 	rex.XB and %spl,0x6f632073(%rip)        # 6f63214e <myuvc_vdev+0x6f63086e>
+  db:	6e                   	outsb  %ds:(%rsi),(%dx)
+  dc:	74 72                	je     150 <.rodata.str1.8+0x150>
+  de:	6f                   	outsl  %ds:(%rsi),(%dx)
+  df:	6c                   	insb   (%dx),%es:(%rdi)
+  e0:	20 3a                	and    %bh,(%rdx)
+  e2:	20 25 64 20 28 65    	and    %ah,0x65282064(%rip)        # 6528214c <myuvc_vdev+0x6528086c>
+  e8:	78 70                	js     15a <.rodata.str1.8+0x15a>
+  ea:	2e 20 25 75 29 2e 0a 	and    %ah,%cs:0xa2e2975(%rip)        # a2e2a66 <myuvc_vdev+0xa2e1186>
+  f1:	00 00                	add    %al,(%rax)
+  f3:	00 00                	add    %al,(%rax)
+  f5:	00 00                	add    %al,(%rax)
+  f7:	00 6d 79             	add    %ch,0x79(%rbp)
+  fa:	75 76                	jne    172 <.rodata.str1.8+0x172>
+  fc:	63 5f 74             	movslq 0x74(%rdi),%ebx
+  ff:	72 79                	jb     17a <.rodata.str1.8+0x17a>
+ 101:	5f                   	pop    %rdi
+ 102:	73 74                	jae    178 <.rodata.str1.8+0x178>
+ 104:	72 65                	jb     16b <.rodata.str1.8+0x16b>
+ 106:	61                   	(bad)  
+ 107:	6d                   	insl   (%dx),%es:(%rdi)
+ 108:	69 6e 67 5f 70 61 72 	imul   $0x7261705f,0x67(%rsi),%ebp
+ 10f:	61                   	(bad)  
+ 110:	6d                   	insl   (%dx),%es:(%rdi)
+ 111:	73 20                	jae    133 <.rodata.str1.8+0x133>
+ 113:	72 65                	jb     17a <.rodata.str1.8+0x17a>
+ 115:	74 20                	je     137 <.rodata.str1.8+0x137>
+ 117:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 11c:	00 00                	add    %al,(%rax)
+ 11e:	00 00                	add    %al,(%rax)
+ 120:	6d                   	insl   (%dx),%es:(%rdi)
+ 121:	79 75                	jns    198 <.rodata.str1.8+0x198>
+ 123:	76 63                	jbe    188 <.rodata.str1.8+0x188>
+ 125:	5f                   	pop    %rdi
+ 126:	67 65 74 5f          	addr32 gs je 189 <.rodata.str1.8+0x189>
+ 12a:	73 74                	jae    1a0 <.rodata.str1.8+0x1a0>
+ 12c:	72 65                	jb     193 <.rodata.str1.8+0x193>
+ 12e:	61                   	(bad)  
+ 12f:	6d                   	insl   (%dx),%es:(%rdi)
+ 130:	69 6e 67 5f 70 61 72 	imul   $0x7261705f,0x67(%rsi),%ebp
+ 137:	61                   	(bad)  
+ 138:	6d                   	insl   (%dx),%es:(%rdi)
+ 139:	73 20                	jae    15b <.rodata.str1.8+0x15b>
+ 13b:	72 65                	jb     1a2 <.rodata.str1.8+0x1a2>
+ 13d:	74 20                	je     15f <.rodata.str1.8+0x15f>
+ 13f:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 144:	00 00                	add    %al,(%rax)
+ 146:	00 00                	add    %al,(%rax)
+ 148:	6d                   	insl   (%dx),%es:(%rdi)
+ 149:	79 75                	jns    1c0 <.rodata.str1.8+0x1c0>
+ 14b:	76 63                	jbe    1b0 <.rodata.str1.8+0x1b0>
+ 14d:	5f                   	pop    %rdi
+ 14e:	73 65                	jae    1b5 <.rodata.str1.8+0x1b5>
+ 150:	74 5f                	je     1b1 <.rodata.str1.8+0x1b1>
+ 152:	73 74                	jae    1c8 <.rodata.str1.8+0x1c8>
+ 154:	72 65                	jb     1bb <.rodata.str1.8+0x1bb>
+ 156:	61                   	(bad)  
+ 157:	6d                   	insl   (%dx),%es:(%rdi)
+ 158:	69 6e 67 5f 70 61 72 	imul   $0x7261705f,0x67(%rsi),%ebp
+ 15f:	61                   	(bad)  
+ 160:	6d                   	insl   (%dx),%es:(%rdi)
+ 161:	73 20                	jae    183 <.rodata.str1.8+0x183>
+ 163:	72 65                	jb     1ca <.rodata.str1.8+0x1ca>
+ 165:	74 20                	je     187 <.rodata.str1.8+0x187>
+ 167:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 16c:	00 00                	add    %al,(%rax)
+ 16e:	00 00                	add    %al,(%rax)
+ 170:	62                   	(bad)  
+ 171:	6d                   	insl   (%dx),%es:(%rdi)
+ 172:	48 69 6e 74 20 20 20 	imul   $0x20202020,0x74(%rsi),%rbp
+ 179:	20 
+ 17a:	20 20                	and    %ah,(%rax)
+ 17c:	20 20                	and    %ah,(%rax)
+ 17e:	20 20                	and    %ah,(%rax)
+ 180:	20 20                	and    %ah,(%rax)
+ 182:	20 20                	and    %ah,(%rax)
+ 184:	20 20                	and    %ah,(%rax)
+ 186:	20 20                	and    %ah,(%rax)
+ 188:	20 3d 20 25 64 0a    	and    %bh,0xa642520(%rip)        # a6426ae <myuvc_vdev+0xa640dce>
+ 18e:	00 00                	add    %al,(%rax)
+ 190:	62                   	(bad)  
+ 191:	46 6f                	rex.RX outsl %ds:(%rsi),(%dx)
+ 193:	72 6d                	jb     202 <.rodata.str1.8+0x202>
+ 195:	61                   	(bad)  
+ 196:	74 49                	je     1e1 <.rodata.str1.8+0x1e1>
+ 198:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 199:	64 65 78 20          	fs gs js 1bd <.rodata.str1.8+0x1bd>
+ 19d:	20 20                	and    %ah,(%rax)
+ 19f:	20 20                	and    %ah,(%rax)
+ 1a1:	20 20                	and    %ah,(%rax)
+ 1a3:	20 20                	and    %ah,(%rax)
+ 1a5:	20 20                	and    %ah,(%rax)
+ 1a7:	20 20                	and    %ah,(%rax)
+ 1a9:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 1ae:	00 00                	add    %al,(%rax)
+ 1b0:	62                   	(bad)  
+ 1b1:	46 72 61             	rex.RX jb 215 <.rodata.str1.8+0x215>
+ 1b4:	6d                   	insl   (%dx),%es:(%rdi)
+ 1b5:	65 49 6e             	rex.WB outsb %gs:(%rsi),(%dx)
+ 1b8:	64 65 78 20          	fs gs js 1dc <.rodata.str1.8+0x1dc>
+ 1bc:	20 20                	and    %ah,(%rax)
+ 1be:	20 20                	and    %ah,(%rax)
+ 1c0:	20 20                	and    %ah,(%rax)
+ 1c2:	20 20                	and    %ah,(%rax)
+ 1c4:	20 20                	and    %ah,(%rax)
+ 1c6:	20 20                	and    %ah,(%rax)
+ 1c8:	20 3d 20 25 64 0a    	and    %bh,0xa642520(%rip)        # a6426ee <myuvc_vdev+0xa640e0e>
+ 1ce:	00 00                	add    %al,(%rax)
+ 1d0:	64 77 46             	fs ja  219 <.rodata.str1.8+0x219>
+ 1d3:	72 61                	jb     236 <.rodata.str1.8+0x236>
+ 1d5:	6d                   	insl   (%dx),%es:(%rdi)
+ 1d6:	65 49 6e             	rex.WB outsb %gs:(%rsi),(%dx)
+ 1d9:	74 65                	je     240 <.rodata.str1.8+0x240>
+ 1db:	72 76                	jb     253 <.rodata.str1.8+0x253>
+ 1dd:	61                   	(bad)  
+ 1de:	6c                   	insb   (%dx),%es:(%rdi)
+ 1df:	20 20                	and    %ah,(%rax)
+ 1e1:	20 20                	and    %ah,(%rax)
+ 1e3:	20 20                	and    %ah,(%rax)
+ 1e5:	20 20                	and    %ah,(%rax)
+ 1e7:	20 20                	and    %ah,(%rax)
+ 1e9:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 1ee:	00 00                	add    %al,(%rax)
+ 1f0:	77 4b                	ja     23d <.rodata.str1.8+0x23d>
+ 1f2:	65 79 46             	gs jns 23b <.rodata.str1.8+0x23b>
+ 1f5:	72 61                	jb     258 <.rodata.str1.8+0x258>
+ 1f7:	6d                   	insl   (%dx),%es:(%rdi)
+ 1f8:	65 52                	gs push %rdx
+ 1fa:	61                   	(bad)  
+ 1fb:	74 65                	je     262 <.rodata.str1.8+0x262>
+ 1fd:	20 20                	and    %ah,(%rax)
+ 1ff:	20 20                	and    %ah,(%rax)
+ 201:	20 20                	and    %ah,(%rax)
+ 203:	20 20                	and    %ah,(%rax)
+ 205:	20 20                	and    %ah,(%rax)
+ 207:	20 20                	and    %ah,(%rax)
+ 209:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 20e:	00 00                	add    %al,(%rax)
+ 210:	77 50                	ja     262 <.rodata.str1.8+0x262>
+ 212:	46 72 61             	rex.RX jb 276 <.rodata.str1.8+0x276>
+ 215:	6d                   	insl   (%dx),%es:(%rdi)
+ 216:	65 52                	gs push %rdx
+ 218:	61                   	(bad)  
+ 219:	74 65                	je     280 <.rodata.str1.8+0x280>
+ 21b:	20 20                	and    %ah,(%rax)
+ 21d:	20 20                	and    %ah,(%rax)
+ 21f:	20 20                	and    %ah,(%rax)
+ 221:	20 20                	and    %ah,(%rax)
+ 223:	20 20                	and    %ah,(%rax)
+ 225:	20 20                	and    %ah,(%rax)
+ 227:	20 20                	and    %ah,(%rax)
+ 229:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 22e:	00 00                	add    %al,(%rax)
+ 230:	77 43                	ja     275 <.rodata.str1.8+0x275>
+ 232:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 233:	6d                   	insl   (%dx),%es:(%rdi)
+ 234:	70 51                	jo     287 <.rodata.str1.8+0x287>
+ 236:	75 61                	jne    299 <.rodata.str1.8+0x299>
+ 238:	6c                   	insb   (%dx),%es:(%rdi)
+ 239:	69 74 79 20 20 20 20 	imul   $0x20202020,0x20(%rcx,%rdi,2),%esi
+ 240:	20 
+ 241:	20 20                	and    %ah,(%rax)
+ 243:	20 20                	and    %ah,(%rax)
+ 245:	20 20                	and    %ah,(%rax)
+ 247:	20 20                	and    %ah,(%rax)
+ 249:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 24e:	00 00                	add    %al,(%rax)
+ 250:	77 43                	ja     295 <.rodata.str1.8+0x295>
+ 252:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 253:	6d                   	insl   (%dx),%es:(%rdi)
+ 254:	70 57                	jo     2ad <.rodata.str1.8+0x2ad>
+ 256:	69 6e 64 6f 77 53 69 	imul   $0x6953776f,0x64(%rsi),%ebp
+ 25d:	7a 65                	jp     2c4 <.rodata.str1.8+0x2c4>
+ 25f:	20 20                	and    %ah,(%rax)
+ 261:	20 20                	and    %ah,(%rax)
+ 263:	20 20                	and    %ah,(%rax)
+ 265:	20 20                	and    %ah,(%rax)
+ 267:	20 20                	and    %ah,(%rax)
+ 269:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 26e:	00 00                	add    %al,(%rax)
+ 270:	77 44                	ja     2b6 <.rodata.str1.8+0x2b6>
+ 272:	65 6c                	gs insb (%dx),%es:(%rdi)
+ 274:	61                   	(bad)  
+ 275:	79 20                	jns    297 <.rodata.str1.8+0x297>
+ 277:	20 20                	and    %ah,(%rax)
+ 279:	20 20                	and    %ah,(%rax)
+ 27b:	20 20                	and    %ah,(%rax)
+ 27d:	20 20                	and    %ah,(%rax)
+ 27f:	20 20                	and    %ah,(%rax)
+ 281:	20 20                	and    %ah,(%rax)
+ 283:	20 20                	and    %ah,(%rax)
+ 285:	20 20                	and    %ah,(%rax)
+ 287:	20 20                	and    %ah,(%rax)
+ 289:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 28e:	00 00                	add    %al,(%rax)
+ 290:	64 77 4d             	fs ja  2e0 <.rodata.str1.8+0x2e0>
+ 293:	61                   	(bad)  
+ 294:	78 56                	js     2ec <.rodata.str1.8+0x2ec>
+ 296:	69 64 65 6f 46 72 61 	imul   $0x6d617246,0x6f(%rbp,%riz,2),%esp
+ 29d:	6d 
+ 29e:	65 53                	gs push %rbx
+ 2a0:	69 7a 65 20 20 20 20 	imul   $0x20202020,0x65(%rdx),%edi
+ 2a7:	20 20                	and    %ah,(%rax)
+ 2a9:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 2ae:	00 00                	add    %al,(%rax)
+ 2b0:	64 77 4d             	fs ja  300 <.rodata.str1.8+0x300>
+ 2b3:	61                   	(bad)  
+ 2b4:	78 50                	js     306 <.rodata.str1.8+0x306>
+ 2b6:	61                   	(bad)  
+ 2b7:	79 6c                	jns    325 <.rodata.str1.8+0x325>
+ 2b9:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 2ba:	61                   	(bad)  
+ 2bb:	64 54                	fs push %rsp
+ 2bd:	72 61                	jb     320 <.rodata.str1.8+0x320>
+ 2bf:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 2c0:	73 66                	jae    328 <.rodata.str1.8+0x328>
+ 2c2:	65 72 53             	gs jb  318 <.rodata.str1.8+0x318>
+ 2c5:	69 7a 65 20 3d 20 25 	imul   $0x25203d20,0x65(%rdx),%edi
+ 2cc:	64 0a 00             	or     %fs:(%rax),%al
+ 2cf:	00 64 77 43          	add    %ah,0x43(%rdi,%rsi,2)
+ 2d3:	6c                   	insb   (%dx),%es:(%rdi)
+ 2d4:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 2d5:	63 6b 46             	movslq 0x46(%rbx),%ebp
+ 2d8:	72 65                	jb     33f <.rodata.str1.8+0x33f>
+ 2da:	71 75                	jno    351 <.rodata.str1.8+0x351>
+ 2dc:	65 6e                	outsb  %gs:(%rsi),(%dx)
+ 2de:	63 79 20             	movslq 0x20(%rcx),%edi
+ 2e1:	20 20                	and    %ah,(%rax)
+ 2e3:	20 20                	and    %ah,(%rax)
+ 2e5:	20 20                	and    %ah,(%rax)
+ 2e7:	20 20                	and    %ah,(%rax)
+ 2e9:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 2ee:	00 00                	add    %al,(%rax)
+ 2f0:	62                   	(bad)  
+ 2f1:	6d                   	insl   (%dx),%es:(%rdi)
+ 2f2:	46 72 61             	rex.RX jb 356 <.rodata.str1.8+0x356>
+ 2f5:	6d                   	insl   (%dx),%es:(%rdi)
+ 2f6:	69 6e 67 49 6e 66 6f 	imul   $0x6f666e49,0x67(%rsi),%ebp
+ 2fd:	20 20                	and    %ah,(%rax)
+ 2ff:	20 20                	and    %ah,(%rax)
+ 301:	20 20                	and    %ah,(%rax)
+ 303:	20 20                	and    %ah,(%rax)
+ 305:	20 20                	and    %ah,(%rax)
+ 307:	20 20                	and    %ah,(%rax)
+ 309:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 30e:	00 00                	add    %al,(%rax)
+ 310:	62                   	(bad)  
+ 311:	50                   	push   %rax
+ 312:	72 65                	jb     379 <.rodata.str1.8+0x379>
+ 314:	66 65 72 65          	data16 gs jb 37d <.rodata.str1.8+0x37d>
+ 318:	64 56                	fs push %rsi
+ 31a:	65 72 73             	gs jb  390 <.rodata.str1.8+0x390>
+ 31d:	69 6f 6e 20 20 20 20 	imul   $0x20202020,0x6e(%rdi),%ebp
+ 324:	20 20                	and    %ah,(%rax)
+ 326:	20 20                	and    %ah,(%rax)
+ 328:	20 3d 20 25 64 0a    	and    %bh,0xa642520(%rip)        # a64284e <myuvc_vdev+0xa640f6e>
+ 32e:	00 00                	add    %al,(%rax)
+ 330:	62                   	(bad)  
+ 331:	4d 69 6e 56 65 72 73 	imul   $0x69737265,0x56(%r14),%r13
+ 338:	69 
+ 339:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 33a:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 33b:	20 20                	and    %ah,(%rax)
+ 33d:	20 20                	and    %ah,(%rax)
+ 33f:	20 20                	and    %ah,(%rax)
+ 341:	20 20                	and    %ah,(%rax)
+ 343:	20 20                	and    %ah,(%rax)
+ 345:	20 20                	and    %ah,(%rax)
+ 347:	20 20                	and    %ah,(%rax)
+ 349:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 34e:	00 00                	add    %al,(%rax)
+ 350:	6d                   	insl   (%dx),%es:(%rdi)
+ 351:	79 75                	jns    3c8 <myuvc_dqbuf+0x38>
+ 353:	76 63                	jbe    3b8 <.rodata.str1.8+0x3b8>
+ 355:	5f                   	pop    %rdi
+ 356:	61                   	(bad)  
+ 357:	6c                   	insb   (%dx),%es:(%rdi)
+ 358:	6c                   	insb   (%dx),%es:(%rdi)
+ 359:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 35a:	63 5f 69             	movslq 0x69(%rdi),%ebx
+ 35d:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 35e:	69 74 5f 75 72 62 73 	imul   $0x20736272,0x75(%rdi,%rbx,2),%esi
+ 365:	20 
+ 366:	65 72 72             	gs jb  3db <myuvc_dqbuf+0x4b>
+ 369:	20 3a                	and    %bh,(%rdx)
+ 36b:	20 72 65             	and    %dh,0x65(%rdx)
+ 36e:	74 20                	je     390 <.rodata.str1.8+0x390>
+ 370:	3d 20 25 64 0a       	cmp    $0xa642520,%eax
+ 375:	00 00                	add    %al,(%rax)
+ 377:	00 46 61             	add    %al,0x61(%rsi)
+ 37a:	69 6c 65 64 20 74 6f 	imul   $0x206f7420,0x64(%rbp,%riz,2),%ebp
+ 381:	20 
+ 382:	73 75                	jae    3f9 <myuvc_dqbuf+0x69>
+ 384:	62                   	(bad)  
+ 385:	6d                   	insl   (%dx),%es:(%rdi)
+ 386:	69 74 20 55 52 42 20 	imul   $0x25204252,0x55(%rax,%riz,1),%esi
+ 38d:	25 
+ 38e:	75 20                	jne    3b0 <.rodata.str1.8+0x3b0>
+ 390:	28 25 64 29 2e 0a    	sub    %ah,0xa2e2964(%rip)        # a2e2cfa <myuvc_vdev+0xa2e141a>
+ 396:	00 00                	add    %al,(%rax)
+ 398:	76 69                	jbe    403 <myuvc_dqbuf+0x73>
+ 39a:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+ 39d:	5f                   	pop    %rdi
+ 39e:	72 65                	jb     405 <myuvc_dqbuf+0x75>
+ 3a0:	67 69 73 74 65 72 5f 	imul   $0x645f7265,0x74(%ebx),%esi
+ 3a7:	64 
+ 3a8:	65 76 69             	gs jbe 414 <myuvc_dqbuf+0x84>
+ 3ab:	63 65 20             	movslq 0x20(%rbp),%esp
+ 3ae:	66 61                	data16 (bad) 
+ 3b0:	69 6c 65 64 20 3f 3f 	imul   $0x3f3f3f20,0x64(%rbp,%riz,2),%ebp
+ 3b7:	3f 
+ 3b8:	20 72 65             	and    %dh,0x65(%rdx)
+ 3bb:	74 3d                	je     3fa <myuvc_dqbuf+0x6a>
+ 3bd:	25                   	.byte 0x25
+ 3be:	64                   	fs
+	...
+
+Disassembly of section .rodata:
+
+0000000000000000 <__func__.41460>:
+   0:	6d                   	insl   (%dx),%es:(%rdi)
+   1:	79 75                	jns    78 <__func__.41450>
+   3:	76 63                	jbe    68 <__func__.41242>
+   5:	5f                   	pop    %rdi
+   6:	64 69 73 63 6f 6e 6e 	imul   $0x656e6e6f,%fs:0x63(%rbx),%esi
+   d:	65 
+   e:	63 74 00 00          	movslq 0x0(%rax,%rax,1),%esi
+	...
+
+0000000000000020 <__func__.41443>:
+  20:	6d                   	insl   (%dx),%es:(%rdi)
+  21:	79 75                	jns    98 <__func__.41249+0x10>
+  23:	76 63                	jbe    88 <__func__.41249>
+  25:	5f                   	pop    %rdi
+  26:	64 65 76 5f          	fs gs jbe 89 <__func__.41249+0x1>
+  2a:	72 65                	jb     91 <__func__.41249+0x9>
+  2c:	6c                   	insb   (%dx),%es:(%rdi)
+  2d:	65 61                	gs (bad) 
+  2f:	73 65                	jae    96 <__func__.41249+0xe>
+  31:	00 00                	add    %al,(%rax)
+  33:	00 00                	add    %al,(%rax)
+  35:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000038 <__func__.41230>:
+  38:	6d                   	insl   (%dx),%es:(%rdi)
+  39:	79 75                	jns    b0 <__func__.41255+0x10>
+  3b:	76 63                	jbe    a0 <__func__.41255>
+  3d:	5f                   	pop    %rdi
+  3e:	70 6f                	jo     af <__func__.41255+0xf>
+  40:	6c                   	insb   (%dx),%es:(%rdi)
+  41:	6c                   	insb   (%dx),%es:(%rdi)
+  42:	00 00                	add    %al,(%rax)
+  44:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000048 <__func__.41211>:
+  48:	6d                   	insl   (%dx),%es:(%rdi)
+  49:	79 75                	jns    c0 <__func__.41261>
+  4b:	76 63                	jbe    b0 <__func__.41255+0x10>
+  4d:	5f                   	pop    %rdi
+  4e:	6d                   	insl   (%dx),%es:(%rdi)
+  4f:	6d                   	insl   (%dx),%es:(%rdi)
+  50:	61                   	(bad)  
+  51:	70 00                	jo     53 <__func__.41211+0xb>
+  53:	00 00                	add    %al,(%rax)
+  55:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000058 <__func__.41197>:
+  58:	6d                   	insl   (%dx),%es:(%rdi)
+  59:	79 75                	jns    d0 <__func__.41261+0x10>
+  5b:	76 63                	jbe    c0 <__func__.41261>
+  5d:	5f                   	pop    %rdi
+  5e:	6f                   	outsl  %ds:(%rsi),(%dx)
+  5f:	70 65                	jo     c6 <__func__.41261+0x6>
+  61:	6e                   	outsb  %ds:(%rsi),(%dx)
+  62:	00 00                	add    %al,(%rax)
+  64:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000068 <__func__.41242>:
+  68:	6d                   	insl   (%dx),%es:(%rdi)
+  69:	79 75                	jns    e0 <__func__.41273>
+  6b:	76 63                	jbe    d0 <__func__.41261+0x10>
+  6d:	5f                   	pop    %rdi
+  6e:	63 6c 6f 73          	movslq 0x73(%rdi,%rbp,2),%ebp
+  72:	65 00 00             	add    %al,%gs:(%rax)
+  75:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000078 <__func__.41450>:
+  78:	6d                   	insl   (%dx),%es:(%rdi)
+  79:	79 75                	jns    f0 <__func__.41273+0x10>
+  7b:	76 63                	jbe    e0 <__func__.41273>
+  7d:	5f                   	pop    %rdi
+  7e:	70 72                	jo     f2 <__func__.41273+0x12>
+  80:	6f                   	outsl  %ds:(%rsi),(%dx)
+  81:	62                   	(bad)  
+  82:	65 00 00             	add    %al,%gs:(%rax)
+  85:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000088 <__func__.41249>:
+  88:	6d                   	insl   (%dx),%es:(%rdi)
+  89:	79 75                	jns    100 <__func__.41267>
+  8b:	76 63                	jbe    f0 <__func__.41273+0x10>
+  8d:	5f                   	pop    %rdi
+  8e:	71 75                	jno    105 <__func__.41267+0x5>
+  90:	65 72 79             	gs jb  10c <__func__.41267+0xc>
+  93:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+00000000000000a0 <__func__.41255>:
+  a0:	6d                   	insl   (%dx),%es:(%rdi)
+  a1:	79 75                	jns    118 <__func__.41283>
+  a3:	76 63                	jbe    108 <__func__.41267+0x8>
+  a5:	5f                   	pop    %rdi
+  a6:	65 6e                	outsb  %gs:(%rsi),(%dx)
+  a8:	75 6d                	jne    117 <__func__.41267+0x17>
+  aa:	5f                   	pop    %rdi
+  ab:	66 6d                	insw   (%dx),%es:(%rdi)
+  ad:	74 5f                	je     10e <__func__.41267+0xe>
+  af:	76 69                	jbe    11a <__func__.41283+0x2>
+  b1:	64 5f                	fs pop %rdi
+  b3:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+00000000000000c0 <__func__.41261>:
+  c0:	6d                   	insl   (%dx),%es:(%rdi)
+  c1:	79 75                	jns    138 <__func__.41316>
+  c3:	76 63                	jbe    128 <__func__.41302>
+  c5:	5f                   	pop    %rdi
+  c6:	67 5f                	addr32 pop %rdi
+  c8:	66 6d                	insw   (%dx),%es:(%rdi)
+  ca:	74 5f                	je     12b <__func__.41302+0x3>
+  cc:	76 69                	jbe    137 <__func__.41302+0xf>
+  ce:	64 5f                	fs pop %rdi
+  d0:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+00000000000000e0 <__func__.41273>:
+  e0:	6d                   	insl   (%dx),%es:(%rdi)
+  e1:	79 75                	jns    158 <__func__.41351+0x8>
+  e3:	76 63                	jbe    148 <__func__.41316+0x10>
+  e5:	5f                   	pop    %rdi
+  e6:	73 5f                	jae    147 <__func__.41316+0xf>
+  e8:	66 6d                	insw   (%dx),%es:(%rdi)
+  ea:	74 5f                	je     14b <__func__.41316+0x13>
+  ec:	76 69                	jbe    157 <__func__.41351+0x7>
+  ee:	64 5f                	fs pop %rdi
+  f0:	63 61 70             	movslq 0x70(%rcx),%esp
+	...
+
+0000000000000100 <__func__.41267>:
+ 100:	6d                   	insl   (%dx),%es:(%rdi)
+ 101:	79 75                	jns    178 <__func__.41360+0x8>
+ 103:	76 63                	jbe    168 <__func__.41351+0x18>
+ 105:	5f                   	pop    %rdi
+ 106:	74 72                	je     17a <__func__.41360+0xa>
+ 108:	79 5f                	jns    169 <__func__.41351+0x19>
+ 10a:	66 6d                	insw   (%dx),%es:(%rdi)
+ 10c:	74 5f                	je     16d <__func__.41351+0x1d>
+ 10e:	76 69                	jbe    179 <__func__.41360+0x9>
+ 110:	64 5f                	fs pop %rdi
+ 112:	63 61 70             	movslq 0x70(%rcx),%esp
+ 115:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000118 <__func__.41283>:
+ 118:	6d                   	insl   (%dx),%es:(%rdi)
+ 119:	79 75                	jns    190 <__func__.41342>
+ 11b:	76 63                	jbe    180 <__func__.41360+0x10>
+ 11d:	5f                   	pop    %rdi
+ 11e:	72 65                	jb     185 <__func__.41360+0x15>
+ 120:	71 62                	jno    184 <__func__.41360+0x14>
+ 122:	75 66                	jne    18a <__func__.41360+0x1a>
+ 124:	73 00                	jae    126 <__func__.41283+0xe>
+	...
+
+0000000000000128 <__func__.41302>:
+ 128:	6d                   	insl   (%dx),%es:(%rdi)
+ 129:	79 75                	jns    1a0 <__func__.41342+0x10>
+ 12b:	76 63                	jbe    190 <__func__.41342>
+ 12d:	5f                   	pop    %rdi
+ 12e:	71 75                	jno    1a5 <__func__.41342+0x15>
+ 130:	65 72 79             	gs jb  1ac <__func__.41342+0x1c>
+ 133:	62                   	(bad)  
+ 134:	75 66                	jne    19c <__func__.41342+0xc>
+	...
+
+0000000000000138 <__func__.41316>:
+ 138:	6d                   	insl   (%dx),%es:(%rdi)
+ 139:	79 75                	jns    1b0 <__func__.41423>
+ 13b:	76 63                	jbe    1a0 <__func__.41342+0x10>
+ 13d:	5f                   	pop    %rdi
+ 13e:	71 62                	jno    1a2 <__func__.41342+0x12>
+ 140:	75 66                	jne    1a8 <__func__.41342+0x18>
+	...
+
+0000000000000150 <__func__.41351>:
+ 150:	6d                   	insl   (%dx),%es:(%rdi)
+ 151:	79 75                	jns    1c8 <uvc_ids+0x8>
+ 153:	76 63                	jbe    1b8 <__func__.41423+0x8>
+ 155:	5f                   	pop    %rdi
+ 156:	73 65                	jae    1bd <__func__.41423+0xd>
+ 158:	74 5f                	je     1b9 <__func__.41423+0x9>
+ 15a:	73 74                	jae    1d0 <uvc_ids+0x10>
+ 15c:	72 65                	jb     1c3 <uvc_ids+0x3>
+ 15e:	61                   	(bad)  
+ 15f:	6d                   	insl   (%dx),%es:(%rdi)
+ 160:	69 6e 67 5f 70 61 72 	imul   $0x7261705f,0x67(%rsi),%ebp
+ 167:	61                   	(bad)  
+ 168:	6d                   	insl   (%dx),%es:(%rdi)
+ 169:	73 00                	jae    16b <__func__.41351+0x1b>
+ 16b:	00 00                	add    %al,(%rax)
+ 16d:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000170 <__func__.41360>:
+ 170:	6d                   	insl   (%dx),%es:(%rdi)
+ 171:	79 75                	jns    1e8 <uvc_ids+0x28>
+ 173:	76 63                	jbe    1d8 <uvc_ids+0x18>
+ 175:	5f                   	pop    %rdi
+ 176:	67 65 74 5f          	addr32 gs je 1d9 <uvc_ids+0x19>
+ 17a:	73 74                	jae    1f0 <uvc_ids+0x30>
+ 17c:	72 65                	jb     1e3 <uvc_ids+0x23>
+ 17e:	61                   	(bad)  
+ 17f:	6d                   	insl   (%dx),%es:(%rdi)
+ 180:	69 6e 67 5f 70 61 72 	imul   $0x7261705f,0x67(%rsi),%ebp
+ 187:	61                   	(bad)  
+ 188:	6d                   	insl   (%dx),%es:(%rdi)
+ 189:	73 00                	jae    18b <__func__.41360+0x1b>
+ 18b:	00 00                	add    %al,(%rax)
+ 18d:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000190 <__func__.41342>:
+ 190:	6d                   	insl   (%dx),%es:(%rdi)
+ 191:	79 75                	jns    208 <uvc_ids+0x48>
+ 193:	76 63                	jbe    1f8 <uvc_ids+0x38>
+ 195:	5f                   	pop    %rdi
+ 196:	74 72                	je     20a <uvc_ids+0x4a>
+ 198:	79 5f                	jns    1f9 <uvc_ids+0x39>
+ 19a:	73 74                	jae    210 <uvc_ids+0x50>
+ 19c:	72 65                	jb     203 <uvc_ids+0x43>
+ 19e:	61                   	(bad)  
+ 19f:	6d                   	insl   (%dx),%es:(%rdi)
+ 1a0:	69 6e 67 5f 70 61 72 	imul   $0x7261705f,0x67(%rsi),%ebp
+ 1a7:	61                   	(bad)  
+ 1a8:	6d                   	insl   (%dx),%es:(%rdi)
+ 1a9:	73 00                	jae    1ab <__func__.41342+0x1b>
+ 1ab:	00 00                	add    %al,(%rax)
+ 1ad:	00 00                	add    %al,(%rax)
+	...
+
+00000000000001b0 <__func__.41423>:
+ 1b0:	6d                   	insl   (%dx),%es:(%rdi)
+ 1b1:	79 75                	jns    228 <myuvc_fops+0x8>
+ 1b3:	76 63                	jbe    218 <uvc_ids+0x58>
+ 1b5:	5f                   	pop    %rdi
+ 1b6:	73 74                	jae    22c <myuvc_fops+0xc>
+ 1b8:	72 65                	jb     21f <uvc_ids+0x5f>
+ 1ba:	61                   	(bad)  
+ 1bb:	6d                   	insl   (%dx),%es:(%rdi)
+ 1bc:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 1bd:	6e                   	outsb  %ds:(%rsi),(%dx)
+	...
+
+00000000000001c0 <uvc_ids>:
+ 1c0:	80 03 00             	addb   $0x0,(%rbx)
+	...
+ 1cb:	00 00                	add    %al,(%rax)
+ 1cd:	0e                   	(bad)  
+ 1ce:	01 00                	add    %eax,(%rax)
+	...
+ 1e0:	80 03 00             	addb   $0x0,(%rbx)
+	...
+ 1eb:	00 00                	add    %al,(%rax)
+ 1ed:	0e                   	(bad)  
+ 1ee:	02 00                	add    (%rax),%al
+	...
+
+0000000000000220 <myuvc_fops>:
+	...
+
+Disassembly of section .modinfo:
+
+0000000000000000 <__UNIQUE_ID_license109>:
+   0:	6c                   	insb   (%dx),%es:(%rdi)
+   1:	69 63 65 6e 73 65 3d 	imul   $0x3d65736e,0x65(%rbx),%esp
+   8:	47 50                	rex.RXB push %r8
+   a:	4c 00 61 75          	rex.WR add %r12b,0x75(%rcx)
+
+000000000000000c <__UNIQUE_ID_author108>:
+   c:	61                   	(bad)  
+   d:	75 74                	jne    83 <__module_depends+0x3>
+   f:	68 6f 72 3d 57       	pushq  $0x573d726f
+  14:	69 6c 6c 20 43 68 65 	imul   $0x6e656843,0x20(%rsp,%rbp,2),%ebp
+  1b:	6e 
+	...
+
+000000000000001d <__UNIQUE_ID_description107>:
+  1d:	64 65 73 63          	fs gs jae 84 <__module_depends+0x4>
+  21:	72 69                	jb     8c <__module_depends+0xc>
+  23:	70 74                	jo     99 <__UNIQUE_ID_retpoline29+0x8>
+  25:	69 6f 6e 3d 56 69 72 	imul   $0x7269563d,0x6e(%rdi),%ebp
+  2c:	74 75                	je     a3 <__UNIQUE_ID_name28+0x6>
+  2e:	61                   	(bad)  
+  2f:	6c                   	insb   (%dx),%es:(%rdi)
+  30:	20 56 69             	and    %dl,0x69(%rsi)
+  33:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  36:	20 54 65 73          	and    %dl,0x73(%rbp,%riz,2)
+  3a:	74 20                	je     5c <__UNIQUE_ID_srcversion30+0xc>
+  3c:	44 72 69             	rex.R jb a8 <__UNIQUE_ID_name28+0xb>
+  3f:	76 65                	jbe    a6 <__UNIQUE_ID_name28+0x9>
+  41:	72 00                	jb     43 <__UNIQUE_ID_description107+0x26>
+	...
+
+0000000000000050 <__UNIQUE_ID_srcversion30>:
+  50:	73 72                	jae    c4 <__UNIQUE_ID_vermagic27+0x1b>
+  52:	63 76 65             	movslq 0x65(%rsi),%esi
+  55:	72 73                	jb     ca <__UNIQUE_ID_vermagic27+0x21>
+  57:	69 6f 6e 3d 39 38 39 	imul   $0x3938393d,0x6e(%rdi),%ebp
+  5e:	41 30 38             	xor    %dil,(%r8)
+  61:	39 33                	cmp    %esi,(%rbx)
+  63:	45 31 30             	xor    %r14d,(%r8)
+  66:	38 44 39 45          	cmp    %al,0x45(%rcx,%rdi,1)
+  6a:	41                   	rex.B
+  6b:	36 31 38             	xor    %edi,%ss:(%rax)
+  6e:	42                   	rex.X
+  6f:	45 33 43 00          	xor    0x0(%r11),%r8d
+	...
+
+0000000000000080 <__module_depends>:
+  80:	64 65 70 65          	fs gs jo e9 <__func__.41273+0x9>
+  84:	6e                   	outsb  %ds:(%rsi),(%dx)
+  85:	64 73 3d             	fs jae c5 <__UNIQUE_ID_vermagic27+0x1c>
+  88:	76 69                	jbe    f3 <myuvc_qbuf+0x3>
+  8a:	64 65 6f             	fs outsl %gs:(%rsi),(%dx)
+  8d:	64 65 76 00          	fs gs jbe 91 <__UNIQUE_ID_retpoline29>
+
+0000000000000091 <__UNIQUE_ID_retpoline29>:
+  91:	72 65                	jb     f8 <myuvc_qbuf+0x8>
+  93:	74 70                	je     105 <myuvc_streaming_intf+0x1>
+  95:	6f                   	outsl  %ds:(%rsi),(%dx)
+  96:	6c                   	insb   (%dx),%es:(%rdi)
+  97:	69 6e 65 3d 59 00 6e 	imul   $0x6e00593d,0x65(%rsi),%ebp
+
+000000000000009d <__UNIQUE_ID_name28>:
+  9d:	6e                   	outsb  %ds:(%rsi),(%dx)
+  9e:	61                   	(bad)  
+  9f:	6d                   	insl   (%dx),%es:(%rdi)
+  a0:	65 3d 6d 79 5f 75    	gs cmp $0x755f796d,%eax
+  a6:	76 63                	jbe    10b <myuvc_streaming_intf+0x7>
+	...
+
+00000000000000a9 <__UNIQUE_ID_vermagic27>:
+  a9:	76 65                	jbe    110 <myuvc_streaming_intf+0xc>
+  ab:	72 6d                	jb     11a <__func__.41283+0x2>
+  ad:	61                   	(bad)  
+  ae:	67 69 63 3d 34 2e 31 	imul   $0x35312e34,0x3d(%ebx),%esp
+  b5:	35 
+  b6:	2e 30 2d 31 34 32 2d 	xor    %ch,%cs:0x2d323431(%rip)        # 2d3234ee <myuvc_vdev+0x2d321c0e>
+  bd:	67 65 6e             	outsb  %gs:(%esi),(%dx)
+  c0:	65 72 69             	gs jb  12c <__func__.41302+0x4>
+  c3:	63 20                	movslq (%rax),%esp
+  c5:	53                   	push   %rbx
+  c6:	4d 50                	rex.WRB push %r8
+  c8:	20 6d 6f             	and    %ch,0x6f(%rbp)
+  cb:	64 5f                	fs pop %rdi
+  cd:	75 6e                	jne    13d <__func__.41316+0x5>
+  cf:	6c                   	insb   (%dx),%es:(%rdi)
+  d0:	6f                   	outsl  %ds:(%rsi),(%dx)
+  d1:	61                   	(bad)  
+  d2:	64 20 00             	and    %al,%fs:(%rax)
+
+Disassembly of section __mcount_loc:
+
+0000000000000000 <__mcount_loc>:
+	...
+
+Disassembly of section .data:
+
+0000000000000000 <myuvc_drv>:
+	...
+
+0000000000000100 <myuvc_ioctl_ops>:
+	...
+
+00000000000004c0 <uvc_vm_ops>:
+	...
+
+Disassembly of section .gnu.linkonce.this_module:
+
+0000000000000000 <__this_module>:
+	...
+  18:	6d                   	insl   (%dx),%es:(%rdi)
+  19:	79 5f                	jns    7a <__this_module+0x7a>
+  1b:	75 76                	jne    93 <__this_module+0x93>
+  1d:	63 00                	movslq (%rax),%eax
+	...
+
+Disassembly of section .bss:
+
+0000000000000000 <myuvc_format>:
+	...
+
+00000000000000d0 <cnt.41459>:
+      d0:	00 00                	add    %al,(%rax)
+	...
+
+00000000000000d4 <cnt.41449>:
+      d4:	00 00                	add    %al,(%rax)
+	...
+
+00000000000000d8 <__key.41293>:
+	...
+
+00000000000000e0 <myuvc_params>:
+	...
+
+0000000000000104 <myuvc_streaming_intf>:
+	...
+
+0000000000000120 <myuvc_queue>:
+	...
+
+0000000000001860 <v4l2_dev>:
+	...
+
+00000000000018d8 <myuvc_udev>:
+	...
+
+00000000000018e0 <myuvc_vdev>:
+	...
+
+Disassembly of section .comment:
+
+0000000000000000 <.comment>:
+   0:	00 47 43             	add    %al,0x43(%rdi)
+   3:	43 3a 20             	rex.XB cmp (%r8),%spl
+   6:	28 55 62             	sub    %dl,0x62(%rbp)
+   9:	75 6e                	jne    79 <__func__.41450+0x1>
+   b:	74 75                	je     82 <__module_depends+0x2>
+   d:	20 35 2e 34 2e 30    	and    %dh,0x302e342e(%rip)        # 302e3441 <myuvc_vdev+0x302e1b61>
+  13:	2d 36 75 62 75       	sub    $0x75627536,%eax
+  18:	6e                   	outsb  %ds:(%rsi),(%dx)
+  19:	74 75                	je     90 <__func__.41249+0x8>
+  1b:	31 7e 31             	xor    %edi,0x31(%rsi)
+  1e:	36 2e 30 34 2e       	ss xor %dh,%cs:(%rsi,%rbp,1)
+  23:	31 32                	xor    %esi,(%rdx)
+  25:	29 20                	sub    %esp,(%rax)
+  27:	35 2e 34 2e 30       	xor    $0x302e342e,%eax
+  2c:	20 32                	and    %dh,(%rdx)
+  2e:	30 31                	xor    %dh,(%rcx)
+  30:	36 30 36             	xor    %dh,%ss:(%rsi)
+  33:	30 39                	xor    %bh,(%rcx)
+  35:	00 00                	add    %al,(%rax)
+  37:	47                   	rex.RXB
+  38:	43                   	rex.XB
+  39:	43 3a 20             	rex.XB cmp (%r8),%spl
+  3c:	28 55 62             	sub    %dl,0x62(%rbp)
+  3f:	75 6e                	jne    af <__UNIQUE_ID_vermagic27+0x6>
+  41:	74 75                	je     b8 <__UNIQUE_ID_vermagic27+0xf>
+  43:	20 35 2e 34 2e 30    	and    %dh,0x302e342e(%rip)        # 302e3477 <myuvc_vdev+0x302e1b97>
+  49:	2d 36 75 62 75       	sub    $0x75627536,%eax
+  4e:	6e                   	outsb  %ds:(%rsi),(%dx)
+  4f:	74 75                	je     c6 <__func__.41261+0x6>
+  51:	31 7e 31             	xor    %edi,0x31(%rsi)
+  54:	36 2e 30 34 2e       	ss xor %dh,%cs:(%rsi,%rbp,1)
+  59:	31 32                	xor    %esi,(%rdx)
+  5b:	29 20                	sub    %esp,(%rax)
+  5d:	35 2e 34 2e 30       	xor    $0x302e342e,%eax
+  62:	20 32                	and    %dh,(%rdx)
+  64:	30 31                	xor    %dh,(%rcx)
+  66:	36 30 36             	xor    %dh,%ss:(%rsi)
+  69:	30 39                	xor    %bh,(%rcx)
+	...
